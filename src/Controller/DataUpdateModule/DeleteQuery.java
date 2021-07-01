@@ -14,12 +14,20 @@ import java.sql.SQLException;
  */
 public class DeleteQuery extends Query {
 
-    public DeleteQuery(DBConnection connection, String query) throws SQLException {
-        super(connection, query);
+    public DeleteQuery(DBConnection connection) throws SQLException {
+        super(connection);
     }
+    
+    public boolean deleteCustomer(String mail, String password) throws SQLException {
+        String[] param = {mail, password};
+        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM customer WHERE mail = ? AND password = ?");
+        super.prepareStatement(param);
+        System.out.println(this.statement.toString());
+        return this.executeQuery();
+    } 
 
     @Override
-    public boolean executeQuery() throws SQLException {
+    protected boolean executeQuery() throws SQLException {
         return this.statement.execute();
     }
 

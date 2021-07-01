@@ -18,15 +18,15 @@ public abstract class Query {
     protected DBConnection connection;  
     protected PreparedStatement statement;
 	
-    public Query(DBConnection connection, String query) throws SQLException {
+    public Query(DBConnection connection) throws SQLException {
         this.connection = connection;
-	this.statement = this.connection.getConnection().prepareStatement(query);
     }
 	
-    public void prepareStatement(Object[] param) {
-        //TO DO
+    public void prepareStatement(String[] param) throws SQLException {
+        for (int i = 1; i <= param.length; ++i)
+            this.statement.setString(i, param[i-1]);
     }
 	
-    public abstract boolean executeQuery() throws SQLException;
+    protected abstract boolean executeQuery() throws SQLException;
 
 }

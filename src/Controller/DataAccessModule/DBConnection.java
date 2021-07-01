@@ -19,7 +19,7 @@ public class DBConnection {
     
     public DBConnection(String username, String password) {
         try {
-            this.connection = DriverManager.getConnection("jdbc:idbc:OOPJava", username, password);
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql11421028", username, password);
 	} catch (SQLException e) {
             e.printStackTrace();
 	}

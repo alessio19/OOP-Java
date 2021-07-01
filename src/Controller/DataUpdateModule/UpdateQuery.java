@@ -14,12 +14,20 @@ import java.sql.SQLException;
  */
 public class UpdateQuery extends Query {
 
-    public UpdateQuery(DBConnection connection, String query) throws SQLException {
-        super(connection, query);
+    public UpdateQuery(DBConnection connection) throws SQLException {
+        super(connection);
     }
+    
+    public boolean updateCustomer(String mail, String password, String column, String value) throws SQLException {
+        String[] param = {value, mail, password};
+        this.statement = this.connection.getConnection().prepareStatement("UPDATE customer SET " + column + " = ? WHERE mail = ? AND password = ?");
+        super.prepareStatement(param);
+        System.out.println(this.statement.toString());
+        return this.executeQuery();
+    } 
 
     @Override
-    public boolean executeQuery() throws SQLException {
+    protected boolean executeQuery() throws SQLException {
         return this.statement.executeUpdate() == 1;
     }
 

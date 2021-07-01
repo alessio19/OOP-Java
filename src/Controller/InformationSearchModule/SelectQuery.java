@@ -18,16 +18,23 @@ public class SelectQuery {
 
     private DBConnection connection;
     private Statement statement;
-    private String query;
 	
-    public SelectQuery(DBConnection connection, String query) throws SQLException {
+    public SelectQuery(DBConnection connection) throws SQLException {
         this.connection = connection;
 	this.statement = this.connection.getConnection().createStatement();
-        this.query = query;
+    }
+    
+    public ResultSet getCustomer() throws SQLException {
+        return this.getFromDB("SELECT * FROM customer;");
+    }
+    
+    public ResultSet getCustomer(String mail, String password) throws SQLException {
+        String q = "SELECT * FROM customer WHERE mail = '" + mail + "' AND password = '" + password + "';";
+        return this.getFromDB(q);
     }
 	
-    public ResultSet getFromDB() throws SQLException {
-        return this.statement.executeQuery(this.query);
+    private ResultSet getFromDB(String query) throws SQLException {
+        return this.statement.executeQuery(query);
     }
 	
 }
