@@ -21,13 +21,13 @@ public class UpdateQuery extends Query {
     public boolean updateCustomer(String mail, String password, String column, String value) throws SQLException {
         String[] param = {value, mail, password};
         this.statement = this.connection.getConnection().prepareStatement("UPDATE customer SET " + column + " = ? WHERE mail = ? AND password = ?");
-        super.prepareStatement(param);
-        System.out.println(this.statement.toString());
-        return this.executeQuery();
+        return this.executeQuery(param);
     } 
 
     @Override
-    protected boolean executeQuery() throws SQLException {
+    protected boolean executeQuery(String[] param) throws SQLException {
+        super.prepareStatement(param);
+        System.out.println(this.statement.toString());
         return this.statement.executeUpdate() == 1;
     }
 

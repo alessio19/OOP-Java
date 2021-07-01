@@ -27,6 +27,6 @@ public abstract class Query {
             this.statement.setString(i, param[i-1]);
     }
 	
-    protected abstract boolean executeQuery() throws SQLException;
+    protected abstract boolean executeQuery(String[] param) throws SQLException;
 
 }
