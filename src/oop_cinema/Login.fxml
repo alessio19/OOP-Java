@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop_cinema.LoginController">
@@ -18,13 +19,15 @@
          </image>
       </ImageView>
       <Label layoutX="407.0" layoutY="288.0" text="Mail adress" textFill="WHITE" />
-      <TextField fx:id="emailField" layoutX="380.0" layoutY="319.0" prefHeight="51.0" prefWidth="287.0" promptText="example@java.com" style="-fx-background-color: #6070FF; -fx-border-radius: 550px;">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="57.0" layoutX="380.0" layoutY="313.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-width: 40; -fx-arc-height: 40;" width="287.0" />
+      <TextField fx:id="emailField" layoutX="398.0" layoutY="316.0" prefHeight="51.0" prefWidth="249.0" promptText="example@java.com" style="-fx-background-color: #6070FF;">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </TextField>
       <Label layoutX="407.0" layoutY="411.0" text="Password" textFill="WHITE" />
-      <TextField fx:id="pwdField" layoutX="380.0" layoutY="442.0" prefHeight="51.0" prefWidth="287.0" promptText="* * * * * * * *" style="-fx-background-color: #6070FF; -fx-border-radius: 550px;">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="57.0" layoutX="380.0" layoutY="439.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-width: 40; -fx-arc-height: 40;" width="287.0" />
+      <TextField fx:id="pwdField" layoutX="401.0" layoutY="442.0" prefHeight="51.0" prefWidth="242.0" promptText="* * * * * * * *" style="-fx-background-color: #6070FF; -fx-border-radius: 550px;">
          <font>
             <Font name="System Italic" size="16.0" />
          </font>

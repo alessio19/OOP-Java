@@ -43,7 +43,8 @@ public class LoginController extends Controller {
     void ActionHandler(ActionEvent event) throws SQLException, IOException {
         if (event.getSource().equals(this.connectButton)) {
             if (!this.selection.isEmpty(this.selection.getCustomer(this.emailField.getText(), this.pwdField.getText()))) {
-                System.out.println("customer exist");
+                OOP_Cinema.addScene("mainMenuCusto", FXMLLoader.load(getClass().getResource("MainMenuCustomer.fxml")));
+                OOP_Cinema.changeScene("mainMenuCusto");               
             } else if (!this.selection.isEmpty(this.selection.getEmployee(this.emailField.getText(), this.pwdField.getText()))) {
                 System.out.println("employee exist");
             } else 

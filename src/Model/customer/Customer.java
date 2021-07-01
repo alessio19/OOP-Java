@@ -21,4 +21,17 @@ public abstract class Customer {
         this.memberType = memberType;
         this.orders = orders;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+        
 }
