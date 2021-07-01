@@ -32,6 +32,15 @@ public class SelectQuery {
         String q = "SELECT * FROM customer WHERE mail = '" + mail + "' AND password = '" + password + "';";
         return this.getFromDB(q);
     }
+    
+    public ResultSet getEmployees() throws SQLException {
+        return this.getFromDB("SELECT * FROM employee;");
+    }
+    
+    public ResultSet getEmployee(String mail, String password) throws SQLException {
+        String q = "SELECT * FROM employee WHERE mail = '" + mail + "' AND password = '" + password + "';";
+        return this.getFromDB(q);
+    }
 	
     private ResultSet getFromDB(String query) throws SQLException {
         return this.statement.executeQuery(query);
