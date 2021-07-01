@@ -15,16 +15,9 @@ import javafx.scene.Scene;
 public abstract class Controller {
     
     protected final DBConnection connection;
-    protected final ScreenController screenController;
 
     public Controller(String username, String password) {
         this.connection = new DBConnection("root", "root");
-        this.screenController = new ScreenController();
-    }
-    
-    public Controller(String username, String password, Scene scene) {
-        this.connection = new DBConnection("root", "root");
-        this.screenController = new ScreenController(scene);
     }
     
 }

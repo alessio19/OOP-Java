@@ -27,7 +27,6 @@ public class UpdateQuery extends Query {
     @Override
     protected boolean executeQuery(String[] param) throws SQLException {
         super.prepareStatement(param);
-        System.out.println(this.statement.toString());
         return this.statement.executeUpdate() == 1;
     }
 

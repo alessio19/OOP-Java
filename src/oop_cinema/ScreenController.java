@@ -6,9 +6,9 @@
 package oop_cinema;
 
 import java.util.HashMap;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  *
@@ -28,7 +28,6 @@ public class ScreenController {
     
     protected void addScreen(String name, Pane pane) {
         this.screens.put(name, pane);
-        this.activate(name);
     }
     
     protected void removeScreen(String name) {
