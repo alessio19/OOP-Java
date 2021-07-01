@@ -19,11 +19,10 @@ public class OOP_Cinema extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
-        Scene scene = new Scene(root);
-        
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));       
+        Scene scene = new Scene(root);                
         stage.setScene(scene);
+        LoginController lc = new LoginController("root", "root", scene);
         stage.show();
     }
 
