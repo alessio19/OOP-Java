@@ -16,8 +16,8 @@ import java.sql.Statement;
  */
 public class SelectQuery {
 
-    private DBConnection connection;
-    private Statement statement;
+    private final DBConnection connection;
+    private final Statement statement;
 	
     public SelectQuery(DBConnection connection) throws SQLException {
         this.connection = connection;
@@ -40,6 +40,10 @@ public class SelectQuery {
     public ResultSet getEmployee(String mail, String password) throws SQLException {
         String q = "SELECT * FROM employee WHERE mail = '" + mail + "' AND password = '" + password + "';";
         return this.getFromDB(q);
+    }
+    
+    public boolean isEmpty(ResultSet rs) throws SQLException {  
+        return !rs.next();
     }
 	
     private ResultSet getFromDB(String query) throws SQLException {

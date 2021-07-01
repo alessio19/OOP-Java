@@ -1,12 +1,16 @@
 package oop_cinema;
 
+import Controller.InformationSearchModule.SelectQuery;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 
-public class LoginController {
+public class LoginController extends Controller {
+    
+    private SelectQuery selection;
 
     @FXML
     private TextField emailField;
@@ -22,11 +26,29 @@ public class LoginController {
 
     @FXML
     private Button connectButton;
+    
+    /**
+     *
+     */
+    public LoginController() throws SQLException {
+        super("root", "root");
+        this.selection = new SelectQuery(this.connection);
+    }
+
+    public LoginController(String username, String password) throws SQLException {
+        super(username, password);
+        this.selection = new SelectQuery(this.connection);
+    }
 
     @FXML
-    void ActionHandler(ActionEvent event) {
+    void ActionHandler(ActionEvent event) throws SQLException {
         if (event.getSource().equals(this.connectButton)) {
-            
+            if (!this.selection.isEmpty(this.selection.getCustomer(this.emailField.getText(), this.pwdField.getText()))) {
+                System.out.println("customer exist");
+            } else if (!this.selection.isEmpty(this.selection.getEmployee(this.emailField.getText(), this.pwdField.getText()))) {
+                System.out.println("employee exist");
+            } else
+                System.out.println("not in the db");
         }
     }
 
