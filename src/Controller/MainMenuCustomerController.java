@@ -57,4 +57,9 @@ public class MainMenuCustomerController {
 
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        this.nameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());
+    }
+    
 }

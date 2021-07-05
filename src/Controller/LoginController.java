@@ -43,7 +43,11 @@ public class LoginController  {
     void ActionHandler(ActionEvent event) throws SQLException, IOException {
         if (event.getSource().equals(this.connectButton)) {
             if (new CustomerDAO().hasCustomer(this.emailField.getText(), this.pwdField.getText())) {
-                OOP_Cinema.addScene("mainMenuCusto", FXMLLoader.load(getClass().getResource("/View/MainMenuCustomer.fxml")));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainMenuCustomer.fxml"));       
+                OOP_Cinema.addScene("mainMenuCusto", loader.load());
+                MainMenuCustomerController controller = loader.getController();
+                System.out.println(new CustomerDAO().getCustomerByCredentials(this.emailField.getText(), this.pwdField.getText()).getMail());
+                controller.setCustomer(new CustomerDAO().getCustomerByCredentials(this.emailField.getText(), this.pwdField.getText()));                
                 OOP_Cinema.changeScene("mainMenuCusto");               
             } else if (new EmployeeDAO().hasEmployee(this.emailField.getText(), this.pwdField.getText())) {
                 System.out.println("employee exist"); // Load Employee View

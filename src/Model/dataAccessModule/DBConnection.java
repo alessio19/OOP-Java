@@ -21,7 +21,7 @@ public final class DBConnection {
         }
     }
 
-    public static Connection getConnection() {
+    public final static Connection getConnection() {
         new DBConnection();
         return connection;
     }

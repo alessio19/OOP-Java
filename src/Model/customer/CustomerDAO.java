@@ -42,7 +42,7 @@ public class CustomerDAO {
         ResultSet result = null;
         Customer  customer = null;
         try {
-            result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE idCustomer = "+id+";");
+            result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE idCustomer = "+id+";");            
             customer = new Customer(
                     result.getInt("idCustomer"),
                     result.getString("mail"),
@@ -80,18 +80,19 @@ public class CustomerDAO {
     }
     
     public Customer getCustomerByCredentials(String mail, String password) {
-        ResultSet result = null;
         Customer customer = null;
         try {
-            result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE mail = '" + mail + "' AND password = '" + password + "';");
-            customer = new Customer(
+            ResultSet result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE mail = '" + mail + "' AND password = '" + password + "';");
+            if (result.next()) {
+             customer = new Customer(
                 result.getInt("idCustomer"),
                 result.getString("mail"),
                 result.getString("password"),
                 result.getString("name"),
                 result.getString("lastName"),
                 MemberType.values()[result.getInt("memberType")-1]
-            );
+            );   
+            }            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -125,7 +126,7 @@ public class CustomerDAO {
          ResultSet result = null;
         Customer  customer = null;
         try {
-            result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE mail = "+mail+";");
+            result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE mail = '"+mail+"';");
             customer = new Customer(
                     result.getInt("idCustomer"),
                     result.getString("mail"),
