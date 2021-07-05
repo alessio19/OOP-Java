@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Controller.DataUpdateModule;
+package Model.dataUpdateModule;
 
-import Controller.DataAccessModule.DBConnection;
+import Model.dataAccessModule.DBConnection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- *
  * @author Alessio
+ * @author Adam
  */
 public abstract class Query {
 	

@@ -2,6 +2,10 @@ package Model.product;
 
 import java.util.Date;
 
+/**
+ * @author Alessio
+ * @author Adam
+ */
 public class Movie extends Product{
     private String details;
     private Date diffusion; 
@@ -14,5 +18,21 @@ public class Movie extends Product{
         this.diffusion = diffusion;
         this.ticketPrice = ticketPrice;
         this.genre = genre;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public Date getDiffusion() {
+        return diffusion;
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public MovieGenre getGenre() {
+        return genre;
     }
 }

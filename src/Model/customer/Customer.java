@@ -1,25 +1,24 @@
 package Model.customer;
 
-import Model.payment.Order;
-import java.util.ArrayList;
-
-public abstract class Customer {
-    protected int id;
-    protected String mail;
+/**
+ * @author Alessio
+ * @author Adam
+ */
+public class Customer {
+    private int id;
+    private String mail;
     protected String password;
-    protected String name;
-    protected String lastName;
-    protected MemberType memberType;
-    protected ArrayList<Order> orders;
+    private String name;
+    private String lastName;
+    private MemberType memberType;
 
-    public Customer(int id, String mail, String password, String name, String lastName, MemberType memberType, ArrayList<Order> orders) {
+    public Customer(int id, String mail, String password, String name, String lastName, MemberType memberType) {
         this.id = id;
         this.mail = mail;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
         this.memberType = memberType;
-        this.orders = orders;
     }
 
     public String getName() {
@@ -30,8 +29,15 @@ public abstract class Customer {
         return lastName;
     }
 
-    public ArrayList<Order> getOrders() {
-        return orders;
+    public int getId() {
+        return id;
     }
-        
+
+    public String getMail() {
+        return mail;
+    }
+
+    public MemberType getMemberType() {
+        return memberType;
+    } 
 }

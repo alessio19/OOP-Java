@@ -1,18 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Controller.InformationSearchModule;
+package Model.informationSearchModule;
 
-import Controller.DataAccessModule.DBConnection;
+import Model.dataAccessModule.DBConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
  * @author Alessio
+ * @author Adam
  */
 public class SelectQuery {
 
@@ -25,26 +20,36 @@ public class SelectQuery {
     }
     
     public ResultSet getCustomer() throws SQLException {
-        return this.getFromDB("SELECT * FROM customer;");
+        return this.getFromDB("SELECT * FROM Customer;");
     }
     
     public ResultSet getCustomer(String mail, String password) throws SQLException {
-        String q = "SELECT * FROM customer WHERE mail = '" + mail + "' AND password = '" + password + "';";
+        String q = "SELECT * FROM Customer WHERE mail = '" + mail + "' AND password = '" + password + "';";
         return this.getFromDB(q);
     }
     
+    public ResultSet getCustomerByMail(String mail) throws SQLException {
+        return this.getFromDB( "SELECT * FROM Customer WHERE mail = '" + mail +  "';");
+    } 
+    
     public ResultSet getEmployees() throws SQLException {
-        return this.getFromDB("SELECT * FROM employee;");
+        return this.getFromDB("SELECT * FROM Employee;");
     }
     
     public ResultSet getEmployee(String mail, String password) throws SQLException {
-        String q = "SELECT * FROM employee WHERE mail = '" + mail + "' AND password = '" + password + "';";
+        String q = "SELECT * FROM Employee WHERE mail = '" + mail + "' AND password = '" + password + "';";
         return this.getFromDB(q);
+    }
+    
+    public ResultSet getEmployeeByMail(String mail) throws SQLException {
+         return this.getFromDB("SELECT * FROM Employee where mail = "+mail+";");
     }
     
     public boolean isEmpty(ResultSet rs) throws SQLException {  
         return !rs.next();
     }
+    
+    
 	
     private ResultSet getFromDB(String query) throws SQLException {
         return this.statement.executeQuery(query);

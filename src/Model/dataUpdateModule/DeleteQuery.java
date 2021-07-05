@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Controller.DataUpdateModule;
+package Model.dataUpdateModule;
 
-import Controller.DataAccessModule.DBConnection;
+import Model.dataAccessModule.DBConnection;
 import java.sql.SQLException;
 
 /**
- *
  * @author Alessio
+ * @author Adam
  */
 public class DeleteQuery extends Query {
 
@@ -20,49 +15,49 @@ public class DeleteQuery extends Query {
     
     public boolean deleteCustomer(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM customer WHERE idCustomer = ?;");
+        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Customer WHERE idCustomer = ?;");
         return this.executeQuery(param);
     }
     
     public boolean deleteCustomer(String mail, String password) throws SQLException {
         String[] param = {mail, password};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM customer WHERE mail = ? AND password = ?;");
+        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Customer WHERE mail = ? AND password = ?;");
         return this.executeQuery(param);
     } 
     
     public boolean deleteEmployee(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM employee WHERE idEmployee = ?;");
+        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Employee WHERE idEmployee = ?;");
         return this.executeQuery(param);
     }
     
     public boolean deleteEmployee(String mail, String password) throws SQLException {
         String[] param = {mail, password};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM employee WHERE mail = ? AND password = ?;");
+        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Employee WHERE mail = ? AND password = ?;");
         return this.executeQuery(param);
     } 
     
     public boolean deleteMovie(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM movie WHERE idMovie = ?;");
+        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Movie WHERE idMovie = ?;");
         return this.executeQuery(param);
     } 
     
     public boolean deleteMovie(String title, String author, String releaseDate) throws SQLException {
         String[] param = {title, author, releaseDate};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM movie WHERE title = ? AND author = ? AND releaseDate = ?;");
+        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Movie WHERE title = ? AND author = ? AND releaseDate = ?;");
         return this.executeQuery(param);
     }
     
     public boolean deletePayment(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM payment WHERE idPayment = ?;");
+        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Payment WHERE idPayment = ?;");
         return this.executeQuery(param);
     } 
     
     public boolean deleteOrder(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM order WHERE idOrder = ?;");        
+        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Order WHERE idOrder = ?;");        
         return this.executeQuery(param);
     } 
 

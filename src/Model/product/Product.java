@@ -2,13 +2,17 @@ package Model.product;
 
 import java.util.Date;
 
-public abstract class Product {
-    protected int id;
-    protected String title;
-    protected String author;
-    protected Date realeaseDate;
-    protected Discount discount;
-    protected int quantityleft;
+/**
+ * @author Alessio
+ * @author Adam
+ */
+public class Product {
+    private int id;
+    private String title;
+    private String author;
+    private Date realeaseDate;
+    private Discount discount;
+    private int quantityleft;
 
     public Product(int id, String title, String author, Date realeaseDate, Discount discount, int quantityleft) {
         this.id = id;
@@ -18,4 +22,30 @@ public abstract class Product {
         this.discount = discount;
         this.quantityleft = quantityleft;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public Date getRealeaseDate() {
+        return realeaseDate;
+    }
+
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public int getQuantityleft() {
+        return quantityleft;
+    }
+    
+    
 }

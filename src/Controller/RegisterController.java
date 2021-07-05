@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package oop_cinema;
+package Controller;
 
-import Controller.DataUpdateModule.InsertQuery;
+import Model.customer.Customer;
+import Model.customer.CustomerDAO;
 import Model.customer.MemberType;
+import Model.employee.Employee;
+import Model.employee.EmployeeDAO;
 import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,13 +18,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 /**
- *
  * @author Alessio
+ * @author Adam
  */
-
-public class RegisterController extends Controller {
-    
-    private InsertQuery insertion;
+public class RegisterController {
 
     @FXML
     private TextField emailField;
@@ -53,7 +48,7 @@ public class RegisterController extends Controller {
     private RadioButton employeeRadio;
     
     @FXML
-    private ChoiceBox<?> customerTypeChoice;
+    private ChoiceBox<MemberType> customerTypeChoice;
     
     @FXML
     private Label errorLabel;
@@ -61,14 +56,12 @@ public class RegisterController extends Controller {
     @FXML
     private Label customerTypeLabel;
     
-    public RegisterController() throws SQLException {
-        super("root", "root");
-        this.insertion = new InsertQuery(this.connection);
-    }
+    private EmployeeDAO employeeDAO;
+    private CustomerDAO customerDAO;
     
-    public RegisterController(String username, String password) throws SQLException {
-        super(username, password);
-        this.insertion = new InsertQuery(this.connection);        
+    public RegisterController() throws SQLException {
+        employeeDAO = new EmployeeDAO();
+        customerDAO = new CustomerDAO();
     }
     
     @FXML
@@ -86,15 +79,34 @@ public class RegisterController extends Controller {
                     !this.pwdField.getText().isEmpty() &&
                     !this.nameField.getText().isEmpty() &&
                     !this.lastNameField.getText().isEmpty()) {
-                try {
                     if (this.employeeRadio.isSelected()) {
-                        this.insertion.insertEmployee(this.emailField.getText(), this.pwdField.getText(), this.nameField.getText(), this.lastNameField.getText());
+                        if (this.employeeDAO.hasEmployee(this.emailField.getText())) {
+                             this.errorLabel.setOpacity(1);   
+                        } else {
+                             employeeDAO.addEmployee( new Employee(
+                                     0, 
+                                     this.emailField.getText(), 
+                                     this.pwdField.getText(),  
+                                     this.nameField.getText(),  
+                                     this.lastNameField.getText())
+                             );
+                             OOP_Cinema.changeScene("login");
+                        }
                     } else {
-                        this.insertion.insertCustomer(this.emailField.getText(), this.pwdField.getText(), this.nameField.getText(), this.lastNameField.getText(), this.customerTypeChoice.selectionModelProperty().getValue().getSelectedItem().toString());
-                    }  
-                } catch (SQLException e) {
-                    this.errorLabel.setOpacity(1);   
-                }
+                        if (customerDAO.hasCustomer(this.emailField.getText())) {
+                              this.errorLabel.setOpacity(1);  
+                        } else {
+                            customerDAO.addCustomer(new Customer(
+                                    0,  
+                                    this.emailField.getText(), 
+                                    this.pwdField.getText(), 
+                                    this.nameField.getText(),  
+                                    this.lastNameField.getText(), 
+                                    this.customerTypeChoice.selectionModelProperty().getValue().getSelectedItem())
+                            );
+                            OOP_Cinema.changeScene("login");
+                        }
+                    }
             }
         } else if (event.getSource().equals(this.customerRadio)) {
             this.customerTypeChoice.setOpacity(1);

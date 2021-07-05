@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Controller.DataUpdateModule;
+package Model.dataUpdateModule;
 
-import Controller.DataAccessModule.DBConnection;
+import Model.dataAccessModule.DBConnection;
 import java.sql.SQLException;
 
 /**
- *
  * @author Alessio
+ * @author Adam
  */
 public class InsertQuery extends Query {
     
@@ -18,33 +13,34 @@ public class InsertQuery extends Query {
         super(connection);
     }
     
-    public boolean insertCustomer(String mail, String password, String name, String lastName, String type) throws SQLException {
-        String[] param = {mail, password, name, lastName, type};
-        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO customer (mail, password, name, lastname, memberType) VALUES (?, ?, ?, ?, ?);");
+    public boolean insertCustomer(String mail, String password, String name, String lastName, int type) throws SQLException {
+        String[] param = {mail, password, name, lastName};
+        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO Customer (mail, password, name, lastname, memberType) VALUES (?, ?, ?, ?, ?);");
+        this.statement.setInt(5, type);
         return this.executeQuery(param);
     } 
     
     public boolean insertEmployee(String mail, String password, String name, String lastName) throws SQLException {
         String[] param = {mail, password, name, lastName};
-        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO employee (mail, password, name, lastname) VALUES (?, ?, ?, ?);");
+        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO Employee (mail, password, name, lastname) VALUES (?, ?, ?, ?);");
         return this.executeQuery(param);
     }
     
     public boolean insertMovie(String details, String diffusion, String ticketPrice, String title, String author, String releaseDate, String genre) throws SQLException {
         String[] param = {details, diffusion, ticketPrice, title, author, releaseDate, genre};
-        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO movie (details, diffusion, ticketPrice, title, author, releaseDate, movieGenre) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO Movie (details, diffusion, ticketPrice, title, author, releaseDate, movieGenre) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
         return this.executeQuery(param);
     }
     
     public boolean insertOrder(String idCustomer, String idProduct, String quantity, String idPayment) throws SQLException {
         String[] param = {idCustomer, idProduct, quantity, idPayment};
-        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO order (customerId, productId, quantity, paymentId) VALUES (?, ?, ?, ?);");
+        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO Order (customerId, productId, quantity, paymentId) VALUES (?, ?, ?, ?);");
         return this.executeQuery(param);
     }
     
     public boolean insertPayment(String price, String cardNumber, String expirationDate, String cvv, String paymentStatus) throws SQLException {
         String[] param = {price, cardNumber, expirationDate, cvv, paymentStatus};
-        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO payment (price, cardNumber, expirationDate, cvv, paymentStatus) VALUES (?, ?, ?, ?, ?);");
+        this.statement = this.connection.getConnection().prepareStatement("INSERT INTO Payment (price, cardNumber, expirationDate, cvv, paymentStatus) VALUES (?, ?, ?, ?, ?);");
         return this.executeQuery(param);
     }
 

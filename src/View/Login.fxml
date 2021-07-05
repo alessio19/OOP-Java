@@ -11,11 +11,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop_cinema.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <children>
       <ImageView fitHeight="726.0" fitWidth="1049.0" layoutX="-1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/BackGroundLogin.png" />
+            <Image url="@../Resources/images/BackGroundLogin.png" />
          </image>
       </ImageView>
       <Label layoutX="407.0" layoutY="288.0" text="Mail adress" textFill="WHITE" />
@@ -41,8 +41,9 @@
       </Button>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="446.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/logo.png" />
+            <Image url="@../Resources/images/logo.png" />
          </image>
       </ImageView>
+      <Label fx:id="loginFail" layoutX="378.0" layoutY="521.0" text="Password or mail are not correct !" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

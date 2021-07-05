@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop_cinema.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
    <children>
       <ImageView fitHeight="719.0" fitWidth="1047.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/BackGroundRegister.png" />
+            <Image url="@../Resources/images/BackGroundRegister.png" />
          </image>
       </ImageView>
       <Label layoutX="218.0" layoutY="216.0" text="Mail adress" textFill="WHITE" />
@@ -46,7 +46,7 @@
       </Button>
       <ImageView fitHeight="69.0" fitWidth="71.0" layoutX="29.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/logo.png" />
+            <Image url="@../Resources/images/logo.png" />
          </image>
       </ImageView>
       <Label layoutX="591.0" layoutY="216.0" text="Name" textFill="WHITE" />

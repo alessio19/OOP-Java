@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Controller.DataUpdateModule;
+package Model.dataUpdateModule;
 
-import Controller.DataAccessModule.DBConnection;
+import Model.dataAccessModule.DBConnection;
 import java.sql.SQLException;
 
 /**
- *
  * @author Alessio
+ * @author Adam
  */
 public class UpdateQuery extends Query {
 
@@ -20,7 +15,7 @@ public class UpdateQuery extends Query {
     
     public boolean updateCustomer(String mail, String password, String column, String value) throws SQLException {
         String[] param = {value, mail, password};
-        this.statement = this.connection.getConnection().prepareStatement("UPDATE customer SET " + column + " = ? WHERE mail = ? AND password = ?");
+        this.statement = this.connection.getConnection().prepareStatement("UPDATE Customer SET " + column + " = ? WHERE mail = ? AND password = ?");
         return this.executeQuery(param);
     } 
 

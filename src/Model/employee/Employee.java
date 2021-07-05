@@ -1,18 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.employee;
 
 /**
- *
- * @author Zenkh
+ * @author Alessio
+ * @author Adam
  */
 public class Employee {
     private int id;
     private String mail;
-    private String password;
+    protected String password;
     private String name;
     private String lastName;
 
@@ -23,4 +18,22 @@ public class Employee {
         this.name = name;
         this.lastName = lastName;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+    
+    
 }
