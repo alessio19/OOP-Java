@@ -1,6 +1,7 @@
 package Model.product;
 
 import Model.dataAccessModule.DBConnection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,17 +13,17 @@ import java.util.ArrayList;
  * @author Adam
  */
 public class MovieDAO {
-    private DBConnection connection;  
+    private Connection connection;  
     
     public MovieDAO() {
-        this.connection = new DBConnection();
+        this.connection = DBConnection.getConnection();
     }
     
     public boolean addMovie(Movie movie) {
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.getConnection().prepareStatement("INSERT INTO Movie (details, diffusion, ticketPrice, title, author, releaseDate, discountId, movieGenreId, quantityLeft) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Movie (details, diffusion, ticketPrice, title, author, releaseDate, discountId, movieGenreId, quantityLeft) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
             preparedStatement.setString(1, movie.getDetails());
             preparedStatement.setTimestamp(2, new Timestamp(movie.getDiffusion().getTime()));
             preparedStatement.setDouble(3, movie.getTicketPrice());
@@ -45,7 +46,7 @@ public class MovieDAO {
         ResultSet result = null;
         ArrayList<Movie> movies = new ArrayList<>();
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Movie");
+            result = connection.createStatement().executeQuery("SELECT * FROM Movie");
             while (result.next()) {      
                 Discount discount = result.getInt("discountId") != 0 ? new DiscountDAO().getDiscountById(result.getInt("discountId")) : null;
                 movies.add(new Movie(
@@ -71,7 +72,7 @@ public class MovieDAO {
         ResultSet result = null;
         Movie movie = null;
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Movie WHERE idMovie = "+id+";"); 
+            result = connection.createStatement().executeQuery("SELECT * FROM Movie WHERE idMovie = "+id+";"); 
             Discount discount = result.getInt("discountId") != 0 ? new DiscountDAO().getDiscountById(result.getInt("discountId")) : null;
             movie= new Movie(
                     result.getInt("idMovie"),

@@ -1,6 +1,7 @@
 package Model.dataUpdateModule;
 
 import Model.dataAccessModule.DBConnection;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -9,13 +10,13 @@ import java.sql.SQLException;
  */
 public class UpdateQuery extends Query {
 
-    public UpdateQuery(DBConnection connection) throws SQLException {
+    public UpdateQuery(Connection connection) throws SQLException {
         super(connection);
     }
     
     public boolean updateCustomer(String mail, String password, String column, String value) throws SQLException {
         String[] param = {value, mail, password};
-        this.statement = this.connection.getConnection().prepareStatement("UPDATE Customer SET " + column + " = ? WHERE mail = ? AND password = ?");
+        this.statement = this.connection.prepareStatement("UPDATE Customer SET " + column + " = ? WHERE mail = ? AND password = ?");
         return this.executeQuery(param);
     } 
 

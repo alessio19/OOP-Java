@@ -1,6 +1,7 @@
 package Model.product;
 
 import Model.dataAccessModule.DBConnection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,17 +11,17 @@ import java.sql.SQLException;
  * @author Adam
  */
 public class DiscountDAO {
-       private DBConnection connection;  
+       private Connection connection;  
     
     public DiscountDAO() {
-        this.connection = new DBConnection();
+        this.connection = DBConnection.getConnection();
     }
     
     public boolean addDiscount(Discount discount){
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.getConnection().prepareStatement("INSERT INTO Discount (value) VALUES (?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Discount (value) VALUES (?);");
             preparedStatement.setDouble(1, discount.getValue());
             preparedStatement.executeUpdate();
             success = true;
@@ -35,7 +36,7 @@ public class DiscountDAO {
         ResultSet result = null;
         Discount  discount = null;
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Discount WHERE idDiscount = "+id+";");
+            result = connection.createStatement().executeQuery("SELECT * FROM Discount WHERE idDiscount = "+id+";");
             discount = new Discount(
                     result.getInt("idDiscount"),
                    result.getDouble("value")

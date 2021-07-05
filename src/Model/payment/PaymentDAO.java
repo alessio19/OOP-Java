@@ -1,6 +1,7 @@
 package Model.payment;
 
 import Model.dataAccessModule.DBConnection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,17 +13,17 @@ import java.sql.Timestamp;
  */
 public class PaymentDAO {
     
-    private DBConnection connection;
+    private Connection connection;
     
     public PaymentDAO() {
-        this.connection = new DBConnection();
+        this.connection = DBConnection.getConnection();
     }
     
     public boolean addPayment(Payment payment) {
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.getConnection().prepareStatement("INSERT INTO Payment (price, cardNumber, expirationDate, ccv, paymentStatusId) VALUES (?, ?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Payment (price, cardNumber, expirationDate, ccv, paymentStatusId) VALUES (?, ?, ?, ?, ?);");
             preparedStatement.setDouble(1, payment.getPrice());
             preparedStatement.setString(2, payment.getCardNumber());
             preparedStatement.setTimestamp(3, new Timestamp(payment.getExpirationDate().getTime()));
@@ -41,7 +42,7 @@ public class PaymentDAO {
         ResultSet result = null;
         Payment payment = null;
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Payment WHERE idPayment = "+id+";"); 
+            result = connection.createStatement().executeQuery("SELECT * FROM Payment WHERE idPayment = "+id+";"); 
             payment = new Payment(
                     result.getInt("idPayment"),
                     PaymentSatus.values()[result.getInt("paymentStatusId")],

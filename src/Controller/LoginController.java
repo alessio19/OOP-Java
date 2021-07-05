@@ -42,10 +42,10 @@ public class LoginController  {
     @FXML
     void ActionHandler(ActionEvent event) throws SQLException, IOException {
         if (event.getSource().equals(this.connectButton)) {
-            if (!new CustomerDAO().hasCustomer(this.emailField.getText(), this.pwdField.getText())) {
+            if (new CustomerDAO().hasCustomer(this.emailField.getText(), this.pwdField.getText())) {
                 OOP_Cinema.addScene("mainMenuCusto", FXMLLoader.load(getClass().getResource("/View/MainMenuCustomer.fxml")));
                 OOP_Cinema.changeScene("mainMenuCusto");               
-            } else if (!new EmployeeDAO().hasEmployee(this.emailField.getText(), this.pwdField.getText())) {
+            } else if (new EmployeeDAO().hasEmployee(this.emailField.getText(), this.pwdField.getText())) {
                 System.out.println("employee exist"); // Load Employee View
             } else 
                 loginFail.visibleProperty().set(true);

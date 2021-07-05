@@ -1,6 +1,7 @@
 package Model.customer;
 
 import Model.dataAccessModule.DBConnection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,17 +13,17 @@ import java.util.ArrayList;
  */
 public class CustomerDAO {
     
-    private DBConnection connection;  
+    private Connection connection;  
     
     public CustomerDAO() {
-        this.connection = new DBConnection();
+        this.connection = DBConnection.getConnection();
     }
     
     public boolean addCustomer(Customer customer) {
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.getConnection().prepareStatement("INSERT INTO Customer (mail, password, name, lastname, memberType) VALUES (?, ?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Customer (mail, password, name, lastname, memberType) VALUES (?, ?, ?, ?, ?);");
             preparedStatement.setString(1, customer.getMail());
             preparedStatement.setString(2, customer.password);
             preparedStatement.setString(3, customer.getName());
@@ -41,7 +42,7 @@ public class CustomerDAO {
         ResultSet result = null;
         Customer  customer = null;
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Customer WHERE idCustomer = "+id+";");
+            result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE idCustomer = "+id+";");
             customer = new Customer(
                     result.getInt("idCustomer"),
                     result.getString("mail"),
@@ -61,7 +62,7 @@ public class CustomerDAO {
         ResultSet result = null;
         ArrayList<Customer> customers = new ArrayList<>();
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Customer");
+            result = connection.createStatement().executeQuery("SELECT * FROM Customer");
             while (result.next()) {                
                 customers.add(new Customer(
                         result.getInt("idCustomer"),
@@ -82,7 +83,7 @@ public class CustomerDAO {
         ResultSet result = null;
         Customer customer = null;
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Customer WHERE mail = '" + mail + "' AND password = '" + password + "';");
+            result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE mail = '" + mail + "' AND password = '" + password + "';");
             customer = new Customer(
                 result.getInt("idCustomer"),
                 result.getString("mail"),
@@ -101,7 +102,7 @@ public class CustomerDAO {
     public boolean hasCustomer(String mail, String password) {
         ResultSet result = null;
         try {
-             result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Customer WHERE mail = '" + mail + "' AND password = '" + password + "';");
+             result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE mail = '" + mail + "' AND password = '" + password + "';");
              return result.next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,7 +113,7 @@ public class CustomerDAO {
     public boolean hasCustomer(String mail) {
         ResultSet result = null;
         try {
-             result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Customer WHERE mail = '" + mail + "';");
+             result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE mail = '" + mail + "';");
              return result.next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,7 +125,7 @@ public class CustomerDAO {
          ResultSet result = null;
         Customer  customer = null;
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Customer WHERE mail = "+mail+";");
+            result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE mail = "+mail+";");
             customer = new Customer(
                     result.getInt("idCustomer"),
                     result.getString("mail"),

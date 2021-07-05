@@ -1,6 +1,6 @@
 package Model.dataUpdateModule;
 
-import Model.dataAccessModule.DBConnection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -10,10 +10,10 @@ import java.sql.SQLException;
  */
 public abstract class Query {
 	
-    protected DBConnection connection;  
+    protected Connection connection;  
     protected PreparedStatement statement;
 	
-    public Query(DBConnection connection) throws SQLException {
+    public Query(Connection connection) throws SQLException {
         this.connection = connection;
     }
 	

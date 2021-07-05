@@ -1,6 +1,6 @@
 package Model.dataUpdateModule;
 
-import Model.dataAccessModule.DBConnection;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -9,55 +9,55 @@ import java.sql.SQLException;
  */
 public class DeleteQuery extends Query {
 
-    public DeleteQuery(DBConnection connection) throws SQLException {
+    public DeleteQuery(Connection connection) throws SQLException {
         super(connection);
     }
     
     public boolean deleteCustomer(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Customer WHERE idCustomer = ?;");
+        this.statement = this.connection.prepareStatement("DELETE FROM Customer WHERE idCustomer = ?;");
         return this.executeQuery(param);
     }
     
     public boolean deleteCustomer(String mail, String password) throws SQLException {
         String[] param = {mail, password};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Customer WHERE mail = ? AND password = ?;");
+        this.statement = this.connection.prepareStatement("DELETE FROM Customer WHERE mail = ? AND password = ?;");
         return this.executeQuery(param);
     } 
     
     public boolean deleteEmployee(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Employee WHERE idEmployee = ?;");
+        this.statement = this.connection.prepareStatement("DELETE FROM Employee WHERE idEmployee = ?;");
         return this.executeQuery(param);
     }
     
     public boolean deleteEmployee(String mail, String password) throws SQLException {
         String[] param = {mail, password};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Employee WHERE mail = ? AND password = ?;");
+        this.statement = this.connection.prepareStatement("DELETE FROM Employee WHERE mail = ? AND password = ?;");
         return this.executeQuery(param);
     } 
     
     public boolean deleteMovie(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Movie WHERE idMovie = ?;");
+        this.statement = this.connection.prepareStatement("DELETE FROM Movie WHERE idMovie = ?;");
         return this.executeQuery(param);
     } 
     
     public boolean deleteMovie(String title, String author, String releaseDate) throws SQLException {
         String[] param = {title, author, releaseDate};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Movie WHERE title = ? AND author = ? AND releaseDate = ?;");
+        this.statement = this.connection.prepareStatement("DELETE FROM Movie WHERE title = ? AND author = ? AND releaseDate = ?;");
         return this.executeQuery(param);
     }
     
     public boolean deletePayment(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Payment WHERE idPayment = ?;");
+        this.statement = this.connection.prepareStatement("DELETE FROM Payment WHERE idPayment = ?;");
         return this.executeQuery(param);
     } 
     
     public boolean deleteOrder(String id) throws SQLException {
         String[] param = {id};
-        this.statement = this.connection.getConnection().prepareStatement("DELETE FROM Order WHERE idOrder = ?;");        
+        this.statement = this.connection.prepareStatement("DELETE FROM Order WHERE idOrder = ?;");        
         return this.executeQuery(param);
     } 
 

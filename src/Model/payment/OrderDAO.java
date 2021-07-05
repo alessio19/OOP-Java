@@ -3,6 +3,7 @@ package Model.payment;
 import Model.dataAccessModule.DBConnection;
 import Model.customer.CustomerDAO;
 import Model.product.MovieDAO;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,17 +15,17 @@ import java.util.ArrayList;
  */
 public class OrderDAO {
     
-    private DBConnection connection;  
+    private Connection connection;  
     
     public OrderDAO() {
-        this.connection = new DBConnection();
+        this.connection = DBConnection.getConnection();
     }
     
     public boolean addOrder(Order order) {
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.getConnection().prepareStatement("INSERT INTO Order (customerId, productId, quantity, paymentId) VALUES (?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Order (customerId, productId, quantity, paymentId) VALUES (?, ?, ?, ?);");
             preparedStatement.setInt(1, order.getCustomer().getId());
             preparedStatement.setInt(2, order.getProduct().getId());
             preparedStatement.setInt(3, order.getIquantity());
@@ -42,7 +43,7 @@ public class OrderDAO {
         ResultSet result = null;
         ArrayList<Order> orders = new ArrayList<>();
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Order");
+            result = connection.createStatement().executeQuery("SELECT * FROM Order");
             while (result.next()) {                
                 orders.add(new Order(
                         result.getInt("idOrder"),

@@ -1,6 +1,7 @@
 package Model.employee;
 
 import Model.dataAccessModule.DBConnection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,17 +13,17 @@ import java.util.ArrayList;
  */
 public class EmployeeDAO {
     
-    private DBConnection connection;  
+    private Connection connection;  
     
     public EmployeeDAO() {
-        this.connection = new DBConnection();
+        this.connection = DBConnection.getConnection();
     }
     
     public boolean addEmployee(Employee employee) {
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.getConnection().prepareStatement("INSERT INTO Employee (mail, password, name, lastname) VALUES (?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Employee (mail, password, name, lastname) VALUES (?, ?, ?, ?);");
             preparedStatement.setString(1, employee.getMail());
             preparedStatement.setString(2, employee.password);
             preparedStatement.setString(3, employee.getName());
@@ -40,7 +41,7 @@ public class EmployeeDAO {
         ResultSet result = null;
         ArrayList<Employee> employees = new ArrayList<>();
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Employee");
+            result = connection.createStatement().executeQuery("SELECT * FROM Employee");
             while (result.next()) {                
                 employees.add(new Employee(
                         result.getInt("idEmployee"),
@@ -60,7 +61,7 @@ public class EmployeeDAO {
         ResultSet result = null;
         Employee employee = null;
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "' AND password = '" + password + "';");
+            result = connection.createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "' AND password = '" + password + "';");
             employee = new Employee(
                 result.getInt("idCustomer"),
                 result.getString("mail"),
@@ -77,7 +78,7 @@ public class EmployeeDAO {
     public boolean hasEmployee(String mail, String password) {
         ResultSet result = null;
         try {
-             result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "' AND password = '" + password + "';");
+             result = connection.createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "' AND password = '" + password + "';");
              return result.next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,7 +89,7 @@ public class EmployeeDAO {
     public boolean hasEmployee(String mail) {
         ResultSet result = null;
         try {
-             result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "';");
+             result = connection.createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "';");
              return result.next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,7 +101,7 @@ public class EmployeeDAO {
         ResultSet result = null;
         Employee employee = null;
         try {
-            result = connection.getConnection().createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "';");
+            result = connection.createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "';");
             employee = new Employee(
                 result.getInt("idCustomer"),
                 result.getString("mail"),

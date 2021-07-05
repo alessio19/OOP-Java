@@ -1,6 +1,6 @@
 package Model.informationSearchModule;
 
-import Model.dataAccessModule.DBConnection;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,12 +11,12 @@ import java.sql.Statement;
  */
 public class SelectQuery {
 
-    private final DBConnection connection;
+    private final Connection connection;
     private final Statement statement;
 	
-    public SelectQuery(DBConnection connection) throws SQLException {
+    public SelectQuery(Connection connection) throws SQLException {
         this.connection = connection;
-	this.statement = this.connection.getConnection().createStatement();
+        this.statement = this.connection.createStatement();
     }
     
     public ResultSet getCustomer() throws SQLException {
