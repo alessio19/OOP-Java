@@ -8,24 +8,23 @@ import java.util.Date;
  */
 public class Movie extends Product{
     private String details;
-    private Date diffusion; 
+    private Date diffusionStart, diffusionEnd; 
     private double ticketPrice;
     private MovieGenre genre;
+    private String image;
 
-    public Movie(int id, String title, String author, Date realeaseDate, Discount discount, int quantityleft, String details, Date diffusion, double ticketPrice, MovieGenre genre) {
-        super(id, title, author, realeaseDate, discount, quantityleft);
+    public Movie(int id, String title, String author, Date realeaseDate, Discount discount, String details, Date diffusionStart, Date diffusionEnd, double ticketPrice, MovieGenre genre, String image) {
+        super(id, title, author, realeaseDate, discount);
         this.details = details;
-        this.diffusion = diffusion;
+        this.diffusionStart = diffusionStart;
+        this.diffusionEnd = diffusionEnd;
         this.ticketPrice = ticketPrice;
         this.genre = genre;
+        this.image = image;
     }
 
     public String getDetails() {
         return details;
-    }
-
-    public Date getDiffusion() {
-        return diffusion;
     }
 
     public double getTicketPrice() {
@@ -35,4 +34,17 @@ public class Movie extends Product{
     public MovieGenre getGenre() {
         return genre;
     }
+
+    public Date getDiffusionStart() {
+        return diffusionStart;
+    }
+
+    public Date getDiffusionEnd() {
+        return diffusionEnd;
+    }
+
+    public String getImage() {
+        return image;
+    }
+    
 }

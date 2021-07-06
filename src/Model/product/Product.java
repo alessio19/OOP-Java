@@ -12,15 +12,13 @@ public class Product {
     private String author;
     private Date realeaseDate;
     private Discount discount;
-    private int quantityleft;
 
-    public Product(int id, String title, String author, Date realeaseDate, Discount discount, int quantityleft) {
+    public Product(int id, String title, String author, Date realeaseDate, Discount discount) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.realeaseDate = realeaseDate;
         this.discount = discount;
-        this.quantityleft = quantityleft;
     }
 
     public int getId() {
@@ -42,10 +40,5 @@ public class Product {
     public Discount getDiscount() {
         return discount;
     }
-
-    public int getQuantityleft() {
-        return quantityleft;
-    }
-    
     
 }
