@@ -32,4 +32,8 @@ public class ScreenController {
         this.mainScene.setRoot(this.screens.get(name));
     }
     
+    public Scene getScene() {
+        return this.mainScene;
+    }
+    
 }

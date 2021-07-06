@@ -1,0 +1,10 @@
+.movieContainer {
+    -fx-arc-height: 50;
+    -fx-arc-width: 50;
+}
+
+.movieTitleContainer{
+    -fx-arc-height: 50;
+    -fx-arc-width: 50;
+    -fx-padding: 100;
+}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -86,17 +87,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Rectangle fx:id="MovieSession" arcWidth="5.0" fill="#6070ff" height="244.0" layoutX="35.0" layoutY="199.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="205.0" />
-      <Rectangle arcWidth="5.0" fill="WHITE" height="97.0" layoutX="42.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="191.0" />
-      <Label fx:id="MovieSessionTitle" layoutX="60.0" layoutY="351.0" prefHeight="26.0" prefWidth="149.0" text="Label">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="MovieSessionDetails" layoutX="60.0" layoutY="376.0" prefHeight="49.0" prefWidth="156.0" text="Label">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
+      <Pagination fx:id="paginationCurrentMovies" layoutX="39.0" layoutY="181.0" pageCount="2" prefHeight="259.0" prefWidth="605.0" />
    </children>
 </AnchorPane>

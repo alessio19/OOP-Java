@@ -41,4 +41,8 @@ public class OOP_Cinema extends Application {
         launch(args);
     }
     
+    public static Scene getScene() {
+        return controller.getScene();
+    }
+    
 }
