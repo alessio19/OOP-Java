@@ -12,6 +12,10 @@ public final class DBConnection {
     
     private static Connection connection;
     
+    static {
+        new DBConnection();
+    }
+    
     private DBConnection() {
         try {
             System.out.println("Connecting to DB");
@@ -22,7 +26,6 @@ public final class DBConnection {
     }
 
     public final static Connection getConnection() {
-        new DBConnection();
         return connection;
     }
 

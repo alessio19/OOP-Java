@@ -5,6 +5,7 @@ package Controller;
  * @author Adam
  */
 import Model.customer.Customer;
+import Model.customer.CustomerDAO;
 import Model.filmSession.FilmSession;
 import Model.filmSession.FilmSessionDAO;
 import java.util.ArrayList;
@@ -77,7 +78,6 @@ public class MainMenuCustomerController {
     public void initialize() {
         OOP_Cinema.getScene().getStylesheets().add("/Resources/css/movie.css");
         this.filmSessions = new FilmSessionDAO().getFilmSessions(); 
-       
        int page = filmSessions.size()%3 ==0 ? 0 : 1;
        paginationCurrentMovies.setPageCount((filmSessions.size()/3 + page));
        paginationCurrentMovies.setPageFactory(new Callback<Integer, Node>() {
