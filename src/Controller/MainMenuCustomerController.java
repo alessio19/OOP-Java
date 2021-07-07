@@ -5,6 +5,8 @@ package Controller;
  * @author Adam
  */
 import Model.customer.Customer;
+import Model.payment.Order;
+import Model.payment.OrderDAO;
 import Model.product.Movie;
 import Model.product.MovieDAO;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class MainMenuCustomerController {
     
     private Customer customer;
     private ArrayList<Movie> movies;
+    private ArrayList<Order> orders;
 
     @FXML
     private ImageView logo;
@@ -45,6 +48,9 @@ public class MainMenuCustomerController {
 
     @FXML
     private TextArea textAreaMovie;
+    
+    @FXML
+    private TextArea textAreaOrder;
 
     @FXML
     private Label exampleTitle;
@@ -74,23 +80,23 @@ public class MainMenuCustomerController {
     public void initialize() {
         OOP_Cinema.getScene().getStylesheets().add("/Resources/css/movie.css");
         this.movies = new MovieDAO().getMovies();
-       int page = movies.size()%3 ==0 ? 0 : 1;
-       paginationCurrentMovies.setPageCount((movies.size()/3 + page));
-       paginationCurrentMovies.setPageFactory(new Callback<Integer, Node>() {
+        int page = movies.size()%3 ==0 ? 0 : 1;
+        paginationCurrentMovies.setPageCount((movies.size()/3 + page));
+        paginationCurrentMovies.setPageFactory(new Callback<Integer, Node>() {
             @Override
             public Node call(Integer pageIndex) {
                 HBox box = new HBox(3);
-           for (int i = pageIndex*3 ; i < (pageIndex+1)*3; i++) {
-               box.setMinHeight(250);
-               box.setMinWidth(100);
-               try {
-                   box.getChildren().add(getMovieContainer(movies.get(i)));
-               } catch (Exception e) {
-               }
-           }
-           return box;
+                for (int i = pageIndex*3 ; i < (pageIndex+1)*3; i++) {
+                    box.setMinHeight(250);
+                    box.setMinWidth(100);
+                    try {
+                        box.getChildren().add(getMovieContainer(movies.get(i)));
+                    } catch (Exception e) {
+                    }
+                }
+                return box;
             }
-        });
+        });               
     }
     
     public MainMenuCustomerController() {
@@ -105,6 +111,20 @@ public class MainMenuCustomerController {
     public void setCustomer(Customer customer) {
         this.customer = customer;
         this.nameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());
+        this.setCustomerOrders();
+    }
+    
+    private void setCustomerOrders() {
+        this.orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
+        this.orders.forEach(order -> {
+            this.textAreaOrder.setText(this.textAreaOrder.getText()
+                    + order.getId() + "\t"
+                    + order.getProduct().getTitle() + "\t"
+                    + order.getIquantity() + "\t"
+                    + order.getPayment().getPrice() + "\t" 
+                    + order.getPayment().getStatus().toString() + "\n"
+            );
+        });
     }
     
     private Pane getMovieContainer(Movie movie) {
