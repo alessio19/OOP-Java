@@ -27,35 +27,10 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="25.0" layoutY="474.0" text="Recent orders :" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="93.0" layoutY="541.0" text="Title" textFill="#5e5e5e">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label layoutX="233.0" layoutY="541.0" text="Genre" textFill="#5e5e5e">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label layoutX="362.0" layoutY="541.0" text="Release" textFill="#5e5e5e">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label layoutX="514.0" layoutY="541.0" text="Order date" textFill="#5e5e5e">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="691.0" layoutX="681.0" layoutY="14.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 40; -fx-arc-height: 40;" width="346.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="87.0" layoutX="692.0" layoutY="25.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="324.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="513.0" layoutX="692.0" layoutY="183.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="324.0" />
-      <Label layoutX="709.0" layoutY="149.0" text="My orders :" textFill="WHITE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="233.0" layoutX="692.0" layoutY="176.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="324.0" />
+      <Label layoutX="709.0" layoutY="142.0" text="Coming soon :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -66,27 +41,14 @@
             <Image url="@../Resources/images/magnifyingGlass.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="textAreaMovie" layoutX="709.0" layoutY="199.0" prefHeight="480.0" prefWidth="291.0" style="-fx-border-color: #ffffff;" />
-      <Label fx:id="exampleTitle" layoutX="83.0" layoutY="600.0" text="Example" textFill="WHITE">
+      <TextArea fx:id="textAreaMovie" layoutX="709.0" layoutY="187.0" prefHeight="212.0" prefWidth="291.0" style="-fx-border-color: #ffffff;" />
+      <Pagination fx:id="paginationCurrentMovies" layoutX="39.0" layoutY="209.0" pageCount="2" prefHeight="259.0" prefWidth="605.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="233.0" layoutX="693.0" layoutY="461.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="324.0" />
+      <Label layoutX="710.0" layoutY="427.0" text="Recent orders :" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="exampleGenre" layoutX="230.0" layoutY="600.0" text="Example" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="exampleRelease" layoutX="365.0" layoutY="600.0" text="Example" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="exampleOrderDate" layoutX="529.0" layoutY="600.0" text="Example" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Pagination fx:id="paginationCurrentMovies" layoutX="39.0" layoutY="181.0" pageCount="2" prefHeight="259.0" prefWidth="605.0" />
+      <TextArea fx:id="textAreaOrder" layoutX="710.0" layoutY="472.0" prefHeight="212.0" prefWidth="291.0" style="-fx-border-color: #ffffff;" />
    </children>
 </AnchorPane>
