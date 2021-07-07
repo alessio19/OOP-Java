@@ -9,9 +9,11 @@ import Model.payment.Order;
 import Model.payment.OrderDAO;
 import Model.product.Movie;
 import Model.product.MovieDAO;
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
@@ -104,9 +106,17 @@ public class MainMenuCustomerController {
     }  
 
     @FXML
-    void ActionHandler(ActionEvent event) {
-
+    void ActionHandler(ActionEvent event) throws IOException {
+        if(event.getSource().equals(this.logo)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Profile.fxml"));       
+            OOP_Cinema.addScene("profile", loader.load());
+            ProfileController controller = loader.getController();
+            controller.setCustomer(this.customer);  
+            OOP_Cinema.changeScene("profile");
+        }
     }
+    
+    
 
     public void setCustomer(Customer customer) {
         this.customer = customer;

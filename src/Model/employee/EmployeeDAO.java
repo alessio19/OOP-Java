@@ -23,11 +23,12 @@ public class EmployeeDAO {
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO Employee (mail, password, name, lastname) VALUES (?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Employee (mail, password, name, lastname, profilePicture) VALUES (?, ?, ?, ?, ?);");
             preparedStatement.setString(1, employee.getMail());
             preparedStatement.setString(2, employee.password);
             preparedStatement.setString(3, employee.getName());
             preparedStatement.setString(4, employee.getLastName());
+            preparedStatement.setString(5, employee.getProfilePicture());
             preparedStatement.executeUpdate();
             success = true;
         } catch (SQLException e) {
@@ -48,7 +49,8 @@ public class EmployeeDAO {
                         result.getString("mail"),
                         result.getString("password"),
                         result.getString("name"),
-                        result.getString("lastName")
+                        result.getString("lastName"),
+                        result.getString("profilePicture")
                 ));
             }
         } catch (SQLException e) {
@@ -67,7 +69,8 @@ public class EmployeeDAO {
                 result.getString("mail"),
                 result.getString("password"),
                 result.getString("name"),
-                result.getString("lastName")
+                result.getString("lastName"),
+                result.getString("profilePicture")
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,7 +110,8 @@ public class EmployeeDAO {
                 result.getString("mail"),
                 result.getString("password"),
                 result.getString("name"),
-                result.getString("lastName")
+                result.getString("lastName"),
+                result.getString("profilePicture")
             );
         } catch (SQLException e) {
             e.printStackTrace();

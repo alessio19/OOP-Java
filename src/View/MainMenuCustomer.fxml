@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuCustomerController">
    <children>
-      <ImageView fx:id="logo" fitHeight="59.0" fitWidth="64.0" layoutX="30.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logo" fitHeight="59.0" fitWidth="64.0" layoutX="30.0" layoutY="30.0" onMouseClicked="#ActionHandler" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/images/logo.png" />
          </image>

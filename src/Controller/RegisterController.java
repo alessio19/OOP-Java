@@ -42,6 +42,9 @@ public class RegisterController {
     private TextField lastNameField;
     
     @FXML
+    private TextField profilePictureURL;
+    
+    @FXML
     private RadioButton customerRadio;
     
     @FXML
@@ -88,8 +91,9 @@ public class RegisterController {
                                      this.emailField.getText(), 
                                      this.pwdField.getText(),  
                                      this.nameField.getText(),  
-                                     this.lastNameField.getText())
-                             );
+                                     this.lastNameField.getText(),
+                                     this.profilePictureURL.getText()
+                             ));
                              OOP_Cinema.changeScene("login");
                         }
                     } else {
@@ -102,8 +106,9 @@ public class RegisterController {
                                     this.pwdField.getText(), 
                                     this.nameField.getText(),  
                                     this.lastNameField.getText(), 
-                                    this.customerTypeChoice.selectionModelProperty().getValue().getSelectedItem())
-                            );
+                                    this.customerTypeChoice.selectionModelProperty().getValue().getSelectedItem(),
+                                    this.profilePictureURL.getText()
+                            ));
                             OOP_Cinema.changeScene("login");
                         }
                     }

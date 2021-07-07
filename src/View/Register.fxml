@@ -32,11 +32,11 @@
             <Font name="System Italic" size="16.0" />
          </font>
       </TextField>
-      <Hyperlink fx:id="returnLogin" layoutX="282.0" layoutY="594.0" onAction="#ActionHandler" text="Back to login" textFill="WHITE" underline="true">
+      <Hyperlink fx:id="returnLogin" layoutX="282.0" layoutY="618.0" onAction="#ActionHandler" text="Back to login" textFill="WHITE" underline="true">
          <font>
             <Font size="14.0" />
          </font></Hyperlink>
-      <Button fx:id="registerButton" layoutX="559.0" layoutY="581.0" mnemonicParsing="false" onAction="#ActionHandler" prefHeight="51.0" prefWidth="287.0" style="-fx-background-color: #6070FF; -fx-border-radius: 50;" text="REGISTER" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="registerButton" layoutX="559.0" layoutY="605.0" mnemonicParsing="false" onAction="#ActionHandler" prefHeight="51.0" prefWidth="287.0" style="-fx-background-color: #6070FF; -fx-border-radius: 50;" text="REGISTER" textAlignment="CENTER" textFill="WHITE">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -73,5 +73,11 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
+      <Label layoutX="586.0" layoutY="462.0" text="Profile picture" textFill="WHITE" />
+      <TextField fx:id="profilePictureURL" layoutX="559.0" layoutY="493.0" prefHeight="51.0" prefWidth="287.0" promptText="Enter url of profile picture" style="-fx-background-color: #6070FF; -fx-border-radius: 550px;">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

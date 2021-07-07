@@ -23,12 +23,13 @@ public class CustomerDAO {
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO Customer (mail, password, name, lastname, memberType) VALUES (?, ?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Customer (mail, password, name, lastname, memberType, profilePicture) VALUES (?, ?, ?, ?, ?, ?);");
             preparedStatement.setString(1, customer.getMail());
             preparedStatement.setString(2, customer.password);
             preparedStatement.setString(3, customer.getName());
             preparedStatement.setString(4, customer.getLastName());
             preparedStatement.setInt(5, customer.getMemberType().ordinal()+1);
+            preparedStatement.setString(6, customer.getProfilePicture());
             preparedStatement.executeUpdate();
             success = true;
         } catch (SQLException e) {
@@ -49,7 +50,8 @@ public class CustomerDAO {
                     result.getString("password"),
                     result.getString("name"),
                     result.getString("lastName"),
-                    MemberType.values()[result.getInt("memberType")-1]
+                    MemberType.values()[result.getInt("memberType")-1],
+                    result.getString("profilePicture")
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,7 +72,8 @@ public class CustomerDAO {
                         result.getString("password"),
                         result.getString("name"),
                         result.getString("lastName"),
-                        MemberType.values()[result.getInt("memberType")-1]
+                        MemberType.values()[result.getInt("memberType")-1],
+                        result.getString("profilePicture")
                 ));
             }
         } catch (SQLException e) {
@@ -90,7 +93,8 @@ public class CustomerDAO {
                 result.getString("password"),
                 result.getString("name"),
                 result.getString("lastName"),
-                MemberType.values()[result.getInt("memberType")-1]
+                MemberType.values()[result.getInt("memberType")-1],
+                result.getString("profilePicture")
             );   
             }            
         } catch (SQLException e) {
@@ -133,7 +137,8 @@ public class CustomerDAO {
                     result.getString("password"),
                     result.getString("name"),
                     result.getString("lastName"),
-                    MemberType.values()[result.getInt("memberType")-1]
+                    MemberType.values()[result.getInt("memberType")-1],
+                    result.getString("profilePicture")
             );
         } catch (SQLException e) {
             e.printStackTrace();
