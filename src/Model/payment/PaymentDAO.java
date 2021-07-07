@@ -39,10 +39,10 @@ public class PaymentDAO {
     }
     
     public Payment getPaymentById(int id) {
-        ResultSet result = null;
         Payment payment = null;
         try {
-            result = connection.createStatement().executeQuery("SELECT * FROM Payment WHERE idPayment = "+id+";"); 
+            ResultSet result = connection.createStatement().executeQuery("SELECT * FROM Payment WHERE idPayment = "+id+";"); 
+            result.next();
             payment = new Payment(
                     result.getInt("idPayment"),
                     PaymentSatus.values()[result.getInt("paymentStatusId")],

@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuCustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuEmployeeController">
    <children>
       <ImageView fx:id="logo" fitHeight="59.0" fitWidth="64.0" layoutX="30.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -87,7 +87,7 @@
          </font>
       </Label>
       <Circle fill="#ffb660" layoutX="897.0" layoutY="256.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#ffb660" layoutX="897.0" layoutY="431.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fx:id="userListBtn" fill="#ffb660" layoutX="897.0" layoutY="431.0" onMouseClicked="#handleUserList" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <Label layoutX="867.0" layoutY="329.0" prefHeight="20.0" prefWidth="60.0" text="Movie list" textFill="WHITE">
          <font>
             <Font size="14.0" />

@@ -54,7 +54,7 @@ public class MovieDAO {
                         result.getInt("idMovie"),
                         result.getString("title"),
                         result.getString("author"),
-                        result.getDate("realeaseDate"),
+                        result.getDate("releaseDate"),
                         discount,
                         result.getString("details"),
                         result.getDate("diffusionStart"),

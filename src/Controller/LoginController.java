@@ -49,7 +49,11 @@ public class LoginController  {
                 controller.setCustomer(new CustomerDAO().getCustomerByCredentials(this.emailField.getText(), this.pwdField.getText()));                
                 OOP_Cinema.changeScene("mainMenuCusto");               
             } else if (new EmployeeDAO().hasEmployee(this.emailField.getText(), this.pwdField.getText())) {
-                System.out.println("employee exist"); // Load Employee View
+                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainMenuEmployee.fxml"));       
+                OOP_Cinema.addScene("mainMenuEmployee", loader.load());
+                MainMenuEmployeeController controller = loader.getController();
+                controller.setEmployee(new EmployeeDAO().getEmployeeByCredentials(this.emailField.getText(), this.pwdField.getText()));                
+                OOP_Cinema.changeScene("mainMenuEmployee");               
             } else 
                 loginFail.visibleProperty().set(true);
         } else if (event.getSource().equals(this.registerButton)) {

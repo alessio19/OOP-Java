@@ -58,12 +58,12 @@ public class EmployeeDAO {
     }
     
     public Employee getEmployeeByCredentials(String mail, String password) {
-        ResultSet result = null;
         Employee employee = null;
         try {
-            result = connection.createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "' AND password = '" + password + "';");
+            ResultSet result  = connection.createStatement().executeQuery("SELECT * FROM Employee WHERE mail = '" + mail + "' AND password = '" + password + "';");
+            result.next();
             employee = new Employee(
-                result.getInt("idCustomer"),
+                result.getInt("idEmployee"),
                 result.getString("mail"),
                 result.getString("password"),
                 result.getString("name"),

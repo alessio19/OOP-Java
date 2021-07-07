@@ -25,7 +25,7 @@ public class OrderDAO {
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO Order (customerId, productId, quantity, paymentId) VALUES (?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Orders (customerId, productId, quantity, paymentId) VALUES (?, ?, ?, ?);");
             preparedStatement.setInt(1, order.getCustomer().getId());
             preparedStatement.setInt(2, order.getProduct().getId());
             preparedStatement.setInt(3, order.getIquantity());
@@ -43,7 +43,26 @@ public class OrderDAO {
         ResultSet result = null;
         ArrayList<Order> orders = new ArrayList<>();
         try {
-            result = connection.createStatement().executeQuery("SELECT * FROM Order");
+            result = connection.createStatement().executeQuery("SELECT * FROM Orders");
+            while (result.next()) {                
+                orders.add(new Order(
+                        result.getInt("idOrder"),
+                        new CustomerDAO().getCutomerById(result.getInt("customerId")),
+                        new MovieDAO().getMovieById(result.getInt("productid")),
+                        new PaymentDAO().getPaymentById(result.getInt("paymentId")),
+                        result.getInt("quantity")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+    
+    public ArrayList<Order> getOrdersForUsrId(int id) {
+        ArrayList<Order> orders = new ArrayList<>();
+        try {
+            ResultSet result = connection.createStatement().executeQuery("SELECT * FROM Orders WHERE customerId = "+id+";");
             while (result.next()) {                
                 orders.add(new Order(
                         result.getInt("idOrder"),

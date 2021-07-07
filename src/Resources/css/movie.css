@@ -1,10 +1,10 @@
-.movieContainer {
+.roundBorder {
     -fx-arc-height: 50;
     -fx-arc-width: 50;
 }
 
-.movieTitleContainer{
+.btnEdit {
     -fx-arc-height: 50;
     -fx-arc-width: 50;
-    -fx-padding: 100;
+    -fx-background-color: #6070ff;
 }

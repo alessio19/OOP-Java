@@ -39,10 +39,10 @@ public class CustomerDAO {
     }
     
     public Customer getCutomerById(int id) {
-        ResultSet result = null;
         Customer  customer = null;
         try {
-            result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE idCustomer = "+id+";");            
+            ResultSet result = connection.createStatement().executeQuery("SELECT * FROM Customer WHERE idCustomer = "+id+";");            
+            result.next();
             customer = new Customer(
                     result.getInt("idCustomer"),
                     result.getString("mail"),
