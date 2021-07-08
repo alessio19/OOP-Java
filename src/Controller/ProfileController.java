@@ -27,6 +27,9 @@ public class ProfileController {
     private Circle profilePicture;
 
     @FXML
+    private Label mainNameLabel;
+    
+    @FXML
     private Label nameLabel;
 
     @FXML
@@ -61,7 +64,7 @@ public class ProfileController {
     
     public void setCustomer(Customer customer) {
         this.customer = customer;
-        this.nameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());
+        this.mainNameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());
         if (this.customer.getProfilePicture().isEmpty())
             this.profilePicture.setFill(new ImagePattern(new Image("/Resources/images/profile.png")));
         else

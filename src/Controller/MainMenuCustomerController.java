@@ -21,6 +21,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -106,17 +107,18 @@ public class MainMenuCustomerController {
     }  
 
     @FXML
-    void ActionHandler(ActionEvent event) throws IOException {
-        if(event.getSource().equals(this.logo)) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Profile.fxml"));       
-            OOP_Cinema.addScene("profile", loader.load());
-            ProfileController controller = loader.getController();
-            controller.setCustomer(this.customer);  
-            OOP_Cinema.changeScene("profile");
-        }
+    void ActionHandler(ActionEvent event) {
+        
     }
     
-    
+    @FXML
+    void profileButton(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Profile.fxml"));       
+        OOP_Cinema.addScene("profile", loader.load());
+        ProfileController controller = loader.getController();
+        controller.setCustomer(this.customer);  
+        OOP_Cinema.changeScene("profile");
+    }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
