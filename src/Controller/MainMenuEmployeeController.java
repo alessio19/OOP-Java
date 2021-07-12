@@ -1,10 +1,13 @@
 package Controller;
 
 import Model.employee.Employee;
+import Model.employee.EmployeeDAO;
 import Model.product.Movie;
 import Model.product.MovieDAO;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -111,6 +114,20 @@ public class MainMenuEmployeeController {
         Label titleLabel = new Label(movie.getTitle());
         Rectangle edit = new Rectangle(170,50);
         Label editLabel = new Label("Edit");
+        edit.setOnMouseClicked(e -> {
+            try {
+                this.editMovie(movie);
+            } catch (IOException ex) {
+                Logger.getLogger(MainMenuEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        editLabel.setOnMouseClicked(e -> {
+            try {
+                this.editMovie(movie);
+            } catch (IOException ex) {
+                Logger.getLogger(MainMenuEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
 
         r.getStyleClass().add("roundBorder");
         r.setFill(new ImagePattern(new Image(movie.getImage())));
@@ -140,6 +157,14 @@ public class MainMenuEmployeeController {
         pane.getChildren().add(editLabel);
 
         return pane;
+    }
+    
+    private void editMovie(Movie m) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EditMovie.fxml"));       
+        OOP_Cinema.addScene("editMovie", loader.load());
+        EditMovieController controller = loader.getController();
+        controller.setMovie(m);
+        OOP_Cinema.changeScene("editMovie");
     }
     
 }

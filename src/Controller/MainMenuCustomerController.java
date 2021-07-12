@@ -12,7 +12,6 @@ import Model.payment.OrderDAO;
 import Model.product.Movie;
 import Model.product.MovieDAO;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
