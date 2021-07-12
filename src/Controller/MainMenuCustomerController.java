@@ -5,23 +5,34 @@ package Controller;
  * @author Adam
  */
 import Model.customer.Customer;
+import Model.filmSession.FilmSession;
+import Model.filmSession.FilmSessionDAO;
 import Model.payment.Order;
 import Model.payment.OrderDAO;
 import Model.product.Movie;
 import Model.product.MovieDAO;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -30,6 +41,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 public class MainMenuCustomerController {
     
@@ -78,6 +90,36 @@ public class MainMenuCustomerController {
     
     @FXML
     private Pagination paginationCurrentMovies;
+    
+    @FXML
+    private ComboBox<FilmSession> cmbSessions;
+
+    @FXML
+    private Button orderBtn;
+
+    @FXML
+    private Label movieName;
+
+    @FXML
+    private Label movieDescription;
+
+    @FXML
+    private Label author;
+
+    @FXML
+    private Label ticketPrice;
+
+    @FXML
+    private Label discount;
+
+    @FXML
+    private ComboBox<Integer> cmbQuantity;
+
+    @FXML
+    private Label totalPrice;
+    
+    @FXML
+    private AnchorPane sessionDetailPane;
     
     @FXML
     public void initialize() {
@@ -149,6 +191,9 @@ public class MainMenuCustomerController {
                
                r.getStyleClass().add("movieContainer");
                r.setFill(new ImagePattern(new Image(movie.getImage())));
+               r.setOnMouseClicked((event) -> {
+                   changeSession(movie);
+               });
                title.getStyleClass().add("movieTitleContainer");
                title.setFill(Color.WHITE);
                title.setLayoutY(167);
@@ -159,6 +204,9 @@ public class MainMenuCustomerController {
                titleLabel.setFont(Font.font("System",FontWeight.BOLD, 14));
                descriptionLabel.setLayoutY(195);
                descriptionLabel.setLayoutX(20);
+               descriptionLabel.setWrapText(true);
+               descriptionLabel.setMaxWidth(120);
+               descriptionLabel.setMaxHeight(40);
                
                pane.getChildren().add(r);
                pane.getChildren().add(title);
@@ -166,6 +214,96 @@ public class MainMenuCustomerController {
                pane.getChildren().add(descriptionLabel);
                
                return pane;
+    }
+
+    @FXML
+    void handleOrderBtn(ActionEvent event) {
+
+    }
+    
+    private void changeSession(Movie movie) {
+        totalPrice.setText("0€");
+        sessionDetailPane.setDisable(false);
+        movieName.setText(movie.getTitle());
+        author.setText(movie.getAuthor());
+        movieDescription.setText(movie.getDetails());
+        ticketPrice.setText(movie.getTicketPrice()+" €");
+        discount.setText(movie.getDiscount()!=null ? movie.getDiscount().getValue()*100 + "%" : "No discount");
+        cmbQuantity.setDisable(true);
+        ArrayList<FilmSession> sessions = new FilmSessionDAO().getFilmSessionByMovieId(movie.getId());
+        
+        updateSessionCMB(sessions);
+        
+        sessionDetailPane.setVisible(true);
+    }
+    
+    private void updateSessionCMB(ArrayList<FilmSession> sessions) {
+        cmbSessions.setItems(FXCollections.observableArrayList(sessions));
+        
+        cmbSessions.setCellFactory(new Callback<ListView<FilmSession>, ListCell<FilmSession>>() {
+            @Override
+            public ListCell<FilmSession> call(ListView<FilmSession> param) {
+                final ListCell<FilmSession> cell = new ListCell<FilmSession>() {
+                    @Override
+                    protected void updateItem(FilmSession item, boolean empty) {
+                        super.updateItem(item, false);
+                        if (item != null) {
+                            setText(item.getDiffusionDate().toString());
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        cmbSessions.setConverter(new StringConverter<FilmSession>() {
+            @Override
+            public String toString(FilmSession object) {
+                if(object == null) {
+                    return null;
+                } else {
+                    return object.getDiffusionDate().toString();
+                }
+            }
+
+            @Override
+            public FilmSession fromString(String string) {
+                return null;
+            }
+        });
+        
+        cmbSessions.setOnAction(e -> {
+            try {
+                ComboBox cmb = (ComboBox)e.getSource();
+                FilmSession session = (FilmSession)cmb.getSelectionModel().getSelectedItem();
+                System.out.println(session.getMovie().getTitle());
+                updateQuantityCMB(session);
+            } catch (NullPointerException ex) {
+                cmbQuantity.setDisable(true);
+                totalPrice.setText("0€");
+            }
+        });
+    }
+    
+    private void updateQuantityCMB(FilmSession session) {
+        cmbQuantity.setDisable(false);
+        cmbQuantity.setItems(FXCollections.observableArrayList(IntStream.range(1, session.getTicketQuantity()).boxed().collect(Collectors.toList())));
+        cmbQuantity.setOnAction(e->{
+            try {
+                double discount =  (session.getMovie().getDiscount()!=null ?session.getMovie().getDiscount().getValue():0)*session.getMovie().getTicketPrice() ;
+                double price = (session.getMovie().getTicketPrice() - discount)*cmbQuantity.getSelectionModel().getSelectedItem();
+                totalPrice.setText(round(price)+"€");
+            } catch (NullPointerException ex) {
+                totalPrice.setText("0€");
+            }
+         });
+    }
+    
+    private double round(double val) {
+        val = val * 100;
+        val = Math.round(val);
+        return val / 100;
     }
     
 }

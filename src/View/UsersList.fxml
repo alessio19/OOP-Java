@@ -20,7 +20,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="14.0" layoutY="91.0" prefHeight="300.0" prefWidth="576.0">
+      <ScrollPane fx:id="scrollPane" layoutX="14.0" layoutY="91.0" prefHeight="300.0" prefWidth="576.0">
          <content>
             <Accordion fx:id="accordionUsersList" prefHeight="297.0" prefWidth="571.0" style="-fx-background-color: #ffffff;" />
          </content>

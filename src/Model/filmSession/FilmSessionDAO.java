@@ -78,4 +78,22 @@ public class FilmSessionDAO {
         return success;
     }
     
+    public ArrayList<FilmSession> getFilmSessionByMovieId(int id) {
+        ArrayList<FilmSession> filmSessions = new ArrayList<>();
+        try {
+            ResultSet result = connection.createStatement().executeQuery("SELECT * FROM FilmSession WHERE idMovie = "+id+";");             
+            while (result.next()) { 
+                filmSessions.add(new FilmSession(
+                        result.getInt("idFilmSession"),
+                        (new MovieDAO().getMovieById(result.getInt("idMovie"))),
+                        result.getDate("diffusionDate"),
+                        result.getInt("ticketQuantity")
+                ));      
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return filmSessions;
+    }
+    
 }

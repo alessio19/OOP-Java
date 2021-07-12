@@ -42,9 +42,6 @@ public class RegisterController {
     private TextField lastNameField;
     
     @FXML
-    private TextField profilePictureURL;
-    
-    @FXML
     private RadioButton customerRadio;
     
     @FXML
@@ -83,7 +80,7 @@ public class RegisterController {
                     !this.nameField.getText().isEmpty() &&
                     !this.lastNameField.getText().isEmpty()) {
                     if (this.employeeRadio.isSelected()) {
-                        if (this.employeeDAO.hasEmployee(this.emailField.getText())) {
+                        if (this.employeeDAO.hasEmployee(this.emailField.getText()) || this.customerDAO.hasCustomer(this.emailField.getText())) {
                              this.errorLabel.setOpacity(1);   
                         } else {
                              employeeDAO.addEmployee( new Employee(
@@ -92,12 +89,12 @@ public class RegisterController {
                                      this.pwdField.getText(),  
                                      this.nameField.getText(),  
                                      this.lastNameField.getText(),
-                                     this.profilePictureURL.getText()
+                                     "https://i.pravatar.cc/300?u="+ this.emailField.getText()
                              ));
                              OOP_Cinema.changeScene("login");
                         }
                     } else {
-                        if (customerDAO.hasCustomer(this.emailField.getText())) {
+                        if (customerDAO.hasCustomer(this.emailField.getText()) || this.employeeDAO.hasEmployee(this.emailField.getText())) {
                               this.errorLabel.setOpacity(1);  
                         } else {
                             customerDAO.addCustomer(new Customer(
@@ -107,7 +104,7 @@ public class RegisterController {
                                     this.nameField.getText(),  
                                     this.lastNameField.getText(), 
                                     this.customerTypeChoice.selectionModelProperty().getValue().getSelectedItem(),
-                                    this.profilePictureURL.getText()
+                                    "https://i.pravatar.cc/300?u="+ this.emailField.getText()
                             ));
                             OOP_Cinema.changeScene("login");
                         }

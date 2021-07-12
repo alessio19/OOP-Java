@@ -48,6 +48,9 @@ public class ProfileController {
     private Label lastNameLabel;    
     
     @FXML
+    private Rectangle backToTheMenu;
+    
+    @FXML
     public void initialize() {
 
     }    
@@ -73,6 +76,16 @@ public class ProfileController {
         this.pwdLabel.setText(this.customer.getPwd());
         this.nameLabel.setText(this.customer.getName());
         this.lastNameLabel.setText(this.customer.getLastName());
+    }
+    
+    @FXML
+    void backHandle(MouseEvent event) {
+        OOP_Cinema.changeScene("mainMenuCusto");
+    }
+    
+    @FXML
+    void logoutHandler(MouseEvent event) {
+        OOP_Cinema.changeScene("login");
     }
     
 }

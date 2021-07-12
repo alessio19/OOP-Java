@@ -33,10 +33,10 @@ public class DiscountDAO {
     }
     
     public Discount getDiscountById(int id) {
-        ResultSet result = null;
         Discount  discount = null;
         try {
-            result = connection.createStatement().executeQuery("SELECT * FROM Discount WHERE idDiscount = "+id+";");
+             ResultSet result = connection.createStatement().executeQuery("SELECT * FROM Discount WHERE idDiscount = "+id+";");
+             result.next();
             discount = new Discount(
                     result.getInt("idDiscount"),
                    result.getDouble("value")

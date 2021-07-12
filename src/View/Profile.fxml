@@ -95,5 +95,16 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Rectangle fx:id="backToTheMenu" arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="54.0" layoutX="897.0" layoutY="646.0" onMouseClicked="#backHandle" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="120.0" />
+      <Label layoutX="928.0" layoutY="656.0" onMouseClicked="#backHandle" prefHeight="35.0" prefWidth="73.0" text="Return" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="940.0" layoutY="589.0" onMouseClicked="#logoutHandler" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/logout.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

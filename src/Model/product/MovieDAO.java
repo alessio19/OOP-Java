@@ -74,15 +74,16 @@ public class MovieDAO {
         Movie movie = null;
         try {
             ResultSet result = connection.createStatement().executeQuery("SELECT * FROM Movie WHERE idMovie = "+id+";"); 
-            //Discount discount = Integer.valueOf(result.getInt("discountId")) != null ? new DiscountDAO().getDiscountById(result.getInt("discountId")) : null;
             result.next();
+            Discount discount = Integer.valueOf(result.getInt("discountId")) != 0 ? new DiscountDAO().getDiscountById(result.getInt("discountId")) : null;
+            
+            
             movie= new Movie(
                     result.getInt("idMovie"),
                     result.getString("title"),
                     result.getString("author"),
                     result.getDate("releaseDate"),
-                    //discount,
-                    null,
+                    discount,
                     result.getString("details"),
                     result.getDate("diffusionStart"),
                     result.getDate("diffusionEnd"),

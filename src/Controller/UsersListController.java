@@ -7,6 +7,7 @@ import Model.payment.OrderDAO;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.shape.Rectangle;
 
@@ -20,12 +21,16 @@ public class UsersListController{
     @FXML
     private Accordion accordionUsersList;
     
+    @FXML
+    private ScrollPane scrollPane;
+    
     private ArrayList<Customer> customers;
     
     @FXML
     public void initialize() {
         customers = new CustomerDAO().getCutomers();
-        accordionUsersList.setMinWidth(600);
+        scrollPane.setMinWidth(1000);
+        accordionUsersList.setMinWidth(995);
         for(Customer customer : customers) {
             ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(customer.getId());
             accordionUsersList.getPanes().add(getPane(customer, orders));
