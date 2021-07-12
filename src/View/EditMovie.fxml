@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -7,6 +8,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -45,14 +49,23 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <DatePicker fx:id="endOfDiffusion" layoutX="412.0" layoutY="153.0" prefHeight="25.0" prefWidth="131.0" />
-      <DatePicker fx:id="startOfDiffusion" layoutX="411.0" layoutY="206.0" prefHeight="25.0" prefWidth="131.0" />
+      <DatePicker fx:id="endOfDiffusion" layoutX="412.0" layoutY="153.0" prefHeight="25.0" prefWidth="131.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
+      <DatePicker fx:id="startOfDiffusion" layoutX="411.0" layoutY="206.0" prefHeight="25.0" prefWidth="131.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
       <Label layoutX="285.0" layoutY="263.0" text="Price ticket :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="ticketPrice" layoutX="412.0" layoutY="259.0" prefHeight="25.0" prefWidth="131.0" promptText="Enter a ticket price" style="-fx-background-color: #ffffff25;" />
+      <TextField fx:id="ticketPrice" layoutX="412.0" layoutY="259.0" prefHeight="25.0" prefWidth="131.0" promptText="Enter a ticket price" style="-fx-background-color: #ffffff;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="42.0" layoutX="460.0" layoutY="324.0" onMouseClicked="#ApplyModifMovie" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 40; -fx-arc-width: 40;" width="93.0" />
       <Label layoutX="488.0" layoutY="337.0" onMouseClicked="#ApplyModifMovie" text="APPLY" textFill="WHITE">
          <font>
@@ -100,13 +113,19 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="quantityTicketEdit" layoutX="776.0" layoutY="587.0" prefHeight="27.0" prefWidth="173.0" promptText="Choose a quantity" style="-fx-background-color: #ffffff25; -fx-border-radius: 5;" />
+      <TextField fx:id="quantityTicketEdit" layoutX="776.0" layoutY="587.0" prefHeight="27.0" prefWidth="173.0" promptText="Choose a quantity" style="-fx-background-color: #ffffff; -fx-border-radius: 5;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
       <Label layoutX="655.0" layoutY="630.0" text="Diffusion date :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <DatePicker fx:id="diffusionDateEdit" layoutX="776.0" layoutY="626.0" prefHeight="25.0" prefWidth="173.0" />
+      <DatePicker fx:id="diffusionDateEdit" layoutX="776.0" layoutY="626.0" prefHeight="25.0" prefWidth="173.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="25.0" layoutX="655.0" layoutY="662.0" onMouseClicked="#deleteFilmSession" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 25; -fx-arc-width: 25;" width="150.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="25.0" layoutX="816.0" layoutY="662.0" onMouseClicked="#applyEditFilmSession" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 25; -fx-arc-width: 25;" width="60.0" />
       <Label layoutX="677.0" layoutY="666.0" onMouseClicked="#deleteFilmSession" text="Delete film session" textFill="#6070ff">
@@ -121,7 +140,31 @@
       </Label>
       <ScrollPane fx:id="filmSessionPane" layoutX="636.0" layoutY="141.0" prefHeight="386.0" prefWidth="350.0" style="-fx-background-color: #ffffff;">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="348.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <GridPane fx:id="GridSession" layoutX="9.0" prefHeight="66.0" prefWidth="319.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="106.0" minWidth="10.0" prefWidth="66.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="118.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="150.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Id" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                        <Label text="Ticket quantity" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                        <Label text="Diffusion date" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="OPEN_HAND" />
+                           </cursor></Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </GridPane>
+               </children>
+            </AnchorPane>
         </content>
       </ScrollPane>
    </children>
