@@ -97,4 +97,19 @@ public class MovieDAO {
         return movie;
     }
     
+    public boolean updateMovie(Movie movie) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE Movie SET diffusionStart = ?, diffusionEnd = ?, ticketPrice = ? WHERE idMovie = ?");
+            ps.setTimestamp(1, new Timestamp(movie.getDiffusionStart().getTime()));
+            ps.setTimestamp(2, new Timestamp(movie.getDiffusionEnd().getTime()));
+            ps.setDouble(3, movie.getTicketPrice());
+            ps.setInt(4, movie.getId());
+            ps.executeUpdate();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+    
 }

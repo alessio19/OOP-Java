@@ -46,5 +46,17 @@ public class Movie extends Product{
     public String getImage() {
         return image;
     }
+
+    public void setDiffusionStart(Date diffusionStart) {
+        this.diffusionStart = diffusionStart;
+    }
+
+    public void setDiffusionEnd(Date diffusionEnd) {
+        this.diffusionEnd = diffusionEnd;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
     
 }

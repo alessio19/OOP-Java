@@ -12,6 +12,7 @@ import Model.payment.OrderDAO;
 import Model.product.Movie;
 import Model.product.MovieDAO;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -247,7 +248,7 @@ public class MainMenuCustomerController {
                     protected void updateItem(FilmSession item, boolean empty) {
                         super.updateItem(item, false);
                         if (item != null) {
-                            setText(item.getDiffusionDate().toString());
+                            setText((new SimpleDateFormat("dd-M-yyyy kk:mm").format(item.getDiffusionDate().getTime())));
                         } else {
                             setText(null);
                         }
@@ -262,7 +263,7 @@ public class MainMenuCustomerController {
                 if(object == null) {
                     return null;
                 } else {
-                    return object.getDiffusionDate().toString();
+                    return new SimpleDateFormat("dd-M-yyyy kk:mm").format(object.getDiffusionDate().getTime()) ;
                 }
             }
 

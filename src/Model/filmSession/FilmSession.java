@@ -6,7 +6,7 @@
 package Model.filmSession;
 
 import Model.product.Movie;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -16,10 +16,10 @@ public class FilmSession {
     
     private int idFilmSession;
     private Movie movie;    
-    private Date diffusionDate;
+    private Calendar diffusionDate;
     private int ticketQuantity;
 
-    public FilmSession(int idFilmSession, Movie movie, Date diffusionDate, int ticketQuantity) {
+    public FilmSession(int idFilmSession, Movie movie, Calendar diffusionDate, int ticketQuantity) {
         this.idFilmSession = idFilmSession;
         this.movie = movie;
         this.diffusionDate = diffusionDate;
@@ -38,7 +38,7 @@ public class FilmSession {
         this.movie = movie;
     }
 
-    public Date getDiffusionDate() {
+    public Calendar getDiffusionDate() {
         return diffusionDate;
     }
 
@@ -49,5 +49,8 @@ public class FilmSession {
     public void setTicketQuantity(int ticketQuantity) {
         this.ticketQuantity = ticketQuantity;
     }
-    
+
+    public void setDiffusionDate(Calendar diffusionDate) {
+        this.diffusionDate = diffusionDate;
+    }
 }
