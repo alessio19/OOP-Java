@@ -12,6 +12,10 @@ public class Discount {
         this.id = id;
         this.value = value;
     }
+    
+    public Discount(double value) {
+        this.value = value;
+    }
 
     public int getId() {
         return id;
@@ -20,4 +24,11 @@ public class Discount {
     public double getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return this.value*100 + "%";
+    }
+    
+    
 }

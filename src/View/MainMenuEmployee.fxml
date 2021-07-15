@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TextField?>
@@ -35,13 +36,8 @@
       </Label>
       <Pagination fx:id="paginationCurrentMovies" layoutX="39.0" layoutY="209.0" pageCount="2" prefHeight="259.0" prefWidth="605.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="54.0" layoutY="622.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="228.0" />
-      <TextField fx:id="MovieDiscount" layoutX="71.0" layoutY="626.0" prefHeight="42.0" prefWidth="193.0" promptText="Select a movie . . ." style="-fx-border-color: #ffffff;">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </TextField>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="319.0" layoutY="623.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="228.0" />
-      <TextField fx:id="DiscountTextField" layoutX="336.0" layoutY="627.0" prefHeight="42.0" prefWidth="193.0" promptText="Discount to apply" style="-fx-border-color: #ffffff;">
+      <TextField fx:id="DiscountTextField" layoutX="336.0" layoutY="627.0" onKeyReleased="#DiscountValueCHange" prefHeight="42.0" prefWidth="193.0" promptText="Discount to apply" style="-fx-border-color: #ffffff;">
          <font>
             <Font size="13.0" />
          </font>
@@ -61,29 +57,19 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="589.0" layoutY="622.0" text="New price :" textFill="WHITE">
+      <Label layoutX="589.0" layoutY="637.0" text="New price :" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="newPrice" layoutX="725.0" layoutY="622.0" prefHeight="20.0" prefWidth="50.0" text="price" textFill="WHITE">
+      <Label fx:id="newPrice" layoutX="725.0" layoutY="637.0" prefHeight="20.0" prefWidth="50.0" text="price" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="711.0" layoutY="624.0" text="\$" textFill="WHITE">
+      <Label layoutX="711.0" layoutY="639.0" text="\$" textFill="WHITE">
          <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="589.0" layoutY="657.0" text="Promotion code :" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="prototionCode" layoutX="711.0" layoutY="657.0" prefHeight="20.0" prefWidth="107.0" text="promotion" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Circle fill="#ffb660" layoutX="897.0" layoutY="256.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
@@ -108,11 +94,13 @@
             <Image url="@../Resources/images/client.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="857.0" layoutY="620.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="114.0" />
-      <Button fx:id="applyButton" layoutX="888.0" layoutY="632.0" mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="APPLY">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="857.0" layoutY="620.0" onMouseClicked="#applyDiscount" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="114.0" />
+      <Button fx:id="applyButton" layoutX="888.0" layoutY="632.0" mnemonicParsing="false" onMouseClicked="#applyDiscount" style="-fx-background-color: #ffffff;" text="APPLY">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <ChoiceBox fx:id="choiceBoxMovie" layoutX="70.0" layoutY="625.0" prefHeight="42.0" prefWidth="193.0" style="-fx-background-color: #ffffff;" />
+      <Label fx:id="errorDiscountAlreadyExisting" layoutX="58.0" layoutY="687.0" text="This movie already has a discount" textFill="#ffb660" visible="false" />
    </children>
 </AnchorPane>

@@ -9,6 +9,7 @@ import Model.filmSession.FilmSession;
 import Model.filmSession.FilmSessionDAO;
 import Model.payment.Order;
 import Model.payment.OrderDAO;
+import Model.product.Discount;
 import Model.product.Movie;
 import Model.product.MovieDAO;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,8 +29,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -122,6 +127,9 @@ public class MainMenuCustomerController {
     private AnchorPane sessionDetailPane;
     
     @FXML
+    private TableView<Movie> tableDeal;
+    
+    @FXML
     public void initialize() {
         OOP_Cinema.getScene().getStylesheets().add("/Resources/css/movie.css");
         this.movies = new MovieDAO().getMovies();
@@ -141,7 +149,27 @@ public class MainMenuCustomerController {
                 }
                 return box;
             }
-        });               
+        });          
+        ArrayList<Movie> movieWithDiscount = new ArrayList<>();
+        movies.forEach(movie -> {
+            if (movie.getDiscount() != null) 
+                movieWithDiscount.add(movie);            
+        });
+        TableColumn<Movie, String> movieCol = new TableColumn<>("Movie");
+        movieCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        TableColumn<Movie, Discount> discountCol = new TableColumn<>("Discount");
+        discountCol.setCellValueFactory(new PropertyValueFactory<>("discount"));
+        
+        movieCol.setMinWidth(160);
+        discountCol.setMinWidth(50);
+        movieCol.setStyle("-fx-alignment: CENTER;");
+        discountCol.setStyle("-fx-alignment: CENTER;");        
+        
+        this.tableDeal.setItems(FXCollections.observableArrayList(movieWithDiscount));
+        this.tableDeal.getColumns().addAll(movieCol, discountCol);   
+        this.tableDeal.setOnMouseClicked(e -> {
+            this.changeSession(this.tableDeal.getSelectionModel().getSelectedItem());
+        });
     }
     
     public MainMenuCustomerController() {

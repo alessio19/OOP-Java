@@ -2,6 +2,8 @@ package Controller;
 
 import Model.employee.Employee;
 import Model.employee.EmployeeDAO;
+import Model.product.Discount;
+import Model.product.DiscountDAO;
 import Model.product.Movie;
 import Model.product.MovieDAO;
 import java.io.IOException;
@@ -13,11 +15,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -62,10 +66,17 @@ public class MainMenuEmployeeController {
     private ImageView ClientButton;
 
     @FXML
+    private ChoiceBox<String> choiceBoxMovie;
+    
+    @FXML
+    private Label errorDiscountAlreadyExisting;
+    
+    @FXML
     private Button applyButton;
     
     private ArrayList<Movie> movies;
     private Employee employee;
+    private Movie movieForDiscount;
     
     @FXML
     public void initialize() {
@@ -88,8 +99,11 @@ public class MainMenuEmployeeController {
            return box;
             }
         });
-    }
-    
+       
+       for (int i=0; i<this.movies.size(); ++i) {
+           this.choiceBoxMovie.getItems().add(this.movies.get(i).getTitle());
+       }
+    }    
     
     public void setEmployee(Employee employee) {
         this.employee = employee;
@@ -104,8 +118,7 @@ public class MainMenuEmployeeController {
         } catch (IOException ex) {
               System.out.println(ex);
         }
-    }
-    
+    }    
     
     private Pane getMovieContainer(Movie movie) {
         Pane pane = new Pane();
@@ -127,6 +140,9 @@ public class MainMenuEmployeeController {
             } catch (IOException ex) {
                 Logger.getLogger(MainMenuEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        });
+        r.setOnMouseClicked(e -> {
+            this.discountHandler(movie);
         });
 
         r.getStyleClass().add("roundBorder");
@@ -165,6 +181,33 @@ public class MainMenuEmployeeController {
         EditMovieController controller = loader.getController();
         controller.setMovie(m);
         OOP_Cinema.changeScene("editMovie");
+    }
+    
+    private void discountHandler(Movie m) {
+        if (m.getDiscount() != null)
+            this.errorDiscountAlreadyExisting.setVisible(true);
+        else
+            this.errorDiscountAlreadyExisting.setVisible(false);
+        this.choiceBoxMovie.setValue(m.getTitle());
+        this.currentPrice.setText(Double.toString(m.getTicketPrice()));      
+        movieForDiscount = m;
+    }
+    
+    @FXML
+    void DiscountValueCHange(KeyEvent event) {
+        try {
+            if (!Double.isNaN(Double.parseDouble(this.DiscountTextField.getText()))) {
+                this.newPrice.setText(Double.toString(Double.parseDouble(this.currentPrice.getText()) * Double.parseDouble(this.DiscountTextField.getText())));
+            }
+        } catch (NumberFormatException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    @FXML
+    void applyDiscount(MouseEvent event) {
+        boolean result = new DiscountDAO().applyDiscount(new Discount(Double.parseDouble(this.DiscountTextField.getText())), movieForDiscount);
+        System.out.println(result);
     }
     
 }

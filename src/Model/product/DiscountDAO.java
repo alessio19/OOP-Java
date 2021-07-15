@@ -17,12 +17,12 @@ public class DiscountDAO {
         this.connection = DBConnection.getConnection();
     }
     
-    public boolean addDiscount(Discount discount){
+    public boolean addDiscount(double value){
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO Discount (value) VALUES (?);");
-            preparedStatement.setDouble(1, discount.getValue());
+            preparedStatement.setDouble(1, value);
             preparedStatement.executeUpdate();
             success = true;
         } catch (SQLException e) {
@@ -30,6 +30,26 @@ public class DiscountDAO {
             success = false;
         }
         return success;
+    }
+    
+    public boolean applyDiscount(Discount discount, Movie movie) {
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement("INSERT INTO Discount (value) VALUES (?);");
+            preparedStatement.setDouble(1, discount.getValue());
+            preparedStatement.execute();
+            preparedStatement.close();
+            
+            PreparedStatement ps = connection.prepareStatement("UPDATE Movie SET discountId = ? WHERE idMovie = ? ON UPDATE CASCADE");
+            ps.setInt(1, discount.getId());
+            ps.setInt(2, movie.getId());
+            ps.executeUpdate();
+            ps.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     
     public Discount getDiscountById(int id) {
