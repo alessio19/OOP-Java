@@ -97,6 +97,33 @@ public class MovieDAO {
         return movie;
     }
     
+    public Movie getMovieByTitleAuthor(String title, String author) {
+        Movie movie = null;
+        try {
+            ResultSet result = connection.createStatement().executeQuery("SELECT * FROM Movie WHERE title = '"+title+"' AND author = '" + author + "';"); 
+            result.next();
+            Discount discount = Integer.valueOf(result.getInt("discountId")) != 0 ? new DiscountDAO().getDiscountById(result.getInt("discountId")) : null;
+            
+            
+            movie= new Movie(
+                    result.getInt("idMovie"),
+                    result.getString("title"),
+                    result.getString("author"),
+                    result.getDate("releaseDate"),
+                    discount,
+                    result.getString("details"),
+                    result.getDate("diffusionStart"),
+                    result.getDate("diffusionEnd"),
+                    result.getDouble("ticketPrice"),
+                    MovieGenre.values()[result.getInt("movieGenreId")-1],
+                    result.getString("movieImage")
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return movie;
+    }
+    
     public boolean updateMovie(Movie movie) {
         try {
             PreparedStatement ps = connection.prepareStatement("UPDATE Movie SET diffusionStart = ?, diffusionEnd = ?, ticketPrice = ? WHERE idMovie = ?");

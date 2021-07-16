@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.PaymentScreenController">
+   <children>
+      <ImageView fx:id="logo" fitHeight="59.0" fitWidth="64.0" layoutX="40.0" layoutY="40.0" onMouseClicked="#profileButton" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/logo.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="nameLabel" layoutX="124.0" layoutY="61.0" text="Name LastName" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="557.0" layoutX="16.0" layoutY="147.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="663.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="557.0" layoutX="694.0" layoutY="147.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="333.0" />
+      <Label layoutX="56.0" layoutY="171.0" text="Review order :">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableOrders" layoutX="40.0" layoutY="226.0" prefHeight="456.0" prefWidth="615.0" />
+      <Label layoutX="726.0" layoutY="171.0" text="Payment review :">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="752.0" layoutY="258.0" text="Subtotal :">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="subtotalLabel" layoutX="893.0" layoutY="258.0" text="sub">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="752.0" layoutY="340.0" text="Discount total:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="discountLabel" layoutX="893.0" layoutY="340.0" text="discount">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="752.0" layoutY="434.0" text="Total :">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalLabel" layoutX="893.0" layoutY="434.0" text="total">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="91.0" layoutX="719.0" layoutY="591.0" onMouseClicked="#procedingPayment" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 40; -fx-arc-width: 40;" width="284.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="49.0" layoutX="783.0" layoutY="45.0" onMouseClicked="#conitnueShopping" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="157.0" />
+      <Label layoutX="798.0" layoutY="61.0" onMouseClicked="#conitnueShopping" text="CONTINUE SHOPPING" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="743.0" layoutY="623.0" onMouseClicked="#procedingPayment" text="PROCEDING TO PAYMENT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

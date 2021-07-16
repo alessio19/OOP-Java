@@ -23,6 +23,11 @@ public class Payment {
         this.ccv = ccv;
     }
 
+    public Payment(PaymentSatus status, double price) {
+        this.status = status;
+        this.price = price;
+    }    
+
     public int getId() {
         return id;
     }
@@ -42,4 +47,10 @@ public class Payment {
     public String getCardNumber() {
         return cardNumber;
     }
+
+    @Override
+    public String toString() {
+        return Double.toString(price);
+    }    
+    
 }

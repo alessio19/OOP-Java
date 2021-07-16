@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -32,19 +31,13 @@
          </font>
       </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="691.0" layoutX="681.0" layoutY="14.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 40; -fx-arc-height: 40;" width="346.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="87.0" layoutX="692.0" layoutY="25.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="324.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="87.0" layoutX="692.0" layoutY="25.0" onMouseClicked="#goToPayment" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="324.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="233.0" layoutX="692.0" layoutY="176.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="324.0" />
       <Label layoutX="709.0" layoutY="142.0" text="Best deal :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="searchBarField" layoutX="750.0" layoutY="39.0" onAction="#ActionHandler" prefHeight="59.0" prefWidth="252.0" promptText="Search for an order . . ." style="-fx-border-color: #ffffff;" />
-      <ImageView fx:id="magnifyingGlass" fitHeight="26.0" fitWidth="32.0" layoutX="709.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Resources/images/magnifyingGlass.png" />
-         </image>
-      </ImageView>
       <Pagination fx:id="paginationCurrentMovies" layoutX="39.0" layoutY="209.0" pageCount="2" prefHeight="259.0" prefWidth="605.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="233.0" layoutX="693.0" layoutY="461.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="324.0" />
       <Label layoutX="710.0" layoutY="427.0" text="Recent orders :" textFill="WHITE">
@@ -88,5 +81,15 @@
          </children>
       </AnchorPane>
       <TableView fx:id="tableDeal" layoutX="703.0" layoutY="193.0" prefHeight="200.0" prefWidth="303.0" />
+      <Label layoutX="758.0" layoutY="55.0" onMouseClicked="#goToPayment" text="Items in cart :" textFill="#6070ff">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="itemInCart" layoutX="896.0" layoutY="55.0" onMouseClicked="#goToPayment" text="orders" textFill="#6070ff">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -40,5 +40,12 @@ public class Product {
     public Discount getDiscount() {
         return discount;
     }
+
+    @Override
+    public String toString() {
+        return title + " - " + author;
+    }
+    
+    
     
 }

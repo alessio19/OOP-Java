@@ -8,7 +8,9 @@ import Model.customer.Customer;
 import Model.filmSession.FilmSession;
 import Model.filmSession.FilmSessionDAO;
 import Model.payment.Order;
+import Model.payment.PaymentSatus;
 import Model.payment.OrderDAO;
+import Model.payment.Payment;
 import Model.product.Discount;
 import Model.product.Movie;
 import Model.product.MovieDAO;
@@ -18,7 +20,6 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +33,6 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -59,12 +59,9 @@ public class MainMenuCustomerController {
 
     @FXML
     private Label nameLabel;
-
+    
     @FXML
-    private TextField searchBarField;
-
-    @FXML
-    private ImageView magnifyingGlass;
+    private Label itemInCart;
 
     @FXML
     private TextArea textAreaMovie;
@@ -246,7 +243,8 @@ public class MainMenuCustomerController {
 
     @FXML
     void handleOrderBtn(ActionEvent event) {
-
+        new OrderDAO().addOrder(new Order(this.customer, new MovieDAO().getMovieByTitleAuthor(this.movieName.getText(), this.author.getText()), new Payment(PaymentSatus.Processing, Double.parseDouble(this.totalPrice.getText())), this.cmbQuantity.getSelectionModel().getSelectedItem()));
+        this.updateNbItemCart();
     }
     
     private void changeSession(Movie movie) {
@@ -321,17 +319,30 @@ public class MainMenuCustomerController {
             try {
                 double discount =  (session.getMovie().getDiscount()!=null ?session.getMovie().getDiscount().getValue():0)*session.getMovie().getTicketPrice() ;
                 double price = (session.getMovie().getTicketPrice() - discount)*cmbQuantity.getSelectionModel().getSelectedItem();
-                totalPrice.setText(round(price)+"€");
+                totalPrice.setText(Double.toString(round(price)));
             } catch (NullPointerException ex) {
                 totalPrice.setText("0€");
             }
          });
     }
     
+    @FXML
+    void goToPayment(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PaymentScreen.fxml"));       
+        OOP_Cinema.addScene("payment", loader.load());
+        PaymentScreenController controller = loader.getController();
+        controller.setCustomer(this.customer);
+        OOP_Cinema.changeScene("payment");
+    }
+    
     private double round(double val) {
         val = val * 100;
         val = Math.round(val);
         return val / 100;
+    }
+    
+    private void updateNbItemCart() {
+        this.itemInCart.setText(Integer.toString(new OrderDAO().getOrdersForUsrId(customer.getId()).size()));
     }
     
 }

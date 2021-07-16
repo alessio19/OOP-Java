@@ -22,6 +22,13 @@ public class Order {
         this.Iquantity = Iquantity;
     }
 
+    public Order(Customer customer, Movie product, Payment payment, int Iquantity) {
+        this.customer = customer;
+        this.product = product;
+        this.payment = payment;
+        this.Iquantity = Iquantity;
+    }    
+
     public int getId() {
         return id;
     }
