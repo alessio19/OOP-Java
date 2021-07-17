@@ -20,10 +20,8 @@ public class MovieDAO {
     }
     
     public boolean addMovie(Movie movie) {
-        PreparedStatement preparedStatement = null;
-        boolean success = false;
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO Movie (details, diffusionStart, diffusionEnd, ticketPrice, title, author, releaseDate, discountId, movieGenreId, movieImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Movie (details, diffusionStart, diffusionEnd, ticketPrice, title, author, releaseDate, discountId, movieGenreId, movieImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             preparedStatement.setString(1, movie.getDetails());
             preparedStatement.setTimestamp(2, new Timestamp(movie.getDiffusionStart().getTime()));
             preparedStatement.setTimestamp(3, new Timestamp(movie.getDiffusionEnd().getTime()));
@@ -31,16 +29,19 @@ public class MovieDAO {
             preparedStatement.setString(5, movie.getTitle());
             preparedStatement.setString(6, movie.getAuthor());
             preparedStatement.setTimestamp(7, new Timestamp(movie.getRealeaseDate().getTime()));
-            preparedStatement.setInt(8, movie.getDiscount().getId());
+            if(movie.getDiscount() != null){
+                preparedStatement.setInt(8, movie.getDiscount().getId());
+            } else {
+                preparedStatement.setNull(8, java.sql.Types.NULL);
+            }
             preparedStatement.setInt(9, movie.getGenre().ordinal());
             preparedStatement.setString(10, movie.getImage());
             preparedStatement.executeUpdate();
-            success = true;
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
+            return false;
         }
-        return success;
     }
     
     public ArrayList<Movie> getMovies() {
@@ -135,6 +136,19 @@ public class MovieDAO {
             ps.close();
             return true;
         } catch (SQLException e) {
+            return false;
+        }
+    }
+    
+    public boolean deleteMovie(Movie movie) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Movie WHERE idMovie = ?;");            
+            preparedStatement.setInt(1, movie.getId());
+            preparedStatement.execute();
+            preparedStatement.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

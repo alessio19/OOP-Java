@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.employee.Employee;
-import Model.employee.EmployeeDAO;
 import Model.product.Discount;
 import Model.product.DiscountDAO;
 import Model.product.Movie;
@@ -208,6 +207,15 @@ public class MainMenuEmployeeController {
     void applyDiscount(MouseEvent event) {
         boolean result = new DiscountDAO().applyDiscount(new Discount(Double.parseDouble(this.DiscountTextField.getText())), movieForDiscount);
         System.out.println(result);
+    }
+    
+    @FXML
+    void movieListBtn(MouseEvent event) throws IOException {  
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MovieListMenu.fxml"));       
+        OOP_Cinema.addScene("movieListMenu", loader.load());
+        MovieListMenuController controller = loader.getController();
+        controller.setEmployee(employee);
+        OOP_Cinema.changeScene("movieListMenu");
     }
     
 }

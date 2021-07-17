@@ -72,7 +72,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Circle fill="#ffb660" layoutX="897.0" layoutY="256.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#ffb660" layoutX="897.0" layoutY="256.0" onMouseClicked="#movieListBtn" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <Circle fx:id="userListBtn" fill="#ffb660" layoutX="897.0" layoutY="431.0" onMouseClicked="#handleUserList" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <Label layoutX="867.0" layoutY="329.0" prefHeight="20.0" prefWidth="60.0" text="Movie list" textFill="WHITE">
          <font>
@@ -84,7 +84,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ImageView fx:id="MovieButton" fitHeight="94.0" fitWidth="33.0" layoutX="881.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="MovieButton" fitHeight="94.0" fitWidth="33.0" layoutX="881.0" layoutY="238.0" onMouseClicked="#movieListBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/images/movie.png" />
          </image>
