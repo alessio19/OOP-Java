@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="643.0" prefWidth="1000.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MovieListMenuController">
+   <children>
+      <TableView fx:id="movieListTableView" layoutX="82.0" layoutY="88.0" prefHeight="444.0" prefWidth="332.0">
+        <columns>
+          <TableColumn fx:id="movieTitleTabCol" prefWidth="113.0" text="Movie Title" />
+          <TableColumn fx:id="movieStartDateTabCol" prefWidth="65.0" text="Start date" />
+            <TableColumn fx:id="movieEndDateTabCol" prefWidth="73.0" text="End date" />
+            <TableColumn fx:id="moviePriceTabCol" text="Price" />
+        </columns>
+      </TableView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="458.0" layoutX="518.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="408.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="64.0" layoutX="82.0" layoutY="553.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="332.0" />
+      <Label layoutX="98.0" layoutY="562.0" text="Selected Movie">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="98.0" layoutY="589.0" text="Title : " />
+      <Label fx:id="selectedMovieTitle" layoutX="130.0" layoutY="589.0" text="Label" />
+      <Label layoutX="532.0" layoutY="90.0" text="New Movie">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="35.0" layoutX="303.0" layoutY="568.0" onMouseClicked="#deleteMovieBtn" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="97.0" />
+      <Label layoutX="321.0" layoutY="572.0" onMouseClicked="#deleteMovieBtn" text="DELETE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="35.0" layoutX="815.0" layoutY="496.0" onMouseClicked="#addMovieBtn" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="97.0" />
+      <Label layoutX="844.0" layoutY="500.0" onMouseClicked="#addMovieBtn" text="ADD" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="532.0" layoutY="124.0" text="Title : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="530.0" layoutY="158.0" text="Author : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="531.0" layoutY="195.0" text="Genre :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="532.0" layoutY="267.0" text="Description : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="531.0" layoutY="232.0" text="Poster url :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="movieTitleTxtField" layoutX="609.0" layoutY="120.0" prefHeight="25.0" prefWidth="298.0" />
+      <TextField fx:id="movieAuthorTxtField" layoutX="609.0" layoutY="154.0" prefHeight="25.0" prefWidth="298.0" />
+      <ComboBox fx:id="movieGenreCmb" layoutX="609.0" layoutY="191.0" prefHeight="25.0" prefWidth="298.0" />
+      <TextField fx:id="movieImgUrlTxtField" layoutX="609.0" layoutY="228.0" prefHeight="25.0" prefWidth="298.0" />
+      <TextArea fx:id="movieDescriptiontTxtArea" layoutX="609.0" layoutY="267.0" prefHeight="88.0" prefWidth="298.0" />
+      <Label layoutX="534.0" layoutY="365.0" text="Start date : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="534.0" layoutY="396.0" text="End date : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="movieStartDatePicker" layoutX="609.0" layoutY="361.0" prefHeight="25.0" prefWidth="97.0" />
+      <DatePicker fx:id="movieEndDatePicker" layoutX="609.0" layoutY="392.0" prefHeight="25.0" prefWidth="97.0" />
+      <ImageView fitHeight="43.0" fitWidth="41.0" layoutX="945.0" layoutY="16.0" onMouseClicked="#exitBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/close.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="logo" fitHeight="59.0" fitWidth="64.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/logo.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="nameLabel" layoutX="98.0" layoutY="37.0" text="Name LastName" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="534.0" layoutY="433.0" text="Ticket price :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ticketPrice" layoutX="609.0" layoutY="429.0" prefHeight="25.0" prefWidth="97.0" />
+   </children>
+</AnchorPane>

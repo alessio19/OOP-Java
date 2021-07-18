@@ -85,7 +85,7 @@ public class PaymentScreenController {
     
     @FXML
     void conitnueShopping(MouseEvent event) {
-
+        OOP_Cinema.changeScene("mainMenuCusto");
     }
 
     @FXML
