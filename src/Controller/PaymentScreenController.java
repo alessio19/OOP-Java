@@ -30,6 +30,8 @@ public class PaymentScreenController {
     private Customer customer;
     private ArrayList<Order> orders;
     
+    private double subTotal, discountTotal;
+    
     @FXML
     private ImageView logo;
 
@@ -50,7 +52,8 @@ public class PaymentScreenController {
     
     @FXML
     public void initialize() {
-        
+        this.subTotal = 0;
+        this.discountTotal = 0;
     }
     
     public void setCustomer(Customer customer) {
@@ -69,9 +72,17 @@ public class PaymentScreenController {
         paymentCol.setCellValueFactory(new PropertyValueFactory<>("payment"));
         
         this.tableOrders.setItems(FXCollections.observableArrayList(orders));
-        this.tableOrders.getColumns().addAll(movieTitleCol, quantityCol, paymentCol);
+        this.tableOrders.getColumns().addAll(movieTitleCol, quantityCol, paymentCol);       
+       
+        this.orders.forEach(order -> {
+            this.subTotal += order.getPayment().getPrice();
+            this.discountTotal += order.getProduct().getDiscount().getValue();
+        });
+        this.subtotalLabel.setText(Double.toString(this.subTotal));
+        this.discountLabel.setText(Double.toString(this.discountTotal));
+        //this.totalLabel.setText(Double.toString(this.subTotal - this.discountTotal));
     }
-
+    
     @FXML
     void conitnueShopping(MouseEvent event) {
 

@@ -132,20 +132,17 @@ public class MainMenuCustomerController {
         this.movies = new MovieDAO().getMovies();
         int page = movies.size()%3 ==0 ? 0 : 1;
         paginationCurrentMovies.setPageCount((movies.size()/3 + page));
-        paginationCurrentMovies.setPageFactory(new Callback<Integer, Node>() {
-            @Override
-            public Node call(Integer pageIndex) {
-                HBox box = new HBox(3);
-                for (int i = pageIndex*3 ; i < (pageIndex+1)*3; i++) {
-                    box.setMinHeight(250);
-                    box.setMinWidth(100);
-                    try {
-                        box.getChildren().add(getMovieContainer(movies.get(i)));
-                    } catch (Exception e) {
-                    }
+        paginationCurrentMovies.setPageFactory((Integer pageIndex) -> {
+            HBox box = new HBox(3);
+            for (int i = pageIndex*3 ; i < (pageIndex+1)*3; i++) {
+                box.setMinHeight(250);
+                box.setMinWidth(100);
+                try {
+                    box.getChildren().add(getMovieContainer(movies.get(i)));
+                } catch (Exception e) {
                 }
-                return box;
             }
+            return box;
         });          
         ArrayList<Movie> movieWithDiscount = new ArrayList<>();
         movies.forEach(movie -> {
