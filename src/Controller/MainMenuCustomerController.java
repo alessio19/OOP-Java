@@ -8,9 +8,7 @@ import Model.customer.Customer;
 import Model.filmSession.FilmSession;
 import Model.filmSession.FilmSessionDAO;
 import Model.payment.Order;
-import Model.payment.PaymentSatus;
 import Model.payment.OrderDAO;
-import Model.payment.Payment;
 import Model.product.Discount;
 import Model.product.Movie;
 import Model.product.MovieDAO;
@@ -23,7 +21,6 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -52,7 +49,7 @@ public class MainMenuCustomerController {
     
     private Customer customer;
     private ArrayList<Movie> movies;
-    private ArrayList<Order> orders;
+    private ArrayList<Order> cart;
 
     @FXML
     private ImageView logo;
@@ -187,12 +184,13 @@ public class MainMenuCustomerController {
     public void setCustomer(Customer customer) {
         this.customer = customer;
         this.nameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());
+        this.cart = new ArrayList<>();
         this.setCustomerOrders();
     }
     
     private void setCustomerOrders() {
-        this.orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
-        this.orders.forEach(order -> {
+        ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
+        orders.forEach(order -> {
             this.textAreaOrder.setText(this.textAreaOrder.getText()
                     + order.getId() + "\t"
                     + order.getProduct().getTitle() + "\t"
@@ -240,7 +238,14 @@ public class MainMenuCustomerController {
 
     @FXML
     void handleOrderBtn(ActionEvent event) {
-        new OrderDAO().addOrder(new Order(this.customer, new MovieDAO().getMovieByTitleAuthor(this.movieName.getText(), this.author.getText()), new Payment(PaymentSatus.Processing, Double.parseDouble(this.totalPrice.getText())), this.cmbQuantity.getSelectionModel().getSelectedItem()));
+        this.cart.add(
+                new Order(
+                        this.customer, 
+                        new MovieDAO().getMovieByTitleAuthor(this.movieName.getText(), this.author.getText()), 
+                        null, 
+                        this.cmbQuantity.getSelectionModel().getSelectedItem()
+                )
+        );
         this.updateNbItemCart();
     }
     
@@ -329,6 +334,7 @@ public class MainMenuCustomerController {
         OOP_Cinema.addScene("payment", loader.load());
         PaymentScreenController controller = loader.getController();
         controller.setCustomer(this.customer);
+        controller.setCart(this.cart);
         OOP_Cinema.changeScene("payment");
     }
     
@@ -339,7 +345,7 @@ public class MainMenuCustomerController {
     }
     
     private void updateNbItemCart() {
-        this.itemInCart.setText(Integer.toString(new OrderDAO().getOrdersForUsrId(customer.getId()).size()));
+        this.itemInCart.setText(Integer.toString(this.cart.size()));
     }
     
 }

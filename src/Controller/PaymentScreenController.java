@@ -6,13 +6,18 @@
 package Controller;
 
 import Model.customer.Customer;
+import Model.customer.CustomerDAO;
 import Model.payment.Order;
 import Model.payment.OrderDAO;
 import Model.payment.Payment;
+import Model.product.Discount;
 import Model.product.Movie;
+import java.io.IOException;
 import java.util.ArrayList;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,9 +33,9 @@ import javafx.scene.input.MouseEvent;
 public class PaymentScreenController {
 
     private Customer customer;
-    private ArrayList<Order> orders;
+    private ArrayList<Order> cart;
     
-    private double subTotal, discountTotal;
+    private double subTotal, total;
     
     @FXML
     private ImageView logo;
@@ -43,44 +48,68 @@ public class PaymentScreenController {
 
     @FXML
     private Label subtotalLabel;
+    
+    @FXML
+    private Label memberTypeDiscount;
 
     @FXML
-    private Label discountLabel;
-
-    @FXML
-    private Label totalLabel;
+    private Label totalLabel;    
     
     @FXML
     public void initialize() {
         this.subTotal = 0;
-        this.discountTotal = 0;
+        this.total = 0;
     }
     
     public void setCustomer(Customer customer) {
         this.customer = customer;
-        this.nameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());
+        this.nameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());        
+    }
+    
+    public void setCart(ArrayList<Order> cart) {
+        this.cart = cart;
         this.setOrders();
     }
     
-    public void setOrders() {
-        this.orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
+    public void setOrders() {        
         TableColumn<Order, Movie> movieTitleCol = new TableColumn<>("Movie Title");
         movieTitleCol.setCellValueFactory(new PropertyValueFactory<>("product"));
+        
         TableColumn<Order, Integer> quantityCol = new TableColumn<>("Quantity");
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("Iquantity"));
-        TableColumn<Order, Payment> paymentCol = new TableColumn<>("Price");
-        paymentCol.setCellValueFactory(new PropertyValueFactory<>("payment"));
         
-        this.tableOrders.setItems(FXCollections.observableArrayList(orders));
-        this.tableOrders.getColumns().addAll(movieTitleCol, quantityCol, paymentCol);       
-       
-        this.orders.forEach(order -> {
-            this.subTotal += order.getPayment().getPrice();
-            this.discountTotal += order.getProduct().getDiscount().getValue();
+        TableColumn<Order, Double> paymentCol = new TableColumn<>("Price");
+        paymentCol.setCellValueFactory(cellData -> {
+            return new SimpleDoubleProperty(cellData.getValue().getProduct().getTicketPrice() * cellData.getValue().getIquantity()).asObject();
         });
-        this.subtotalLabel.setText(Double.toString(this.subTotal));
-        this.discountLabel.setText(Double.toString(this.discountTotal));
-        //this.totalLabel.setText(Double.toString(this.subTotal - this.discountTotal));
+        
+        TableColumn<Order, Double> discountCol = new TableColumn<>("Discount");
+        discountCol.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getProduct().getDiscount() != null)
+                return new SimpleDoubleProperty(cellData.getValue().getProduct().getDiscount().getValue()).asObject();
+            return new SimpleDoubleProperty(0).asObject();
+        });
+        
+        this.tableOrders.setItems(FXCollections.observableArrayList(cart));
+        this.tableOrders.getColumns().addAll(movieTitleCol, quantityCol, paymentCol, discountCol);       
+       
+        this.cart.forEach(order -> {
+            this.subTotal += order.getIquantity() * order.getProduct().getTicketPrice();
+            if (order.getProduct().getDiscount() != null)
+                this.total += (order.getIquantity() * order.getProduct().getTicketPrice()) * order.getProduct().getDiscount().getValue();
+            else
+                this.total += (order.getIquantity() * order.getProduct().getTicketPrice());
+        });
+        
+        this.subtotalLabel.setText(Double.toString(this.round(this.subTotal)));
+        this.memberTypeDiscount.setText(Double.toString(this.customer.getMemberTypeDiscount()));        
+        this.totalLabel.setText(Double.toString(this.round(this.total)));
+    }
+    
+    private double round(double val) {
+        val = val * 100;
+        val = Math.round(val);
+        return val / 100;
     }
     
     @FXML
@@ -89,13 +118,12 @@ public class PaymentScreenController {
     }
 
     @FXML
-    void procedingPayment(MouseEvent event) {
-
-    }
-
-    @FXML
-    void profileButton(MouseEvent event) {
-
+    void procedingPayment(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PaymentProcedure.fxml"));       
+        OOP_Cinema.addScene("paymentProcedure", loader.load());
+        PaymentProcedureController controller = loader.getController();
+        controller.setInfo(this.cart, Double.parseDouble(this.totalLabel.getText()));
+        OOP_Cinema.changeScene("paymentProcedure");  
     }
     
 }

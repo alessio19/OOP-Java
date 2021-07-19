@@ -30,6 +30,10 @@ public class OOP_Cinema extends Application {
         controller.addScreen(sceneName, parent);
     }
     
+    public static boolean alreadyExist(String name) {
+        return controller.alreadyExist(name);
+    }
+    
     public static void changeScene(String sceneName) {
         controller.activate(sceneName);
     }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PaymentProcedureController">
+   <children>
+      <ImageView fitHeight="719.0" fitWidth="1047.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/BackGroundLogin.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="344.0" layoutY="254.0" text="Card number :" textFill="WHITE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="58.0" layoutX="365.0" layoutY="297.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 48; -fx-arc-width: 48;" width="323.0" />
+      <TextArea fx:id="cardNumber" layoutX="382.0" layoutY="307.0" prefHeight="39.0" prefWidth="287.0" style="-fx-control-inner-background: #6070FF; -fx-text-box-border: #6070FF;" text="Enter your card number" />
+      <Label layoutX="344.0" layoutY="393.0" text="CCV :" textFill="WHITE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="58.0" layoutX="365.0" layoutY="430.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 48; -fx-arc-width: 48;" width="131.0" />
+      <TextArea fx:id="ccv" layoutX="375.0" layoutY="439.0" prefHeight="40.0" prefWidth="109.0" style="-fx-control-inner-background: #6070FF; -fx-text-box-border: #6070FF;" text="Enter the CCV" />
+      <Label layoutX="542.0" layoutY="392.0" text="Expiration date :" textFill="WHITE" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="58.0" layoutX="563.0" layoutY="429.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 48; -fx-arc-width: 48;" width="131.0" />
+      <DatePicker fx:id="expirationDate" layoutX="574.0" layoutY="438.0" prefHeight="40.0" prefWidth="109.0" promptText="Expiration . . ." style="-fx-background-co-fx-control-inner-backgroundlor: #6070ff;" />
+      <ImageView fitHeight="77.0" fitWidth="86.0" layoutX="480.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/logo.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="52.0" layoutX="402.0" layoutY="610.0" onMouseClicked="#proceedToPayment" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="249.0" />
+      <Label layoutX="441.0" layoutY="623.0" onMouseClicked="#proceedToPayment" text="Proceed to payment" textFill="#6070ff">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="465.0" layoutY="562.0" text="Total to pay :" textFill="WHITE" />
+      <Label fx:id="price" layoutX="551.0" layoutY="561.0" text="price" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="resultImg" fitHeight="132.0" fitWidth="147.0" layoutX="228.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

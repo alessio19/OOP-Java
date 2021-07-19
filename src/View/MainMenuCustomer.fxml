@@ -86,7 +86,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="itemInCart" layoutX="896.0" layoutY="55.0" onMouseClicked="#goToPayment" text="orders" textFill="#6070ff">
+      <Label fx:id="itemInCart" layoutX="896.0" layoutY="55.0" onMouseClicked="#goToPayment" text="0" textFill="#6070ff">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

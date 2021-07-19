@@ -20,6 +20,10 @@ public class ScreenController {
         this.mainScene = s;
     }
     
+    protected boolean alreadyExist(String name) {
+        return this.screens.keySet().contains(name);
+    }
+    
     protected void addScreen(String name, Pane pane) {
         this.screens.put(name, pane);
     }

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 
 /**
@@ -19,23 +20,24 @@ public class PaymentDAO {
         this.connection = DBConnection.getConnection();
     }
     
-    public boolean addPayment(Payment payment) {
+    public Payment addPayment(Payment payment) {
         PreparedStatement preparedStatement = null;
-        boolean success = false;
         try {
-            preparedStatement = connection.prepareStatement("INSERT INTO Payment (price, cardNumber, expirationDate, ccv, paymentStatusId) VALUES (?, ?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO Payment (price, cardNumber, expirationDate, ccv, paymentStatusId) VALUES (?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setDouble(1, payment.getPrice());
             preparedStatement.setString(2, payment.getCardNumber());
             preparedStatement.setTimestamp(3, new Timestamp(payment.getExpirationDate().getTime()));
             preparedStatement.setString(4, payment.ccv);
             preparedStatement.setInt(5, PaymentSatus.values()[payment.getStatus().ordinal()+1].ordinal());
-            preparedStatement.executeUpdate();
-            success = true;
+            preparedStatement.executeUpdate();            
+            ResultSet r = preparedStatement.getGeneratedKeys();
+            r.next();
+            payment.setId(r.getInt(1));
+            return payment;
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
         }
-        return success;
+        return null;
     }
     
     public Payment getPaymentById(int id) {

@@ -5,6 +5,11 @@ package Model.customer;
  * @author Adam
  */
 public class Customer {
+    
+    private final double REGULAR = 0;
+    private final double SENIOR = 0.15;
+    private final double CHILDREN = 0.25;
+    
     private int id;
     private String mail, name, lastName, profilePicture;
     protected String password;    
@@ -20,6 +25,15 @@ public class Customer {
         this.profilePicture = profilePicture;
     }
 
+    public double getMemberTypeDiscount() {
+        switch(this.getMemberType().name()) {
+            case "Regular": return REGULAR;
+            case "Senior": return SENIOR;
+            case "Children": return CHILDREN;
+            default: return 0;
+        }        
+    }
+    
     public String getName() {
         return name;
     }
@@ -46,6 +60,6 @@ public class Customer {
     
     public String getProfilePicture() {
         return this.profilePicture;
-    }
+    }    
     
 }

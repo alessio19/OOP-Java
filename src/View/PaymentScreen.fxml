@@ -8,10 +8,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.PaymentScreenController">
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PaymentScreenController">
    <children>
-      <ImageView fx:id="logo" fitHeight="59.0" fitWidth="64.0" layoutX="40.0" layoutY="40.0" onMouseClicked="#profileButton" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logo" fitHeight="59.0" fitWidth="64.0" layoutX="40.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/images/logo.png" />
          </image>
@@ -44,22 +43,12 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="752.0" layoutY="340.0" text="Discount total:">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="discountLabel" layoutX="893.0" layoutY="340.0" text="discount">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label layoutX="752.0" layoutY="434.0" text="Total :">
+      <Label layoutX="752.0" layoutY="441.0" text="Total :">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <Label fx:id="totalLabel" layoutX="893.0" layoutY="434.0" text="total">
+      <Label fx:id="totalLabel" layoutX="893.0" layoutY="441.0" text="total">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
@@ -74,6 +63,16 @@
       <Label layoutX="743.0" layoutY="623.0" onMouseClicked="#procedingPayment" text="PROCEDING TO PAYMENT" textFill="WHITE">
          <font>
             <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="754.0" layoutY="347.0" text="Member type :">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="memberTypeDiscount" layoutX="895.0" layoutY="347.0" text="discount">
+         <font>
+            <Font name="System Italic" size="17.0" />
          </font>
       </Label>
    </children>

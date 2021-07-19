@@ -41,6 +41,10 @@ public class Order {
         return product;
     }
 
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }    
+    
     public Payment getPayment() {
         return payment;
     }
