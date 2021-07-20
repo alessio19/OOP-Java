@@ -1,6 +1,7 @@
 package Model.payment;
 
 import Model.customer.Customer;
+import Model.filmSession.FilmSession;
 import Model.product.Movie;
 
 /**
@@ -10,11 +11,11 @@ import Model.product.Movie;
 public class Order {
     private int id;
     private Customer customer;
-    private Movie product;
+    private FilmSession product;
     private Payment payment;
     private int Iquantity;
 
-    public Order(int id, Customer customer, Movie product, Payment payment, int Iquantity) {
+    public Order(int id, Customer customer, FilmSession product, Payment payment, int Iquantity) {
         this.id = id;
         this.customer = customer;
         this.product = product;
@@ -22,7 +23,7 @@ public class Order {
         this.Iquantity = Iquantity;
     }
 
-    public Order(Customer customer, Movie product, Payment payment, int Iquantity) {
+    public Order(Customer customer, FilmSession product, Payment payment, int Iquantity) {
         this.customer = customer;
         this.product = product;
         this.payment = payment;
@@ -37,7 +38,7 @@ public class Order {
         return customer;
     }
 
-    public Movie getProduct() {
+    public FilmSession getProduct() {
         return product;
     }
 

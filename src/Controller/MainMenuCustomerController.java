@@ -246,7 +246,7 @@ public class MainMenuCustomerController {
         this.cart.add(
                 new Order(
                         this.customer, 
-                        new MovieDAO().getMovieByTitleAuthor(this.movieName.getText(), this.author.getText()), 
+                        cmbSessions.getValue(), 
                         null, 
                         this.cmbQuantity.getSelectionModel().getSelectedItem()
                 )

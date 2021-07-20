@@ -6,11 +6,7 @@
 package Controller;
 
 import Model.customer.Customer;
-import Model.customer.CustomerDAO;
 import Model.payment.Order;
-import Model.payment.OrderDAO;
-import Model.payment.Payment;
-import Model.product.Discount;
 import Model.product.Movie;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -80,13 +76,13 @@ public class PaymentScreenController {
         
         TableColumn<Order, Double> paymentCol = new TableColumn<>("Price");
         paymentCol.setCellValueFactory(cellData -> {
-            return new SimpleDoubleProperty(cellData.getValue().getProduct().getTicketPrice() * cellData.getValue().getIquantity()).asObject();
+            return new SimpleDoubleProperty(cellData.getValue().getProduct().getMovie().getTicketPrice() * cellData.getValue().getIquantity()).asObject();
         });
         
         TableColumn<Order, Double> discountCol = new TableColumn<>("Discount");
         discountCol.setCellValueFactory(cellData -> {
-            if (cellData.getValue().getProduct().getDiscount() != null)
-                return new SimpleDoubleProperty(cellData.getValue().getProduct().getDiscount().getValue()).asObject();
+            if (cellData.getValue().getProduct().getMovie().getDiscount() != null)
+                return new SimpleDoubleProperty(cellData.getValue().getProduct().getMovie().getDiscount().getValue()).asObject();
             return new SimpleDoubleProperty(0).asObject();
         });
         
@@ -94,11 +90,11 @@ public class PaymentScreenController {
         this.tableOrders.getColumns().addAll(movieTitleCol, quantityCol, paymentCol, discountCol);       
        
         this.cart.forEach(order -> {
-            this.subTotal += order.getIquantity() * order.getProduct().getTicketPrice();
-            if (order.getProduct().getDiscount() != null)
-                this.total += (order.getIquantity() * order.getProduct().getTicketPrice()) * order.getProduct().getDiscount().getValue();
+            this.subTotal += order.getIquantity() * order.getProduct().getMovie().getTicketPrice();
+            if (order.getProduct().getMovie().getDiscount() != null)
+                this.total += (order.getIquantity() * order.getProduct().getMovie().getTicketPrice()) * order.getProduct().getMovie().getDiscount().getValue();
             else
-                this.total += (order.getIquantity() * order.getProduct().getTicketPrice());
+                this.total += (order.getIquantity() * order.getProduct().getMovie().getTicketPrice());
         });
         
         this.subtotalLabel.setText(Double.toString(this.round(this.subTotal)));
