@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,9 +63,6 @@ public class MainMenuCustomerController {
 
     @FXML
     private TextArea textAreaMovie;
-    
-    @FXML
-    private TextArea textAreaOrder;
 
     @FXML
     private Label exampleTitle;
@@ -122,6 +120,9 @@ public class MainMenuCustomerController {
     
     @FXML
     private TableView<Movie> tableDeal;
+    
+    @FXML
+    private TableView<Order> tableOrders;
     
     @FXML
     public void initialize() {
@@ -190,15 +191,19 @@ public class MainMenuCustomerController {
     
     private void setCustomerOrders() {
         ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
-        orders.forEach(order -> {
-            this.textAreaOrder.setText(this.textAreaOrder.getText()
-                    + order.getId() + "\t"
-                    + order.getProduct().getTitle() + "\t"
-                    + order.getIquantity() + "\t"
-                    + order.getPayment().getPrice() + "\t" 
-                    + order.getPayment().getStatus().toString() + "\n"
-            );
+        TableColumn<Order, Movie> movieCol = new TableColumn<>("Movie");
+        movieCol.setCellValueFactory(new PropertyValueFactory<>("product"));
+        TableColumn<Order, Integer> ticketCol = new TableColumn<>("Quantity");
+        ticketCol.setCellValueFactory(new PropertyValueFactory<>("Iquantity"));
+        TableColumn<Order, Double> priceCol = new TableColumn<>("Price");
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("payment"));
+        TableColumn<Order, String> paymentCol = new TableColumn<>("Payment status");
+        paymentCol.setCellValueFactory(cellData -> {
+            return new SimpleStringProperty(cellData.getValue().getPayment().getStatus().name());
         });
+        
+        this.tableOrders.setItems(FXCollections.observableArrayList(orders));
+        this.tableOrders.getColumns().addAll(movieCol, ticketCol, priceCol, paymentCol);
     }
     
     private Pane getMovieContainer(Movie movie) {

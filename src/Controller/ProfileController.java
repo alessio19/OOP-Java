@@ -7,10 +7,21 @@ package Controller;
 
 import Model.customer.Customer;
 import Model.customer.CustomerDAO;
+import Model.filmSession.FilmSession;
+import Model.filmSession.FilmSessionDAO;
+import Model.payment.Order;
+import Model.payment.OrderDAO;
+import Model.product.MovieGenre;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -49,6 +60,9 @@ public class ProfileController {
     
     @FXML
     private Label editButtonLabel;
+    
+    @FXML
+    private StackedBarChart<Date, MovieGenre> profileChart;
     
     @FXML
     public void initialize() {
@@ -98,6 +112,18 @@ public class ProfileController {
         this.pwdField.setText(this.customer.getPwd());
         this.nameField.setText(this.customer.getName());
         this.lastNameField.setText(this.customer.getLastName());
+        this.initializeChart();
+    }
+    
+    private void initializeChart() {
+        ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
+        
+        CategoryAxis yAxis = new CategoryAxis();
+        yAxis.setCategories(FXCollections.observableArrayList(Arrays.toString(MovieGenre.values())));
+        yAxis.setLabel("Movie genre");
+        
+        CategoryAxis xAxis = new CategoryAxis();        
+        xAxis.setCategories(FXCollections.observableArrayList());
     }
     
     @FXML
