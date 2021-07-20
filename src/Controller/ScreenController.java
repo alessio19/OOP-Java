@@ -40,4 +40,8 @@ public class ScreenController {
         return this.mainScene;
     }
     
+    public Pane getPane(String name) {
+        return this.screens.get(name);
+    }
+    
 }

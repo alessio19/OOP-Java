@@ -7,7 +7,9 @@ package Controller;
 
 import Model.customer.Customer;
 import Model.customer.CustomerDAO;
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,8 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.TextAlignment;
 
 /**
  * FXML Controller class
@@ -24,6 +24,8 @@ import javafx.scene.text.TextAlignment;
  * @author Alessio
  */
 public class ProfileController {
+    
+    private boolean updated;
     
     private Customer customer;
     
@@ -52,6 +54,7 @@ public class ProfileController {
     public void initialize() {
         this.disableInputs(true);
         this.mainNameLabel.setAlignment(Pos.CENTER);
+        this.updated = false;
     }    
     
     @FXML
@@ -60,6 +63,8 @@ public class ProfileController {
             this.disableInputs(false);
             this.editButtonLabel.setText("Apply");
         } else {
+            this.updated = true;
+            this.editButtonLabel.setText("Edit");
             this.customer.setMail(this.mailAdressField.getText());
             this.customer.setPassword(this.pwdField.getText());
             this.customer.setName(this.nameField.getText());
@@ -96,7 +101,14 @@ public class ProfileController {
     }
     
     @FXML
-    void backHandle(MouseEvent event) {
+    void backHandle(MouseEvent event) throws IOException {
+        if(this.updated) {
+            OOP_Cinema.removeScreen("mainMenuCusto");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainMenuCustomer.fxml"));       
+            OOP_Cinema.addScene("mainMenuCusto", loader.load());
+            MainMenuCustomerController controller = loader.getController();
+            controller.setCustomer(customer);                  
+        }
         OOP_Cinema.changeScene("mainMenuCusto");
     }
     

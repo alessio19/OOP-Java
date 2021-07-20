@@ -49,4 +49,12 @@ public class OOP_Cinema extends Application {
         return controller.getScene();
     }
     
+    public static Pane getPane(String name) {
+        return controller.getPane(name);
+    }
+    
+    public static void removeScreen(String name) {
+        controller.removeScreen(name);
+    }
+    
 }
