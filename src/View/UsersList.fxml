@@ -8,21 +8,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UsersListController">
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UsersListController">
    <children>
+      <ImageView fitHeight="719.0" fitWidth="1113.0" layoutX="-2.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/BackGroundRegister.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="74.0" fitWidth="54.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/images/logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="14.0" layoutY="67.0" text="Customers list :" textFill="WHITE">
+      <Label layoutX="193.0" layoutY="114.0" text="Customers list :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ScrollPane fx:id="scrollPane" layoutX="14.0" layoutY="91.0" prefHeight="300.0" prefWidth="576.0">
+      <ScrollPane fx:id="scrollPane" layoutX="193.0" layoutY="154.0" prefHeight="338.0" prefWidth="721.0" style="-fx-background-color: #ffffff;">
          <content>
-            <Accordion fx:id="accordionUsersList" prefHeight="297.0" prefWidth="571.0" style="-fx-background-color: #ffffff;" />
+            <Accordion fx:id="accordionUsersList" prefHeight="334.0" prefWidth="716.0" style="-fx-background-color: #ffffff;" />
          </content>
       </ScrollPane>
    </children>

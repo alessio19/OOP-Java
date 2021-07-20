@@ -2,6 +2,7 @@ package Model.payment;
 
 import Model.dataAccessModule.DBConnection;
 import Model.customer.CustomerDAO;
+import Model.filmSession.FilmSessionDAO;
 import Model.product.MovieDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +28,7 @@ public class OrderDAO {
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO Orders (customerId, productId, quantity, paymentId) VALUES (?, ?, ?, ?);");
             preparedStatement.setInt(1, order.getCustomer().getId());
-            preparedStatement.setInt(2, order.getProduct().getId());
+            preparedStatement.setInt(2, order.getProduct().getIdFilmSession());
             preparedStatement.setInt(3, order.getIquantity());
             preparedStatement.setInt(4, order.getPayment().getId());
             preparedStatement.executeUpdate();
@@ -48,7 +49,7 @@ public class OrderDAO {
                 orders.add(new Order(
                         result.getInt("idOrder"),
                         new CustomerDAO().getCutomerById(result.getInt("customerId")),
-                        new MovieDAO().getMovieById(result.getInt("productid")),
+                        new FilmSessionDAO().getFilmSessionById((result.getInt("productid"))),
                         new PaymentDAO().getPaymentById(result.getInt("paymentId")),
                         result.getInt("quantity")
                 ));
@@ -67,7 +68,7 @@ public class OrderDAO {
                 orders.add(new Order(
                         result.getInt("idOrder"),
                         new CustomerDAO().getCutomerById(result.getInt("customerId")),
-                        new MovieDAO().getMovieById(result.getInt("productid")),
+                        new FilmSessionDAO().getFilmSessionById((result.getInt("productid"))),
                         new PaymentDAO().getPaymentById(result.getInt("paymentId")),
                         result.getInt("quantity")
                 ));

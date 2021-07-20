@@ -185,20 +185,6 @@ public class MainMenuCustomerController {
         this.customer = customer;
         this.nameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());
         this.cart = new ArrayList<>();
-        this.setCustomerOrders();
-    }
-    
-    private void setCustomerOrders() {
-        ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
-        orders.forEach(order -> {
-            this.textAreaOrder.setText(this.textAreaOrder.getText()
-                    + order.getId() + "\t"
-                    + order.getProduct().getTitle() + "\t"
-                    + order.getIquantity() + "\t"
-                    + order.getPayment().getPrice() + "\t" 
-                    + order.getPayment().getStatus().toString() + "\n"
-            );
-        });
     }
     
     private Pane getMovieContainer(Movie movie) {
@@ -241,7 +227,7 @@ public class MainMenuCustomerController {
         this.cart.add(
                 new Order(
                         this.customer, 
-                        new MovieDAO().getMovieByTitleAuthor(this.movieName.getText(), this.author.getText()), 
+                        cmbSessions.getValue(), 
                         null, 
                         this.cmbQuantity.getSelectionModel().getSelectedItem()
                 )
