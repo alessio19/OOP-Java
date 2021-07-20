@@ -39,6 +39,25 @@ public class CustomerDAO {
         return success;
     }
     
+    public boolean updateCustomer(Customer customer) {
+        PreparedStatement preparedStatement = null;
+        boolean success = false;
+        try {
+            preparedStatement = connection.prepareStatement("UPDATE Customer SET mail = ?, password = ?, name = ?, lastName = ? WHERE idCustomer = ?;");
+            preparedStatement.setString(1, customer.getMail());
+            preparedStatement.setString(2, customer.password);
+            preparedStatement.setString(3, customer.getName());
+            preparedStatement.setString(4, customer.getLastName());
+            preparedStatement.setInt(5, customer.getId());
+            preparedStatement.executeUpdate();
+            success = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            success = false;
+        }
+        return success;
+    }
+    
     public Customer getCutomerById(int id) {
         Customer  customer = null;
         try {

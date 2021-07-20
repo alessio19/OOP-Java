@@ -54,6 +54,24 @@ public class Customer {
         return password;
     }
 
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
+
     public MemberType getMemberType() {
         return memberType;
     } 

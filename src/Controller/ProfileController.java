@@ -6,13 +6,17 @@
 package Controller;
 
 import Model.customer.Customer;
+import Model.customer.CustomerDAO;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.TextAlignment;
 
 /**
  * FXML Controller class
@@ -30,34 +34,47 @@ public class ProfileController {
     private Label mainNameLabel;
     
     @FXML
-    private Label nameLabel;
+    private TextField mailAdressField;
 
     @FXML
-    private Rectangle editButton;
+    private TextField pwdField;
 
     @FXML
-    private Rectangle exportButton;
+    private TextField nameField;
 
     @FXML
-    private Label mailLabel;
-
-    @FXML
-    private Label pwdLabel;
-
-    @FXML
-    private Label lastNameLabel;    
+    private TextField lastNameField;
     
     @FXML
-    private Rectangle backToTheMenu;
+    private Label editButtonLabel;
     
     @FXML
     public void initialize() {
-
+        this.disableInputs(true);
+        this.mainNameLabel.setAlignment(Pos.CENTER);
     }    
     
     @FXML
-    void editHandle(MouseEvent event) {
-
+    void editHandle(MouseEvent event) {        
+        if (this.mailAdressField.disableProperty().get()) {
+            this.disableInputs(false);
+            this.editButtonLabel.setText("Apply");
+        } else {
+            this.customer.setMail(this.mailAdressField.getText());
+            this.customer.setPassword(this.pwdField.getText());
+            this.customer.setName(this.nameField.getText());
+            this.customer.setLastName(this.lastNameField.getText());            
+            new CustomerDAO().updateCustomer(this.customer);
+            this.setCustomer(customer);
+            this.disableInputs(true);
+        }
+    }
+    
+    private void disableInputs(boolean state) {
+        this.mailAdressField.setDisable(state);
+        this.pwdField.setDisable(state);
+        this.nameField.setDisable(state);
+        this.lastNameField.setDisable(state);  
     }
 
     @FXML
@@ -72,10 +89,10 @@ public class ProfileController {
             this.profilePicture.setFill(new ImagePattern(new Image("/Resources/images/profile.png")));
         else
             this.profilePicture.setFill(new ImagePattern(new Image(this.customer.getProfilePicture())));
-        this.mailLabel.setText(this.customer.getMail());
-        this.pwdLabel.setText(this.customer.getPwd());
-        this.nameLabel.setText(this.customer.getName());
-        this.lastNameLabel.setText(this.customer.getLastName());
+        this.mailAdressField.setText(this.customer.getMail());
+        this.pwdField.setText(this.customer.getPwd());
+        this.nameField.setText(this.customer.getName());
+        this.lastNameField.setText(this.customer.getLastName());
     }
     
     @FXML
