@@ -52,8 +52,7 @@ public class OrderDAO {
                         new CustomerDAO().getCutomerById(result.getInt("customerId")),
                         new FilmSessionDAO().getFilmSessionById((result.getInt("productid"))),
                         new PaymentDAO().getPaymentById(result.getInt("paymentId")),
-                        result.getInt("quantity"),
-                        result.getDate("orderDate")
+                        result.getInt("quantity")
                 ));
             }
         } catch (SQLException e) {
@@ -105,8 +104,7 @@ public class OrderDAO {
                         new CustomerDAO().getCutomerById(result.getInt("customerId")),
                         new FilmSessionDAO().getFilmSessionById((result.getInt("productid"))),
                         new PaymentDAO().getPaymentById(result.getInt("paymentId")),
-                        result.getInt("quantity"),
-                        result.getDate("orderDate")
+                        result.getInt("quantity")
                 ));
             }
         } catch (SQLException e) {
