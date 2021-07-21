@@ -7,19 +7,19 @@ package Controller;
 
 import Model.customer.Customer;
 import Model.customer.CustomerDAO;
-import Model.filmSession.FilmSession;
-import Model.filmSession.FilmSessionDAO;
 import Model.payment.Order;
 import Model.payment.OrderDAO;
 import Model.product.MovieGenre;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
@@ -27,9 +27,13 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileSystemView;
 
 /**
  * FXML Controller class
@@ -105,8 +109,17 @@ public class ProfileController {
     }
 
     @FXML
-    void exportHandle(MouseEvent event) {
-
+    void exportHandle(MouseEvent event) throws IOException {
+        SnapshotParameters param = new SnapshotParameters();
+        param.setFill(Color.TRANSPARENT);
+        Image img = this.profileChart.snapshot(
+                param, 
+                new WritableImage(
+                        (int) this.profileChart.getWidth(), (int) this.profileChart.getHeight()
+                )
+        );        
+        File file = new File(FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath() + "\\chart.png");
+        ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);        
     }
     
     public void setCustomer(Customer customer) {
@@ -124,9 +137,6 @@ public class ProfileController {
     }
     
     private void initializeChart() {
-//        ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
-               
-        //yAxis.set(FXCollections.observableArrayList(Arrays.toString(MovieGenre.values())));
         yAxis.setAutoRanging(false);
         yAxis.setLowerBound(0);
         yAxis.setUpperBound(MovieGenre.values().length);
@@ -144,7 +154,6 @@ public class ProfileController {
                         if (order.getProduct().getMovie().getGenre().equals(mg))
                             serie.getData().add(new XYChart.Data<>(date.toString(), order.getProduct().getMovie().getGenre().ordinal()));
                     }); 
-                    System.out.println(serie.getData());
                     this.profileChart.getData().add(serie);
                 }                   
             }                                                  
