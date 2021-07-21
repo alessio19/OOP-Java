@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -39,12 +40,12 @@
          </image>
       </ImageView>
       <Rectangle fx:id="exportButton" arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="72.0" layoutX="88.0" layoutY="248.0" onMouseClicked="#exportHandle" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="153.0" />
-      <Label layoutX="151.0" layoutY="267.0" prefHeight="35.0" prefWidth="62.0" text="Export" textAlignment="CENTER" textFill="WHITE">
+      <Label layoutX="151.0" layoutY="267.0" onMouseClicked="#exportHandle" prefHeight="35.0" prefWidth="62.0" text="Export" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="20.0" fitWidth="36.0" layoutX="120.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="36.0" layoutX="120.0" layoutY="275.0" onMouseClicked="#exportHandle" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/images/export.png" />
          </image>
@@ -91,5 +92,6 @@
       <TextField fx:id="nameField" layoutX="56.0" layoutY="579.0" />
       <TextField fx:id="lastNameField" layoutX="56.0" layoutY="647.0" />
       <TextField fx:id="pwdField" layoutX="56.0" layoutY="517.0" />
+      <PieChart fx:id="profileChart" layoutX="354.0" layoutY="353.0" prefHeight="342.0" prefWidth="495.0" title="Your orders" />
    </children>
 </AnchorPane>
