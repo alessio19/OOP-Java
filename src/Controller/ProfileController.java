@@ -12,18 +12,16 @@ import Model.payment.OrderDAO;
 import Model.product.MovieGenre;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.StackedBarChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -68,13 +66,7 @@ public class ProfileController {
     private Label editButtonLabel;
     
     @FXML
-    private CategoryAxis xAxis;
-
-    @FXML
-    private NumberAxis yAxis;
-    
-    @FXML
-    private StackedBarChart<String, Integer> profileChart;
+    private PieChart profileChart;
     
     @FXML
     public void initialize() {
@@ -137,28 +129,20 @@ public class ProfileController {
     }
     
     private void initializeChart() {
-        yAxis.setAutoRanging(false);
-        yAxis.setLowerBound(0);
-        yAxis.setUpperBound(MovieGenre.values().length);
-        yAxis.setLabel("Movie genre");
-        
-        ArrayList<String> dates = new ArrayList<>();
-        new OrderDAO().getDates().forEach(date -> {            
-            if (!dates.contains(date.toString())) {
-                ArrayList<Order> orders = new OrderDAO().getOrdersByDateAndUsr(date, this.customer.getId());
-                dates.add(date.toString());                                                               
-                for(MovieGenre mg : MovieGenre.values()) {
-                    XYChart.Series<String, Integer> serie = new XYChart.Series<>();
-                    serie.setName(mg.name());              
-                    orders.forEach(order -> {  
-                        if (order.getProduct().getMovie().getGenre().equals(mg))
-                            serie.getData().add(new XYChart.Data<>(date.toString(), order.getProduct().getMovie().getGenre().ordinal()));
-                    }); 
-                    this.profileChart.getData().add(serie);
-                }                   
-            }                                                  
-        });         
-        xAxis.setCategories(FXCollections.observableArrayList(dates));
+        ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());        
+        ArrayList<PieChart.Data> list = new ArrayList<>();
+        HashMap<MovieGenre, Integer> genres = new HashMap<>();
+        for(MovieGenre mg : MovieGenre.values())
+            genres.put(mg, 0);
+        orders.forEach(order -> {
+            //list.add(new PieChart.Data(order.getProduct().getMovie().getGenre().name(), order.getProduct().getMovie().getGenre().ordinal()));
+            genres.put(order.getProduct().getMovie().getGenre(), genres.get(order.getProduct().getMovie().getGenre())+1);
+        });        
+        genres.keySet().forEach(mg -> {
+            list.add(new PieChart.Data(mg.name(), genres.get(mg)));
+        });
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList(list);        
+        this.profileChart.setData(data);
     }
     
     @FXML

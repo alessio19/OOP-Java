@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -94,13 +92,6 @@
       <TextField fx:id="nameField" layoutX="56.0" layoutY="579.0" />
       <TextField fx:id="lastNameField" layoutX="56.0" layoutY="647.0" />
       <TextField fx:id="pwdField" layoutX="56.0" layoutY="517.0" />
-      <StackedBarChart fx:id="profileChart" layoutX="336.0" layoutY="357.0" prefHeight="338.0" prefWidth="550.0" title="Your orders">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" fx:id="xAxis" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis fx:id="yAxis" side="LEFT" />
-        </yAxis>
-      </StackedBarChart>
+      <PieChart fx:id="profileChart" layoutX="354.0" layoutY="353.0" prefHeight="342.0" prefWidth="495.0" title="Your orders" />
    </children>
 </AnchorPane>
