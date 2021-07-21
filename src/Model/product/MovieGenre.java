@@ -5,5 +5,5 @@ package Model.product;
  * @author Adam
  */
 public enum MovieGenre {
-    Action, Adventure, Comedy, Crime, Fantasy, Historical, Horror, Romance, SF, Thriller, Western
+    Adventure, Comedy, Crime, Action, Fantasy, Historical, Horror, Romance, SF, Thriller, Western
 }

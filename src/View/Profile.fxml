@@ -96,10 +96,10 @@
       <TextField fx:id="pwdField" layoutX="56.0" layoutY="517.0" />
       <StackedBarChart fx:id="profileChart" layoutX="336.0" layoutY="357.0" prefHeight="338.0" prefWidth="550.0" title="Your orders">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis side="BOTTOM" fx:id="xAxis" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
       </StackedBarChart>
    </children>

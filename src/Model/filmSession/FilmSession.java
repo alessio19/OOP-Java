@@ -53,4 +53,10 @@ public class FilmSession {
     public void setDiffusionDate(Calendar diffusionDate) {
         this.diffusionDate = diffusionDate;
     }
+
+    @Override
+    public String toString() {
+        return movie.toString();
+    }
+    
 }

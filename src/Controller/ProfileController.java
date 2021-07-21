@@ -21,7 +21,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -62,7 +64,13 @@ public class ProfileController {
     private Label editButtonLabel;
     
     @FXML
-    private StackedBarChart<Date, MovieGenre> profileChart;
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
+    
+    @FXML
+    private StackedBarChart<String, Integer> profileChart;
     
     @FXML
     public void initialize() {
@@ -116,14 +124,32 @@ public class ProfileController {
     }
     
     private void initializeChart() {
-        ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
-        
-        CategoryAxis yAxis = new CategoryAxis();
-        yAxis.setCategories(FXCollections.observableArrayList(Arrays.toString(MovieGenre.values())));
+//        ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
+               
+        //yAxis.set(FXCollections.observableArrayList(Arrays.toString(MovieGenre.values())));
+        yAxis.setAutoRanging(false);
+        yAxis.setLowerBound(0);
+        yAxis.setUpperBound(MovieGenre.values().length);
         yAxis.setLabel("Movie genre");
         
-        CategoryAxis xAxis = new CategoryAxis();        
-        xAxis.setCategories(FXCollections.observableArrayList());
+        ArrayList<String> dates = new ArrayList<>();
+        new OrderDAO().getDates().forEach(date -> {            
+            if (!dates.contains(date.toString())) {
+                ArrayList<Order> orders = new OrderDAO().getOrdersByDateAndUsr(date, this.customer.getId());
+                dates.add(date.toString());                                                               
+                for(MovieGenre mg : MovieGenre.values()) {
+                    XYChart.Series<String, Integer> serie = new XYChart.Series<>();
+                    serie.setName(mg.name());              
+                    orders.forEach(order -> {  
+                        if (order.getProduct().getMovie().getGenre().equals(mg))
+                            serie.getData().add(new XYChart.Data<>(date.toString(), order.getProduct().getMovie().getGenre().ordinal()));
+                    }); 
+                    System.out.println(serie.getData());
+                    this.profileChart.getData().add(serie);
+                }                   
+            }                                                  
+        });         
+        xAxis.setCategories(FXCollections.observableArrayList(dates));
     }
     
     @FXML
