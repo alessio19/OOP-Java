@@ -135,7 +135,6 @@ public class ProfileController {
         for(MovieGenre mg : MovieGenre.values())
             genres.put(mg, 0);
         orders.forEach(order -> {
-            //list.add(new PieChart.Data(order.getProduct().getMovie().getGenre().name(), order.getProduct().getMovie().getGenre().ordinal()));
             genres.put(order.getProduct().getMovie().getGenre(), genres.get(order.getProduct().getMovie().getGenre())+1);
         });        
         genres.keySet().forEach(mg -> {

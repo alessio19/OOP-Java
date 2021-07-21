@@ -73,27 +73,7 @@ public class OrderDAO {
             e.printStackTrace();
         }
         return dates;
-    }
-     
-    public ArrayList<Order> getOrdersByDateAndUsr(Date date, int id) {
-        ArrayList<Order> orders = new ArrayList<>();
-        try {
-            ResultSet result = connection.createStatement().executeQuery("SELECT * FROM Orders WHERE orderDate BETWEEN '" + date.toString() 
-                    + " 00:00:00' AND '" + date.toString() + " 23:59:59' AND customerId = " + id + ";");
-            while (result.next()) {                
-                orders.add(new Order(
-                        result.getInt("idOrder"),
-                        new CustomerDAO().getCutomerById(result.getInt("customerId")),
-                        new FilmSessionDAO().getFilmSessionById((result.getInt("productid"))),
-                        new PaymentDAO().getPaymentById(result.getInt("paymentId")),
-                        result.getInt("quantity")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orders;
-    }
+    }     
     
     public ArrayList<Order> getOrdersForUsrId(int id) {
         ArrayList<Order> orders = new ArrayList<>();
