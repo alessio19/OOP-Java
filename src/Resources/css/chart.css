@@ -1,1 +1,4 @@
-
+.label-color {
+    -fx-fill: #8b4513;
+    -fx-font-size: 1em;
+}

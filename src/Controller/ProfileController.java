@@ -138,10 +138,12 @@ public class ProfileController {
             genres.put(order.getProduct().getMovie().getGenre(), genres.get(order.getProduct().getMovie().getGenre())+1);
         });        
         genres.keySet().forEach(mg -> {
-            list.add(new PieChart.Data(mg.name(), genres.get(mg)));
+            if (genres.get(mg) > 0)
+                list.add(new PieChart.Data(mg.name(), genres.get(mg)));
         });
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList(list);        
-        this.profileChart.setData(data);
+        this.profileChart.setData(data);   
+        
     }
     
     @FXML
