@@ -30,12 +30,18 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 
+/**
+ *
+ * @author Alessio
+ * @author Adam
+ * details: Controller for the edit movie screen view, allow any employee to edit every information of a selected movie
+ */
 public class EditMovieController {
     
     private Movie movie;
     private ArrayList<FilmSession> sessions;
     private FilmSession selectedFilmSession = null;
-    private FilmSessionDAO filmSessionDAO = new FilmSessionDAO();
+    private final FilmSessionDAO filmSessionDAO = new FilmSessionDAO();
 
     @FXML
     private Rectangle movieImg;
@@ -85,12 +91,16 @@ public class EditMovieController {
     @FXML
     private TableView<FilmSession> sessionsTableView;
 
+    /**
+     * Apply the modification to the selected movie
+     * @param event 
+     */
     @FXML
     void ApplyModifMovie(MouseEvent event) {
         double price = 0;
         try {
            price = Double.valueOf(ticketPrice.getText());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             System.out.println(e.getStackTrace());
         }
         if(endOfDiffusion.getValue() != null && startOfDiffusion.getValue() != null && price > 0) {
@@ -116,12 +126,16 @@ public class EditMovieController {
         }
     }
 
+    /**
+     * Add new film session to the selected movie
+     * @param event 
+     */
     @FXML
     void addFilmSession(MouseEvent event) {
         int quantity = 0;
         try {
             quantity = Integer.parseInt(quantityTicketAdd.getText());
-        } catch(Exception e) {
+        } catch(NumberFormatException e) {
             System.out.println(e.getStackTrace());
         }
         if(diffusionDateAdd.getValue() != null && quantity > 0 && addFilmSessionTimeSpinner.getValue() != null) {
@@ -152,12 +166,16 @@ public class EditMovieController {
         }
     }
 
+    /**
+     * Apply the modification to the selected film session
+     * @param event 
+     */
     @FXML
     void applyEditFilmSession(MouseEvent event) {
         int tickets = 0;
         try {
             tickets = Integer.parseInt(quantityTicketEdit.getText());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             System.out.println(e.getStackTrace());
         }
         if(tickets > 0 && diffusionDateEdit.getValue() != null && editFilmSessionTimeSpinner.getValue() != null) {
@@ -190,11 +208,19 @@ public class EditMovieController {
         }
     }
 
+    /**
+     * Redirect the employee to the main menu
+     * @param event 
+     */
     @FXML
     void backToPreviousFrame(MouseEvent event) {
         OOP_Cinema.changeScene("mainMenuEmployee");
     }
 
+    /**
+     * Remove the selected film session of the selected movie
+     * @param event 
+     */
     @FXML
     void deleteFilmSession(MouseEvent event) {
         if(selectedFilmSession != null) {
@@ -216,6 +242,11 @@ public class EditMovieController {
         }
     }
 
+    /**
+     * setter
+     * set movie's information and initialize items
+     * @param movie
+     */
     public void setMovie(Movie movie) {
         this.movie = movie;
         this.movieImg.setFill(new ImagePattern(new Image(this.movie.getImage())));
@@ -229,6 +260,9 @@ public class EditMovieController {
         this.initializeFilmSession();
     }    
     
+    /**
+     * Fill the film session table
+     */
     private void initializeFilmSession() {
         sessions = filmSessionDAO.getFilmSessionByMovieId(this.movie.getId());
         TableColumn<FilmSession, Integer> sessionIdCol = new TableColumn<>("ID");
@@ -268,6 +302,10 @@ public class EditMovieController {
         });
     }
     
+    /**
+     * Handle the click on the film session table
+     * @param session 
+     */
     private void clickOnTable(FilmSession session) { 
         this.selectedFilmSession = session;
         this.quantityTicketEdit.setText(Double.toString(session.getTicketQuantity()));
@@ -275,6 +313,9 @@ public class EditMovieController {
         editFilmSessionTimeSpinner.getValueFactory().setValue(LocalDateTime.ofInstant(session.getDiffusionDate().getTime().toInstant(), ZoneId.systemDefault()).toLocalTime());
     }
     
+    /**
+     * Update the film session table
+     */
     private void updateSessionTable() {
         this.sessions =  this.filmSessionDAO.getFilmSessionByMovieId(this.movie.getId());
         this.sessionsTableView.getItems().clear();

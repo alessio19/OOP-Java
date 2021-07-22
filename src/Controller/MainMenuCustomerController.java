@@ -1,9 +1,5 @@
 package Controller;
 
-/**
- * @author Alessio
- * @author Adam
- */
 import Model.customer.Customer;
 import Model.filmSession.FilmSession;
 import Model.filmSession.FilmSessionDAO;
@@ -22,7 +18,6 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -30,10 +25,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -46,6 +39,13 @@ import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
+/**
+ * @author Alessio
+ * @author Adam
+ * details: Controller of the main menu for the customer, 
+ * allow different action for the customer.
+ * Also contain the cart of the customer during its session
+ */
 public class MainMenuCustomerController {
     
     private Customer customer;
@@ -53,46 +53,16 @@ public class MainMenuCustomerController {
     private ArrayList<Order> cart;
 
     @FXML
-    private ImageView logo;
-
-    @FXML
     private Label nameLabel;
     
     @FXML
     private Label itemInCart;
-
-    @FXML
-    private TextArea textAreaMovie;
-
-    @FXML
-    private Label exampleTitle;
-
-    @FXML
-    private Label exampleGenre;
-
-    @FXML
-    private Label exampleRelease;
-
-    @FXML
-    private Label exampleOrderDate;
-    
-    @FXML
-    private Rectangle MovieSession;
-
-    @FXML
-    private Label MovieSessionTitle;
-
-    @FXML
-    private Label MovieSessionDetails;
     
     @FXML
     private Pagination paginationCurrentMovies;
     
     @FXML
     private ComboBox<FilmSession> cmbSessions;
-
-    @FXML
-    private Button orderBtn;
 
     @FXML
     private Label movieName;
@@ -124,6 +94,9 @@ public class MainMenuCustomerController {
     @FXML
     private TableView<Order> tableOrders;
     
+    /**
+     * Initialize values and style sheet
+     */
     @FXML
     public void initialize() {
         OOP_Cinema.getScene().getStylesheets().add("/Resources/css/movie.css");
@@ -164,15 +137,18 @@ public class MainMenuCustomerController {
         });
     }
     
+    /**
+     * Constructor
+     */
     public MainMenuCustomerController() {
         
     }  
-
-    @FXML
-    void ActionHandler(ActionEvent event) {
-        
-    }
     
+    /**
+     * Redirect the customer to the profile screen view
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     void profileButton(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Profile.fxml"));       
@@ -182,6 +158,11 @@ public class MainMenuCustomerController {
         OOP_Cinema.changeScene("profile");
     }
 
+    /**
+     * setter
+     * set and initialize the text holder with a name and last name
+     * @param customer
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
         this.nameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());
@@ -189,6 +170,10 @@ public class MainMenuCustomerController {
         this.setCustomerOrders();
     }
     
+    /**
+     * setter
+     * set and initialize the orders of the customer in a table
+     */
     private void setCustomerOrders() {
         ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
         TableColumn<Order, Movie> movieCol = new TableColumn<>("Movie");
@@ -206,6 +191,11 @@ public class MainMenuCustomerController {
         this.tableOrders.getColumns().addAll(movieCol, ticketCol, priceCol, paymentCol);
     }
     
+    /**
+     * Create a movie container with the different element and event handler
+     * @param movie
+     * @return Pane: result
+     */
     private Pane getMovieContainer(Movie movie) {
         Pane pane = new Pane();
                
@@ -241,6 +231,10 @@ public class MainMenuCustomerController {
                return pane;
     }
 
+    /**
+     * Create a new order and add it to the customer's cart, update the number of items
+     * @param event 
+     */
     @FXML
     void handleOrderBtn(ActionEvent event) {
         this.cart.add(
@@ -254,6 +248,10 @@ public class MainMenuCustomerController {
         this.updateNbItemCart();
     }
     
+    /**
+     * Modify the subsection with the detailed view of the selected movie
+     * @param movie 
+     */
     private void changeSession(Movie movie) {
         totalPrice.setText("0€");
         sessionDetailPane.setDisable(false);
@@ -270,6 +268,10 @@ public class MainMenuCustomerController {
         sessionDetailPane.setVisible(true);
     }
     
+    /**
+     * Update the combobox containing the different film sessions
+     * @param sessions 
+     */
     private void updateSessionCMB(ArrayList<FilmSession> sessions) {
         cmbSessions.setItems(FXCollections.observableArrayList(sessions));
         
@@ -319,6 +321,10 @@ public class MainMenuCustomerController {
         });
     }
     
+    /**
+     * Update the combox box choices with the quantity of ticket for the session selected
+     * @param session 
+     */
     private void updateQuantityCMB(FilmSession session) {
         cmbQuantity.setDisable(false);
         cmbQuantity.setItems(FXCollections.observableArrayList(IntStream.range(1, session.getTicketQuantity()).boxed().collect(Collectors.toList())));
@@ -333,6 +339,12 @@ public class MainMenuCustomerController {
          });
     }
     
+    /**
+     * Redirect the customer to the payment screen
+     * Initialize the informations needed for this screen
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     void goToPayment(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PaymentScreen.fxml"));       
@@ -343,12 +355,20 @@ public class MainMenuCustomerController {
         OOP_Cinema.changeScene("payment");
     }
     
+    /**
+     * Round the value to have double with two digit after the coma
+     * @param val
+     * @return double: rounded result
+     */
     private double round(double val) {
         val = val * 100;
         val = Math.round(val);
         return val / 100;
     }
     
+    /**
+     * Update the number of item in the text holder
+     */
     private void updateNbItemCart() {
         this.itemInCart.setText(Integer.toString(this.cart.size()));
     }

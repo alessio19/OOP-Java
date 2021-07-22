@@ -11,14 +11,23 @@ import java.util.ArrayList;
 /**
  * @author Alessio
  * @author Adam
+ * details: DAO for the table Movie in the database, manage the insertion / selection / update / deletion of different movie in the DB
  */
 public class MovieDAO {
     private Connection connection;  
     
+    /**
+     * Constructor
+     */
     public MovieDAO() {
-        this.connection = DBConnection.getConnection();
+        this.connection = DBConnection.getConnection(); 
     }
     
+    /**
+     * Add a movie in the database
+     * @param movie
+     * @return boolean: result
+     */
     public boolean addMovie(Movie movie) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Movie (details, diffusionStart, diffusionEnd, ticketPrice, title, author, releaseDate, discountId, movieGenreId, movieImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
@@ -44,6 +53,10 @@ public class MovieDAO {
         }
     }
     
+    /**
+     *  Retrieve movies from the database
+     * @return ArrayList of Movie: movies
+     */
     public ArrayList<Movie> getMovies() {
         ResultSet result = null;
         ArrayList<Movie> movies = new ArrayList<>();
@@ -71,6 +84,11 @@ public class MovieDAO {
         return movies;
     }
     
+    /**
+     * Retrieve a movie by its ID
+     * @param id
+     * @return Movie: result
+     */
     public Movie getMovieById(int id) {
         Movie movie = null;
         try {
@@ -98,6 +116,12 @@ public class MovieDAO {
         return movie;
     }
     
+    /**
+     *  Retrieve a movie by its author and by its title
+     * @param title
+     * @param author
+     * @return Movie: result
+     */
     public Movie getMovieByTitleAuthor(String title, String author) {
         Movie movie = null;
         try {
@@ -125,6 +149,11 @@ public class MovieDAO {
         return movie;
     }
     
+    /**
+     * Update a movie in the database
+     * @param movie
+     * @return boolean: result
+     */
     public boolean updateMovie(Movie movie) {
         try {
             PreparedStatement ps = connection.prepareStatement("UPDATE Movie SET diffusionStart = ?, diffusionEnd = ?, ticketPrice = ? WHERE idMovie = ?");
@@ -140,6 +169,11 @@ public class MovieDAO {
         }
     }
     
+    /**
+     * Delete a movie from the database
+     * @param movie
+     * @return boolean: result
+     */
     public boolean deleteMovie(Movie movie) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Movie WHERE idMovie = ?;");            

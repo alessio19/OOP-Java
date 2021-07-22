@@ -37,6 +37,10 @@ import javax.swing.filechooser.FileSystemView;
  * FXML Controller class
  *
  * @author Alessio
+ * @author Adam
+ * details: Controller for the profile view, allow the user to edit its informations,
+ * also allow to see an export the chart of all the order of the customer
+ * (can disconnect and be redirect to the login screen)
  */
 public class ProfileController {
     
@@ -68,6 +72,9 @@ public class ProfileController {
     @FXML
     private PieChart profileChart;
     
+    /**
+     * Initialize value and items
+     */
     @FXML
     public void initialize() {
         this.disableInputs(true);
@@ -75,6 +82,11 @@ public class ProfileController {
         this.updated = false;
     }    
     
+    /**
+     * Update the informations of the customer 
+     * or give permission to modify it
+     * @param event 
+     */
     @FXML
     void editHandle(MouseEvent event) {        
         if (this.mailAdressField.disableProperty().get()) {
@@ -93,6 +105,11 @@ public class ProfileController {
         }
     }
     
+    /**
+     * Enable or disable the inputs for 
+     * the customer to modify its informations
+     * @param state 
+     */
     private void disableInputs(boolean state) {
         this.mailAdressField.setDisable(state);
         this.pwdField.setDisable(state);
@@ -100,6 +117,11 @@ public class ProfileController {
         this.lastNameField.setDisable(state);  
     }
 
+    /**
+     * Export the chart on the desktop in a PNG format
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     void exportHandle(MouseEvent event) throws IOException {
         SnapshotParameters param = new SnapshotParameters();
@@ -114,6 +136,11 @@ public class ProfileController {
         ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);        
     }
     
+    /**
+     * setter
+     * set and initalize items
+     * @param customer
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
         this.mainNameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());
@@ -128,6 +155,10 @@ public class ProfileController {
         this.initializeChart();
     }
     
+    /**
+     * Retrieve all the orders of the customer and create data for the chart,
+     * display the chart and animate it
+     */
     private void initializeChart() {
         ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());        
         ArrayList<PieChart.Data> list = new ArrayList<>();
@@ -146,6 +177,11 @@ public class ProfileController {
         
     }
     
+    /**
+     * Redirect customer to the previous screen (Main menu of customer)
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     void backHandle(MouseEvent event) throws IOException {
         if(this.updated) {
@@ -158,6 +194,10 @@ public class ProfileController {
         OOP_Cinema.changeScene("mainMenuCusto");
     }
     
+    /**
+     * Redirect user to the login screen
+     * @param event 
+     */
     @FXML
     void logoutHandler(MouseEvent event) {
         OOP_Cinema.changeScene("login");

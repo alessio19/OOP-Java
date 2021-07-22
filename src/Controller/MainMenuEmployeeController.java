@@ -13,13 +13,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -33,18 +31,17 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
 
+/**
+ *
+ * @author Alessio
+ */
 public class MainMenuEmployeeController {
-    @FXML
-    private ImageView logo;
 
     @FXML
     private Label nameLabel;
 
     @FXML
     private Pagination paginationCurrentMovies;
-
-    @FXML
-    private TextField MovieDiscount;
 
     @FXML
     private TextField DiscountTextField;
@@ -56,37 +53,26 @@ public class MainMenuEmployeeController {
     private Label newPrice;
 
     @FXML
-    private Label prototionCode;
-
-    @FXML
-    private ImageView MovieButton;
-
-    @FXML
-    private ImageView ClientButton;
-
-    @FXML
     private ChoiceBox<String> choiceBoxMovie;
     
     @FXML
     private Label errorDiscountAlreadyExisting;
     
-    @FXML
-    private Button applyButton;
-    
     private ArrayList<Movie> movies;
     private Employee employee;
     private Movie movieForDiscount;
     
+    /**
+     * Initialize items
+     */
     @FXML
     public void initialize() {
         OOP_Cinema.getScene().getStylesheets().add("/Resources/css/movie.css");
         this.movies = new MovieDAO().getMovies();
        int page = movies.size()%3 ==0 ? 0 : 1;
        paginationCurrentMovies.setPageCount((movies.size()/3 + page));
-       paginationCurrentMovies.setPageFactory(new Callback<Integer, Node>() {
-            @Override
-            public Node call(Integer pageIndex) {
-                HBox box = new HBox(3);
+       paginationCurrentMovies.setPageFactory((Integer pageIndex) -> {
+           HBox box = new HBox(3);
            for (int i = pageIndex*3 ; i < (pageIndex+1)*3; i++) {
                box.setMinHeight(250);
                box.setMinWidth(100);
@@ -96,7 +82,6 @@ public class MainMenuEmployeeController {
                }
            }
            return box;
-            }
         });
        
        for (int i=0; i<this.movies.size(); ++i) {
@@ -104,11 +89,20 @@ public class MainMenuEmployeeController {
        }
     }    
     
+    /**
+     * setter
+     * set the employee and initalize the text holder with the name and last name
+     * @param employee
+     */
     public void setEmployee(Employee employee) {
         this.employee = employee;
         this.nameLabel.setText(this.employee.getName() + " " + this.employee.getLastName());
     }
     
+    /**
+     * Redirect the employee to the user list screen
+     * @param event 
+     */
     @FXML
     void handleUserList(MouseEvent event) {
         try {
@@ -119,6 +113,11 @@ public class MainMenuEmployeeController {
         }
     }    
     
+    /**
+     * Create a movie container element
+     * @param movie
+     * @return Pane: movie container
+     */
     private Pane getMovieContainer(Movie movie) {
         Pane pane = new Pane();
         Rectangle r = new Rectangle(200, 250);
@@ -174,6 +173,11 @@ public class MainMenuEmployeeController {
         return pane;
     }
     
+    /**
+     * Redirect the employee to the edit movie screen (with the selected movie)
+     * @param m
+     * @throws IOException 
+     */
     private void editMovie(Movie m) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EditMovie.fxml"));       
         OOP_Cinema.addScene("editMovie", loader.load());
@@ -182,6 +186,10 @@ public class MainMenuEmployeeController {
         OOP_Cinema.changeScene("editMovie");
     }
     
+    /**
+     * Initialize value of discount and warn the employee of an already existing discount
+     * @param m 
+     */
     private void discountHandler(Movie m) {
         if (m.getDiscount() != null)
             this.errorDiscountAlreadyExisting.setVisible(true);
@@ -192,6 +200,10 @@ public class MainMenuEmployeeController {
         movieForDiscount = m;
     }
     
+    /**
+     * Handle chamgement in a discount value
+     * @param event 
+     */
     @FXML
     void DiscountValueCHange(KeyEvent event) {
         try {
@@ -203,12 +215,21 @@ public class MainMenuEmployeeController {
         }
     }
     
+    /**
+     * Apply a new discount to a movie
+     * @param event 
+     */
     @FXML
     void applyDiscount(MouseEvent event) {
         boolean result = new DiscountDAO().applyDiscount(new Discount(Double.parseDouble(this.DiscountTextField.getText())), movieForDiscount);
         System.out.println(result);
     }
     
+    /**
+     * Redirect the employee to the movie list screen
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     void movieListBtn(MouseEvent event) throws IOException {  
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MovieListMenu.fxml"));       

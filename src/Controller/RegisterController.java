@@ -6,6 +6,7 @@ import Model.customer.MemberType;
 import Model.employee.Employee;
 import Model.employee.EmployeeDAO;
 import java.sql.SQLException;
+import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +21,8 @@ import javafx.scene.control.TextField;
 /**
  * @author Alessio
  * @author Adam
+ * details: Controller for the register view, allow new user to register to our application,
+ * give the choice to be a customer or an employee
  */
 public class RegisterController {
 
@@ -56,22 +59,33 @@ public class RegisterController {
     @FXML
     private Label customerTypeLabel;
     
-    private EmployeeDAO employeeDAO;
-    private CustomerDAO customerDAO;
+    private final EmployeeDAO employeeDAO;
+    private final CustomerDAO customerDAO;
     
+    /**
+     * Constructor
+     * @throws SQLException
+     */
     public RegisterController() throws SQLException {
         employeeDAO = new EmployeeDAO();
         customerDAO = new CustomerDAO();
     }
     
+    /**
+     * Initialize items
+     */
     @FXML
     public void initialize() {
         ObservableList list = FXCollections.observableArrayList();
-        for (MemberType m : MemberType.values())
-            list.add(m);
+        list.addAll(Arrays.asList(MemberType.values()));
         this.customerTypeChoice.setItems(list);
     }
     
+    /**
+     * Handle action on different elements on the screen
+     * @param event
+     * @throws SQLException 
+     */
     @FXML
     void ActionHandler(ActionEvent event) throws SQLException {
         if (event.getSource().equals(this.registerButton)) {

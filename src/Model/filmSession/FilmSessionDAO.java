@@ -18,15 +18,25 @@ import java.util.Calendar;
 /**
  *
  * @author Alessio
+ * @author Adam
+ * details: DAO for the table film session in the database, manage the insertion / update / selection and deletion of different film session in the DB
  */
 public class FilmSessionDAO {
     
     private Connection connection;  
 
+    /**
+     * Constructor
+     */
     public FilmSessionDAO() {
         this.connection = DBConnection.getConnection();
     }
     
+    /**
+     * Retrieve a film session by its ID
+     * @param id
+     * @return FilmSession: result
+     */
     public FilmSession getFilmSessionById(int id) {
         FilmSession filmSession = null;
         try {
@@ -46,6 +56,10 @@ public class FilmSessionDAO {
         return filmSession;
     }
     
+    /**
+     * Retrieve all film sessions
+     * @return ArrayList of FilmSession: result
+     */
     public ArrayList<FilmSession> getFilmSessions() {
         ArrayList<FilmSession> filmSessions = new ArrayList<>();
         try {
@@ -66,6 +80,11 @@ public class FilmSessionDAO {
         return filmSessions;
     }
     
+    /**
+     * Insert a film session in the database
+     * @param filmSession
+     * @return boolean: result
+     */
     public boolean addFilmSession(FilmSession filmSession) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO FilmSession (idMovie, diffusionDate, ticketQuantity) VALUES (?, ?, ?);");            
@@ -81,6 +100,11 @@ public class FilmSessionDAO {
         }
     }
     
+    /**
+     * Retrieve all FilmSession of a movie
+     * @param id
+     * @return ArrayList of FilmSession: result
+     */
     public ArrayList<FilmSession> getFilmSessionByMovieId(int id) {
         ArrayList<FilmSession> filmSessions = new ArrayList<>();
         try {
@@ -101,6 +125,11 @@ public class FilmSessionDAO {
         return filmSessions;
     }
     
+    /**
+     * Delete a film session based on its ID
+     * @param id
+     * @return boolean: result
+     */
     public boolean deleteFilmSessionById(int id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM FilmSession WHERE idFilmSession = ?;");            
@@ -114,6 +143,11 @@ public class FilmSessionDAO {
         }
     }
     
+    /**
+     * Update a film session
+     * @param session
+     * @return boolean: result
+     */
     public boolean updateFilmSession(FilmSession session) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE FilmSession SET ticketQuantity = ?, diffusionDate = ? WHERE idFilmSession = ?;");            

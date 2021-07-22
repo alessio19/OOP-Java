@@ -18,6 +18,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * @author Adam
+ * @author Alessio
+ * details: Controller for the final screen of payment, allow the user to proceed 
+ * the payment of every order in its cart, redirect him in case of success
+ */
 public class PaymentProcedureController {
     
     private ArrayList<Order> cart;
@@ -37,16 +43,30 @@ public class PaymentProcedureController {
     @FXML
     private ImageView resultImg;
     
+    /**
+     * Initialize
+     */
     @FXML
     public void inialize() {
         
     }
 
+    /**
+     * setter
+     * initialize values
+     * @param cart
+     * @param price
+     */
     public void setInfo(ArrayList<Order> cart, double price) {
         this.cart = cart;                
         this.price.setText(Double.toString(price));
     }    
     
+    /**
+     * Create a new payment in the database and inform 
+     * the customer of the result of its try to proceed to payment
+     * @param event 
+     */
     @FXML
     void proceedToPayment(MouseEvent event) {
         if (!this.cardNumber.getText().isEmpty() && !this.ccv.getText().isEmpty() && this.expirationDate.getValue() != null) {

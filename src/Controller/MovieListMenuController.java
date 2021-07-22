@@ -21,12 +21,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
+
+/**
+ * @author Alessio
+ * @author Adam
+ * details: Controller for the movie list screen view 
+ */
 public class MovieListMenuController {
     
     private ArrayList<Movie> movies;
     private Movie selectedMovie = null;
     private Employee employee;
-    private MovieDAO movieDAO = new MovieDAO();
+    private final MovieDAO movieDAO = new MovieDAO();
     
     @FXML
     private TableView<Movie> movieListTableView;
@@ -73,6 +79,9 @@ public class MovieListMenuController {
     @FXML
     private TextField ticketPrice;
     
+    /**
+     * Initialize the items
+     */
     @FXML
     public void initialize() {
         movies = movieDAO.getMovies();
@@ -91,11 +100,20 @@ public class MovieListMenuController {
         movieGenreCmb.setItems(FXCollections.observableArrayList(MovieGenre.values()));
     }
 
+    /**
+     * setter
+     * initialize values
+     * @param emp
+     */
     public void setEmployee(Employee emp) {
         this.employee = emp;
         nameLabel.setText(this.employee.getName() + " " + this.employee.getLastName());
     }
 
+    /**
+     * Add a new movie based on the user inputs
+     * @param event 
+     */
     @FXML
     void addMovieBtn(MouseEvent event) {
         Date start =  localDateToDate(movieStartDatePicker.getValue());
@@ -103,7 +121,7 @@ public class MovieListMenuController {
         float price = 0;
         try {
             price = Math.round(Float.parseFloat(ticketPrice.getText())*100)/100;
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             return;
         }
         if (
@@ -132,17 +150,28 @@ public class MovieListMenuController {
         }
     }
 
+    /**
+     * Delete the selected movie
+     * @param event 
+     */
     @FXML
     void deleteMovieBtn(MouseEvent event) {
          movieDAO.deleteMovie(selectedMovie);
          updateTableView();
     }
     
+    /**
+     * Redirect the employee to the main menu
+     * @param event 
+     */
     @FXML
     void exitBtn(MouseEvent event) {
         OOP_Cinema.changeScene("mainMenuEmployee");
     }
     
+    /**
+     * Initialize the movie table
+     */
     private void initMovieTable() {
         movieTitleTabCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         moviePriceTabCol.setCellValueFactory(new PropertyValueFactory<>("ticketPrice"));
@@ -158,17 +187,29 @@ public class MovieListMenuController {
         });
     }
 
+    /**
+     * Handle click on table
+     * @param selectedMovie 
+     */
     private void clickOnTable(Movie selectedMovie) {
         this.selectedMovie = selectedMovie;
         selectedMovieTitle.setText(this.selectedMovie.getTitle());
     }
     
+    /**
+     * Update the table after the employee action
+     */
     private void updateTableView() {
         this.movies = movieDAO.getMovies();
         movieListTableView.getItems().clear();
         movieListTableView.setItems(FXCollections.observableArrayList(this.movies));
     }
     
+    /**
+     * Convert local date to date
+     * @param local
+     * @return Date: date
+     */
     private Date localDateToDate(LocalDate local) {
         return Date.from(Instant.from(local.atStartOfDay(ZoneId.systemDefault())));
     }

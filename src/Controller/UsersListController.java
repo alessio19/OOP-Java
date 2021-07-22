@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,28 +25,36 @@ import javafx.util.Callback;
 /**
  * FXML Controller class
  *
- * @author Zenkh
+ * @author Adam
+ * @author Alessio
+ * details: Controller for the user list screen view
  */
 public class UsersListController{
 
     @FXML
     private Accordion accordionUsersList;
     
-    @FXML
-    private ScrollPane scrollPane;
-    
     private ArrayList<Customer> customers;
     
+    /**
+     * Initialize value
+     */
     @FXML
     public void initialize() {
         customers = new CustomerDAO().getCutomers();
         OOP_Cinema.getScene().getStylesheets().add("/Resources/css/userList.css");
-        for(Customer customer : customers) {
+        customers.forEach(customer -> {
             ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(customer.getId());
             accordionUsersList.getPanes().add(getPane(customer, orders));
-        }
+        });
     }
     
+    /**
+     * Create new titledPane for a customer and show its orders
+     * @param customer
+     * @param orders
+     * @return TitledPane: pane
+     */
     private TitledPane getPane(Customer customer, ArrayList<Order> orders) {
         VBox box = new VBox();
         box.setSpacing(10);
@@ -103,10 +110,23 @@ public class UsersListController{
         return pane;
     }
     
+    /**
+     * Change string to a centered string
+     * @param s
+     * @param size
+     * @return String: string
+     */
     private String center(String s, int size) {
         return center(s, size, ' ');
     }
 
+    /**
+     * Modify string to center it
+     * @param s
+     * @param size
+     * @param pad
+     * @return String: centered
+     */
     private String center(String s, int size, char pad) {
         if (s == null || size <= s.length())
             return s;
