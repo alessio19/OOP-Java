@@ -25,6 +25,10 @@ public final class DBConnection {
         }
     }
 
+    /**
+     * Get the connection for the DB
+     * @return Connection
+     */
     public final static Connection getConnection() {
         return connection;
     }

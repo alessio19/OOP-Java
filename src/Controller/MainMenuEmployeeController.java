@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
@@ -29,11 +28,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
-import javafx.util.Callback;
 
 /**
- *
  * @author Alessio
+ * @author Adam
+ * details: Controller of the main menu for the employee, 
+ * allow different action for the employee.
  */
 public class MainMenuEmployeeController {
 

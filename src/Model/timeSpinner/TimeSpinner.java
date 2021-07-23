@@ -11,6 +11,11 @@ import javafx.util.StringConverter;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+
+/**
+ * Code frome : https://stackoverflow.com/questions/32613619/how-to-make-a-timespinner-in-javafx
+ */
+
 public class TimeSpinner extends Spinner<LocalTime>{
     // Property containing the current editing mode:
     private final ObjectProperty<Mode> mode = new SimpleObjectProperty<>(Mode.HOURS);

@@ -27,7 +27,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="tableOrders" layoutX="40.0" layoutY="226.0" prefHeight="456.0" prefWidth="615.0" />
+      <TableView fx:id="tableOrders" layoutX="40.0" layoutY="226.0" prefHeight="404.0" prefWidth="615.0" />
       <Label layoutX="726.0" layoutY="171.0" text="Payment review :">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -73,6 +73,18 @@
       <Label fx:id="memberTypeDiscount" layoutX="895.0" layoutY="347.0" text="discount">
          <font>
             <Font name="System Italic" size="17.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="49.0" layoutX="195.0" layoutY="637.0" onMouseClicked="#removeBtn" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="157.0" />
+      <Label layoutX="251.0" layoutY="653.0" onMouseClicked="#removeBtn" text="Remove" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="49.0" layoutX="374.0" layoutY="637.0" onMouseClicked="#clearBtn" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="157.0" />
+      <Label layoutX="425.0" layoutY="653.0" onMouseClicked="#clearBtn" text="Clear Cart" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
    </children>

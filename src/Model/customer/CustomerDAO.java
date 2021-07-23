@@ -212,6 +212,10 @@ public class CustomerDAO {
         return customer;
     }
     
+    /**
+     * Delete customer from DB
+     * @param customer
+    */
     public void deleteCustomer(Customer customer) {
          try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Customer WHERE idCustomer = ?");

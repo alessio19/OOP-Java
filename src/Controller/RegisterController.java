@@ -5,8 +5,19 @@ import Model.customer.CustomerDAO;
 import Model.customer.MemberType;
 import Model.employee.Employee;
 import Model.employee.EmployeeDAO;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -104,7 +115,7 @@ public class RegisterController {
                                      this.pwdField.getText(),  
                                      this.nameField.getText(),  
                                      this.lastNameField.getText(),
-                                     "https://i.pravatar.cc/300?u="+ this.emailField.getText()
+                                     this.getRandomPicture()
                              ));
                              OOP_Cinema.changeScene("login");
                         }
@@ -112,6 +123,7 @@ public class RegisterController {
                         if (customerDAO.hasCustomer(this.emailField.getText()) || this.employeeDAO.hasEmployee(this.emailField.getText())) {
                               this.errorLabel.setOpacity(1);  
                         } else {
+                            System.out.println(this.getRandomPicture());
                             customerDAO.addCustomer(new Customer(
                                     0,  
                                     this.emailField.getText(), 
@@ -119,7 +131,7 @@ public class RegisterController {
                                     this.nameField.getText(),  
                                     this.lastNameField.getText(), 
                                     this.customerTypeChoice.selectionModelProperty().getValue().getSelectedItem(),
-                                    "https://i.pravatar.cc/300?u="+ this.emailField.getText()
+                                    this.getRandomPicture()
                             ));
                             OOP_Cinema.changeScene("login");
                         }
@@ -134,6 +146,13 @@ public class RegisterController {
         } else if (event.getSource().equals(this.returnLogin)) {
             OOP_Cinema.changeScene("login");
         }
+    }
+    
+    private String getRandomPicture() {
+        String[] gender = {"men", "women"};
+        Random rd = new Random();
+        int rdGender = rd.nextDouble() >= 0.5? 1 : 0;
+        return "https://randomuser.me/api/portraits/"+gender[rdGender]+"/"+rd.nextInt(50)+".jpg";
     }
 
 }

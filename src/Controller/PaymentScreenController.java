@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -88,7 +87,7 @@ public class PaymentScreenController {
         
         TableColumn<Order, Double> paymentCol = new TableColumn<>("Price");
         paymentCol.setCellValueFactory(cellData -> {
-            return new SimpleDoubleProperty(cellData.getValue().getProduct().getMovie().getTicketPrice() * cellData.getValue().getIquantity()).asObject();
+            return new SimpleDoubleProperty(this.round(cellData.getValue().getProduct().getMovie().getTicketPrice() * cellData.getValue().getIquantity())).asObject();
         });
         
         TableColumn<Order, Double> discountCol = new TableColumn<>("Discount");
@@ -146,6 +145,19 @@ public class PaymentScreenController {
         PaymentProcedureController controller = loader.getController();
         controller.setInfo(this.cart, Double.parseDouble(this.totalLabel.getText()));
         OOP_Cinema.changeScene("paymentProcedure");  
+    }
+    
+     @FXML
+    void clearBtn(MouseEvent event) {
+        tableOrders.getItems().clear();
+    }
+    
+     @FXML
+    void removeBtn(MouseEvent event) {
+         try {
+             tableOrders.getItems().remove(tableOrders.getSelectionModel().getSelectedItem());
+         } catch (Exception e) {
+         }
     }
     
 }

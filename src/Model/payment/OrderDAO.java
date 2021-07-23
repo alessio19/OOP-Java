@@ -115,7 +115,11 @@ public class OrderDAO {
         }
         return orders;
     }
-    
+   
+    /**
+     * Retrieve the order
+     * @param order
+     */
     public void deleteOrder(Order order) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Orders WHERE idOrder = ?");

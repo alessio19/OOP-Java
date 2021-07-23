@@ -68,7 +68,7 @@ public class UsersListController{
         customers.forEach(customer -> {
             ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(customer.getId());
             accordionUsersList.getPanes().add(getPane(customer, orders));
-        }
+        });
         userTypeCmb.setItems( FXCollections.observableArrayList( MemberType.values()));
     }
     

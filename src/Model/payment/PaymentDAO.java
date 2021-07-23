@@ -37,7 +37,7 @@ public class PaymentDAO {
             preparedStatement.setString(2, payment.getCardNumber());
             preparedStatement.setTimestamp(3, new Timestamp(payment.getExpirationDate().getTime()));
             preparedStatement.setString(4, payment.ccv);
-            preparedStatement.setInt(5, PaymentSatus.values()[payment.getStatus().ordinal()+1].ordinal());
+            preparedStatement.setInt(5, payment.getStatus().ordinal()+1);
             preparedStatement.executeUpdate();            
             ResultSet r = preparedStatement.getGeneratedKeys();
             r.next();

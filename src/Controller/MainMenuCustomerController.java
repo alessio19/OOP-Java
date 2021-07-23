@@ -137,12 +137,9 @@ public class MainMenuCustomerController {
         });
     }
     
-    /**
-     * Constructor
-     */
-    public MainMenuCustomerController() {
-        
-    }  
+    public void resetCart() {
+        this.cart = new ArrayList<>();
+    }
     
     /**
      * Redirect the customer to the profile screen view
@@ -253,6 +250,9 @@ public class MainMenuCustomerController {
      * @param movie 
      */
     private void changeSession(Movie movie) {
+        if(movie == null) {
+            return;
+        }
         totalPrice.setText("0€");
         sessionDetailPane.setDisable(false);
         movieName.setText(movie.getTitle());

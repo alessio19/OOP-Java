@@ -47,7 +47,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="currentPrice" layoutX="462.0" layoutY="578.0" prefHeight="20.0" prefWidth="50.0" text="price" textFill="WHITE">
+      <Label fx:id="currentPrice" layoutX="462.0" layoutY="579.0" prefHeight="20.0" prefWidth="50.0" text="price" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -62,7 +62,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="newPrice" layoutX="725.0" layoutY="637.0" prefHeight="20.0" prefWidth="50.0" text="price" textFill="WHITE">
+      <Label fx:id="newPrice" layoutX="725.0" layoutY="637.0" prefHeight="20.0" prefWidth="50.0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
