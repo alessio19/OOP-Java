@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import Model.customer.Customer;
@@ -25,6 +20,9 @@ import javafx.scene.input.MouseEvent;
  * FXML Controller class
  *
  * @author Alessio
+ * @author Adam
+ * details: Controller on the payment screen view, allow the customer to review all the order in its cart
+ * Customer has different option : Continue shopping (keep the cart), proceed to payment
  */
 public class PaymentScreenController {
 
@@ -32,9 +30,6 @@ public class PaymentScreenController {
     private ArrayList<Order> cart;
     
     private double subTotal, total;
-    
-    @FXML
-    private ImageView logo;
 
     @FXML
     private Label nameLabel;
@@ -51,22 +46,39 @@ public class PaymentScreenController {
     @FXML
     private Label totalLabel;    
     
+    /**
+     * Initialize values
+     */
     @FXML
     public void initialize() {
         this.subTotal = 0;
         this.total = 0;
     }
     
+    /**
+     * setter
+     * set and initialize the text holder with a name and last name
+     * @param customer
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
         this.nameLabel.setText(this.customer.getName() + " " + this.customer.getLastName());        
     }
     
+    /**
+     * setter
+     * set the cart from the different order the customer made this session
+     * @param cart
+     */
     public void setCart(ArrayList<Order> cart) {
         this.cart = cart;
         this.setOrders();
     }
     
+    /**
+     * setter
+     * Initialize the values in the table, allow the customer to review every order needing a payment
+     */
     public void setOrders() {        
         TableColumn<Order, Movie> movieTitleCol = new TableColumn<>("Movie Title");
         movieTitleCol.setCellValueFactory(new PropertyValueFactory<>("product"));
@@ -102,17 +114,31 @@ public class PaymentScreenController {
         this.totalLabel.setText(Double.toString(this.round(this.total)));
     }
     
+    /**
+     * Round the value to have double with two digit after the coma
+     * @param val
+     * @return double: rounded result
+     */
     private double round(double val) {
         val = val * 100;
         val = Math.round(val);
         return val / 100;
     }
     
+    /**
+     * Redirect the customer to the main menu for customer (keep its cart in memory)
+     * @param event 
+     */
     @FXML
     void conitnueShopping(MouseEvent event) {
         OOP_Cinema.changeScene("mainMenuCusto");
     }
 
+    /**
+     * Redirect the customer to the final payment screen and set the informations needed for it
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     void procedingPayment(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PaymentProcedure.fxml"));       

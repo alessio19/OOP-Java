@@ -3,6 +3,7 @@ package Model.employee;
 /**
  * @author Alessio
  * @author Adam
+ * details: Contain all the informations of an employee, have access to specific view
  */
 public class Employee {
     private int id;

@@ -13,15 +13,24 @@ import java.util.Date;
 /**
  * @author Alessio
  * @author Adam
+ * details: DAO for the table Order in the database, manage the insertion / selection of different order in the DB
  */
 public class OrderDAO {
     
     private Connection connection;  
     
+    /**
+     * Constructor
+     */
     public OrderDAO() {
         this.connection = DBConnection.getConnection();
     }
     
+    /**
+     * Insert an order in the database
+     * @param order
+     * @return boolean: result
+     */
     public boolean addOrder(Order order) {
         PreparedStatement preparedStatement = null;
         boolean success = false;
@@ -40,6 +49,10 @@ public class OrderDAO {
         return success;
     }
     
+    /**
+     * Retrieve all the orders
+     * @return ArrayList of order: result
+     */
     public ArrayList<Order> getOrders() {
         ResultSet result = null;
         ArrayList<Order> orders = new ArrayList<>();
@@ -61,6 +74,10 @@ public class OrderDAO {
         return orders;
     }
     
+    /**
+     * Retrieve all the dates of all the orders
+     * @return ArrayList of date: dates
+     */
     public ArrayList<Date> getDates() {        
         ArrayList<Date> dates = new ArrayList<>();
         try {
@@ -74,6 +91,11 @@ public class OrderDAO {
         return dates;
     }     
     
+    /**
+     * Retrieve the orders of a user
+     * @param id
+     * @return ArrayList of order: result
+     */
     public ArrayList<Order> getOrdersForUsrId(int id) {
         ArrayList<Order> orders = new ArrayList<>();
         try {

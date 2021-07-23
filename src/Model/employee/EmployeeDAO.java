@@ -10,15 +10,24 @@ import java.util.ArrayList;
 /**
  * @author Alessio
  * @author Adam
+ * details: DAO for the table Employee in the database, manage the insertion / selection of different employee in the DB
  */
 public class EmployeeDAO {
     
     private Connection connection;  
     
+    /**
+     * Constructor
+     */
     public EmployeeDAO() {
         this.connection = DBConnection.getConnection();
     }
     
+    /**
+     * Insert an employee in the database
+     * @param employee
+     * @return boolean: result
+     */
     public boolean addEmployee(Employee employee) {
         PreparedStatement preparedStatement = null;
         boolean success = false;
@@ -38,6 +47,10 @@ public class EmployeeDAO {
         return success;
     }
     
+    /**
+     * Retrieve all the employee in the database
+     * @return ArrayList of employee: result
+     */
     public ArrayList<Employee> getEmployees() {
         ResultSet result = null;
         ArrayList<Employee> employees = new ArrayList<>();
@@ -59,6 +72,12 @@ public class EmployeeDAO {
         return employees;
     }
     
+    /**
+     * Retrieve an employee by its email and password
+     * @param mail
+     * @param password
+     * @return Employee: result
+     */
     public Employee getEmployeeByCredentials(String mail, String password) {
         Employee employee = null;
         try {
@@ -78,6 +97,12 @@ public class EmployeeDAO {
         return employee;
     }
     
+    /**
+     * Find out if the database contain an employee based on an email and pwd
+     * @param mail
+     * @param password
+     * @return boolean: result
+     */
     public boolean hasEmployee(String mail, String password) {
         ResultSet result = null;
         try {
@@ -89,6 +114,11 @@ public class EmployeeDAO {
         }
     }
     
+    /**
+     * Find out if an employee exist with this email
+     * @param mail
+     * @return boolean: result
+     */
     public boolean hasEmployee(String mail) {
         ResultSet result = null;
         try {
@@ -100,6 +130,11 @@ public class EmployeeDAO {
         }
     }
     
+    /**
+     * Retrieve an employee by its email
+     * @param mail
+     * @return Employee: result
+     */
     public Employee getEmployeeByMail(String mail) {
         ResultSet result = null;
         Employee employee = null;

@@ -10,15 +10,24 @@ import java.util.ArrayList;
 /**
  * @author Alessio
  * @author Adam
+ * details: DAO for the table Customer in the database, manage the insertion / update / selection of different customer in the DB
  */
 public class CustomerDAO {
     
     private Connection connection;  
     
+    /**
+     * Constructor
+     */
     public CustomerDAO() {
         this.connection = DBConnection.getConnection();
     }
     
+    /**
+     * Insert a customer in the database
+     * @param customer
+     * @return boolean: result
+     */
     public boolean addCustomer(Customer customer) {
         PreparedStatement preparedStatement = null;
         boolean success = false;
@@ -39,6 +48,11 @@ public class CustomerDAO {
         return success;
     }
     
+    /**
+     * Update a customer in the database
+     * @param customer
+     * @return boolean: result
+     */
     public boolean updateCustomer(Customer customer) {
         PreparedStatement preparedStatement = null;
         boolean success = false;
@@ -59,6 +73,11 @@ public class CustomerDAO {
         return success;
     }
     
+    /**
+     * Retrieve a customer by its ID
+     * @param id
+     * @return Customer: result
+     */
     public Customer getCutomerById(int id) {
         Customer  customer = null;
         try {
@@ -80,6 +99,10 @@ public class CustomerDAO {
         return customer;
     }
     
+    /**
+     * Retrieve all the customers
+     * @return ArrayList of Customer: result
+     */
     public ArrayList<Customer> getCutomers() {
         ResultSet result = null;
         ArrayList<Customer> customers = new ArrayList<>();
@@ -102,6 +125,12 @@ public class CustomerDAO {
         return customers;
     }
     
+    /**
+     * Retrieve a customer based on its email and pwd
+     * @param mail
+     * @param password
+     * @return Customer: result
+     */
     public Customer getCustomerByCredentials(String mail, String password) {
         Customer customer = null;
         try {
@@ -124,6 +153,12 @@ public class CustomerDAO {
         return customer;
     }
     
+    /**
+     * Find out if a customer exist based on an email and pwd
+     * @param mail
+     * @param password
+     * @return boolean: result
+     */
     public boolean hasCustomer(String mail, String password) {
         ResultSet result = null;
         try {
@@ -135,6 +170,11 @@ public class CustomerDAO {
         }
     }
     
+    /**
+     * Find out if a customer exist based on an email
+     * @param mail
+     * @return boolean: result
+     */
     public boolean hasCustomer(String mail) {
         ResultSet result = null;
         try {
@@ -146,6 +186,11 @@ public class CustomerDAO {
         }
     }
     
+    /**
+     * Retrieve a customer based on its email
+     * @param mail
+     * @return Customer: result
+     */
     public Customer getCustomerByMail(String mail) {
          ResultSet result = null;
         Customer  customer = null;

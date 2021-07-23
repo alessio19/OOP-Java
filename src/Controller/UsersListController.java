@@ -58,17 +58,26 @@ public class UsersListController{
     @FXML
     private Label editlabel;
     
+    /**
+     * Initialize value
+     */
     @FXML
     public void initialize() {
         customers = new CustomerDAO().getCutomers();
         OOP_Cinema.getScene().getStylesheets().add("/Resources/css/userList.css");
-        for(Customer customer : customers) {
+        customers.forEach(customer -> {
             ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(customer.getId());
             accordionUsersList.getPanes().add(getPane(customer, orders));
         }
         userTypeCmb.setItems( FXCollections.observableArrayList( MemberType.values()));
     }
     
+    /**
+     * Create new titledPane for a customer and show its orders
+     * @param customer
+     * @param orders
+     * @return TitledPane: pane
+     */
     private TitledPane getPane(Customer customer, ArrayList<Order> orders) {
         VBox box = new VBox();
         box.setSpacing(10);
@@ -139,6 +148,13 @@ public class UsersListController{
         return center(s, size, ' ');
     }
 
+    /**
+     * Modify string to center it
+     * @param s
+     * @param size
+     * @param pad
+     * @return String: centered
+     */
     private String center(String s, int size, char pad) {
         if (s == null || size <= s.length())
             return s;

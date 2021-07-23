@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -27,11 +28,6 @@
          </font>
       </TextField>
       <Label layoutX="218.0" layoutY="347.0" text="Password" textFill="WHITE" />
-      <TextField fx:id="pwdField" layoutX="191.0" layoutY="378.0" prefHeight="51.0" prefWidth="287.0" promptText="* * * * * * * *" style="-fx-background-color: #6070FF; -fx-border-radius: 550px;">
-         <font>
-            <Font name="System Italic" size="16.0" />
-         </font>
-      </TextField>
       <Hyperlink fx:id="returnLogin" layoutX="282.0" layoutY="618.0" onAction="#ActionHandler" text="Back to login" textFill="WHITE" underline="true">
          <font>
             <Font size="14.0" />
@@ -73,5 +69,10 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
+      <PasswordField fx:id="pwdField" layoutX="194.0" layoutY="378.0" prefHeight="51.0" prefWidth="287.0" promptText="* * * * * * * *" style="-fx-background-color: #6070FF;">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </PasswordField>
    </children>
 </AnchorPane>

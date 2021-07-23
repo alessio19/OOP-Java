@@ -11,15 +11,24 @@ import java.sql.Timestamp;
 /**
  * @author Alessio
  * @author Adam
+ * details: DAO for the table Payment in the database, manage the insertion / selection of different payment in the DB
  */
 public class PaymentDAO {
     
     private Connection connection;
     
+    /**
+     * Constructor
+     */
     public PaymentDAO() {
         this.connection = DBConnection.getConnection();
     }
     
+    /**
+     * Insert a payment in the database
+     * @param payment
+     * @return Payment: insertion
+     */
     public Payment addPayment(Payment payment) {
         PreparedStatement preparedStatement = null;
         try {
@@ -40,6 +49,11 @@ public class PaymentDAO {
         return null;
     }
     
+    /**
+     * Retrieve a payment from the database
+     * @param id
+     * @return Payment: result
+     */
     public Payment getPaymentById(int id) {
         Payment payment = null;
         try {

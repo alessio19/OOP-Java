@@ -9,14 +9,23 @@ import java.sql.SQLException;
 /**
  * @author Alessio
  * @author Adam
+ * details: DAO for the table Discount in the database, manage the insertion / update / selection of different discount in the DB
  */
 public class DiscountDAO {
        private Connection connection;  
     
+    /**
+     * Constructor
+     */
     public DiscountDAO() {
         this.connection = DBConnection.getConnection();
     }
     
+    /**
+     * Insert a discount in the database
+     * @param value
+     * @return boolean: result
+     */
     public boolean addDiscount(double value){
         PreparedStatement preparedStatement = null;
         boolean success = false;
@@ -32,6 +41,12 @@ public class DiscountDAO {
         return success;
     }
     
+    /**
+     * Insert a discount in the database and update the movie containing the discount
+     * @param discount
+     * @param movie
+     * @return boolean: result
+     */
     public boolean applyDiscount(Discount discount, Movie movie) {
         PreparedStatement preparedStatement = null;
         try {
@@ -52,6 +67,11 @@ public class DiscountDAO {
         }
     }
     
+    /**
+     * Retrieve discount from the database
+     * @param id
+     * @return Discount: result
+     */
     public Discount getDiscountById(int id) {
         Discount  discount = null;
         try {
