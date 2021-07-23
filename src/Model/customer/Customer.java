@@ -79,5 +79,8 @@ public class Customer {
     public String getProfilePicture() {
         return this.profilePicture;
     }    
-    
+
+    public void setMemberType(MemberType memberType) {
+        this.memberType = memberType;
+    }
 }

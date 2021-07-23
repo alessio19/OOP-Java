@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1041.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UsersListController">
@@ -13,11 +17,6 @@
       <ImageView fitHeight="719.0" fitWidth="1113.0" layoutX="-2.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/images/BackGroundRegister.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="74.0" fitWidth="54.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Resources/images/logo.png" />
          </image>
       </ImageView>
       <Label layoutX="193.0" layoutY="114.0" text="Customers list :" textFill="WHITE">
@@ -30,5 +29,64 @@
             <Accordion fx:id="accordionUsersList" prefHeight="334.0" prefWidth="716.0" style="-fx-background-color: #ffffff;" />
          </content>
       </ScrollPane>
+      <ImageView fitHeight="34.0" fitWidth="32.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#backToMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/close.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="171.0" layoutX="194.0" layoutY="511.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 40; -fx-arc-height: 40;" width="721.0" />
+      <Circle fx:id="profilePicture" fill="WHITE" layoutX="269.0" layoutY="607.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Label layoutX="209.0" layoutY="518.0" prefHeight="35.0" prefWidth="120.0" text="Information :" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="156.0" layoutX="360.0" layoutY="518.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="543.0" />
+      <Label layoutX="380.0" layoutY="528.0" prefHeight="35.0" prefWidth="120.0" text="Mail adress" textFill="#111111">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="555.0" layoutY="525.0" prefHeight="35.0" prefWidth="120.0" text="Name" textFill="#111111">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="382.0" layoutY="594.0" prefHeight="35.0" prefWidth="120.0" text="Last name" textFill="#111111">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="mailAdressField" layoutX="382.0" layoutY="563.0" />
+      <TextField fx:id="nameField" layoutX="557.0" layoutY="563.0" />
+      <TextField fx:id="lastNameField" layoutX="382.0" layoutY="626.0" />
+      <ComboBox fx:id="userTypeCmb" layoutX="557.0" layoutY="626.0" prefWidth="150.0" />
+      <Label layoutX="555.0" layoutY="593.0" prefHeight="35.0" prefWidth="120.0" text="User type" textFill="#111111">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="45.0" layoutX="756.0" layoutY="613.0" onMouseClicked="#editHandle" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="135.0" />
+      <Label fx:id="editlabel" layoutX="813.0" layoutY="616.0" onMouseClicked="#editHandle" prefHeight="35.0" prefWidth="62.0" text="Edit" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="20.0" fitWidth="36.0" layoutX="776.0" layoutY="624.0" onMouseClicked="#editHandle" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/edit.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="45.0" layoutX="756.0" layoutY="553.0" onMouseClicked="#deleteCustomer" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="135.0" />
+      <Label layoutX="813.0" layoutY="556.0" onMouseClicked="#deleteCustomer" prefHeight="35.0" prefWidth="62.0" text="Delete" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="20.0" fitWidth="36.0" layoutX="776.0" layoutY="564.0" onMouseClicked="#deleteCustomer" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/failure.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

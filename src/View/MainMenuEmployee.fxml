@@ -89,7 +89,7 @@
             <Image url="@../Resources/images/movie.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="ClientButton" fitHeight="94.0" fitWidth="33.0" layoutX="881.0" layoutY="413.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ClientButton" fitHeight="94.0" fitWidth="33.0" layoutX="881.0" layoutY="413.0" onMouseClicked="#handleUserList" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/images/client.png" />
          </image>
@@ -102,5 +102,10 @@
       </Button>
       <ChoiceBox fx:id="choiceBoxMovie" layoutX="70.0" layoutY="625.0" prefHeight="42.0" prefWidth="193.0" style="-fx-background-color: #ffffff;" />
       <Label fx:id="errorDiscountAlreadyExisting" layoutX="58.0" layoutY="687.0" text="This movie already has a discount" textFill="#ffb660" visible="false" />
+      <ImageView fitHeight="42.0" fitWidth="40.0" layoutX="951.0" layoutY="40.0" onMouseClicked="#logOutBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/images/logout2.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

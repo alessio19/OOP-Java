@@ -218,4 +218,9 @@ public class MainMenuEmployeeController {
         OOP_Cinema.changeScene("movieListMenu");
     }
     
+    @FXML
+    void logOutBtn(MouseEvent event) {
+        OOP_Cinema.changeScene("login");
+    }
+    
 }

@@ -43,12 +43,13 @@ public class CustomerDAO {
         PreparedStatement preparedStatement = null;
         boolean success = false;
         try {
-            preparedStatement = connection.prepareStatement("UPDATE Customer SET mail = ?, password = ?, name = ?, lastName = ? WHERE idCustomer = ?;");
+            preparedStatement = connection.prepareStatement("UPDATE Customer SET mail = ?, password = ?, name = ?, lastName = ?, memberType = ? WHERE idCustomer = ?;");
             preparedStatement.setString(1, customer.getMail());
             preparedStatement.setString(2, customer.password);
             preparedStatement.setString(3, customer.getName());
             preparedStatement.setString(4, customer.getLastName());
-            preparedStatement.setInt(5, customer.getId());
+            preparedStatement.setInt(5, customer.getMemberType().ordinal()+1);
+            preparedStatement.setInt(6, customer.getId());
             preparedStatement.executeUpdate();
             success = true;
         } catch (SQLException e) {
@@ -164,6 +165,16 @@ public class CustomerDAO {
             return null;
         }
         return customer;
+    }
+    
+    public void deleteCustomer(Customer customer) {
+         try {
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Customer WHERE idCustomer = ?");
+            preparedStatement.setInt(1, customer.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
 }

@@ -3,7 +3,6 @@ package Model.payment;
 import Model.dataAccessModule.DBConnection;
 import Model.customer.CustomerDAO;
 import Model.filmSession.FilmSessionDAO;
-import Model.product.MovieDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -93,5 +92,15 @@ public class OrderDAO {
             e.printStackTrace();
         }
         return orders;
+    }
+    
+    public void deleteOrder(Order order) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Orders WHERE idOrder = ?");
+            preparedStatement.setInt(1, order.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

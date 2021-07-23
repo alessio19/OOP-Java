@@ -2,6 +2,7 @@ package Controller;
 
 import Model.customer.Customer;
 import Model.customer.CustomerDAO;
+import Model.customer.MemberType;
 import Model.payment.Order;
 import Model.payment.OrderDAO;
 import java.util.ArrayList;
@@ -9,34 +10,53 @@ import java.util.Calendar;
 import java.util.Formatter;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Callback;
 
-/**
- * FXML Controller class
- *
- * @author Zenkh
- */
 public class UsersListController{
+    
+    private Customer selectedUser ;
+    private TitledPane selectedPane;
 
     @FXML
     private Accordion accordionUsersList;
     
-    @FXML
-    private ScrollPane scrollPane;
-    
     private ArrayList<Customer> customers;
+    
+    @FXML
+    private Circle profilePicture;
+
+    @FXML
+    private TextField mailAdressField;
+
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField lastNameField;
+
+    @FXML
+    private ComboBox<MemberType> userTypeCmb;
+    
+    @FXML
+    private Label editlabel;
     
     @FXML
     public void initialize() {
@@ -46,6 +66,7 @@ public class UsersListController{
             ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(customer.getId());
             accordionUsersList.getPanes().add(getPane(customer, orders));
         }
+        userTypeCmb.setItems( FXCollections.observableArrayList( MemberType.values()));
     }
     
     private TitledPane getPane(Customer customer, ArrayList<Order> orders) {
@@ -71,7 +92,7 @@ public class UsersListController{
                 {
                     btn.setOnAction((ActionEvent event) -> {
                         Order data = getTableView().getItems().get(getIndex());
-                        System.out.println("selectedData: " + data);
+                        deleteOrder(data, ordersTable);
                     });
                 }
                 @Override
@@ -100,7 +121,18 @@ public class UsersListController{
         );
         pane.setMinHeight(250);
         pane.setMaxHeight(250);
+        
+        pane.setOnMouseClicked(event -> {
+            this.changeSelectedUser(customer);
+            this.selectedPane = pane;
+        });
+        
         return pane;
+    }
+    
+    private void deleteOrder(Order order,  TableView<Order> ordersTable) {
+        new OrderDAO().deleteOrder(order);
+        ordersTable.getItems().remove(order);
     }
     
     private String center(String s, int size) {
@@ -120,6 +152,57 @@ public class UsersListController{
             sb.append(pad);
         }
         return sb.toString();
+    }
+    
+    @FXML
+    void backToMenu(MouseEvent event) {
+        OOP_Cinema.changeScene("mainMenuEmployee");
+    }
+    
+    private void changeSelectedUser(Customer customer) {
+          if(customer == null) {
+            return;
+        }
+        this.selectedUser = customer;
+        this.disableInputs(true);
+         if (customer.getProfilePicture().isEmpty())
+            this.profilePicture.setFill(new ImagePattern(new Image("/Resources/images/profile.png")));
+        else
+            this.profilePicture.setFill(new ImagePattern(new Image(customer.getProfilePicture())));
+        this.mailAdressField.setText(customer.getMail());
+        this.nameField.setText(customer.getName());
+        this.lastNameField.setText(customer.getLastName());
+        this.userTypeCmb.getSelectionModel().select(customer.getMemberType());
+    }
+    
+    private void disableInputs(boolean state) {
+        this.mailAdressField.setDisable(state);
+        this.nameField.setDisable(state);
+        this.lastNameField.setDisable(state);  
+        this.userTypeCmb.setDisable(state);
+    }
+    
+    @FXML
+    void editHandle(MouseEvent event) {
+        if (this.mailAdressField.disableProperty().get()) {
+            this.disableInputs(false);
+            this.editlabel.setText("Apply");
+        } else {
+            this.editlabel.setText("Edit");
+            this.selectedUser.setMail(this.mailAdressField.getText());
+            this.selectedUser.setName(this.nameField.getText());
+            this.selectedUser.setLastName(this.lastNameField.getText());      
+            this.selectedUser.setMemberType(this.userTypeCmb.getSelectionModel().getSelectedItem());
+            System.out.println(this.userTypeCmb.getSelectionModel().getSelectedItem());
+            new CustomerDAO().updateCustomer(this.selectedUser);
+            this.disableInputs(true);
+        }
+    }
+    
+     @FXML
+    void deleteCustomer(MouseEvent event) {
+        new CustomerDAO().deleteCustomer(this.selectedUser);
+        accordionUsersList.getPanes().remove(this.selectedPane);
     }
     
 }
