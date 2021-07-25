@@ -28,9 +28,8 @@
       </TextField>
       <Label layoutX="407.0" layoutY="411.0" text="Password" textFill="WHITE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6070ff" height="57.0" layoutX="380.0" layoutY="439.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" style="-fx-arc-width: 40; -fx-arc-height: 40;" width="287.0" />
-      <Hyperlink fx:id="forgotPassword" layoutX="563.0" layoutY="518.0" text="forgot password ?" textFill="WHITE" underline="true" />
-      <Hyperlink fx:id="registerButton" layoutX="414.0" layoutY="604.0" onAction="#ActionHandler" text="REGISTER" textFill="WHITE" />
-      <Button fx:id="connectButton" layoutX="537.0" layoutY="597.0" mnemonicParsing="false" onAction="#ActionHandler" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #6070FF; -fx-border-radius: 50; -fx-padding: 10 10 10 10;" text="CONNECT" textFill="WHITE">
+      <Hyperlink fx:id="registerButton" layoutX="410.0" layoutY="545.0" onAction="#ActionHandler" text="REGISTER" textFill="WHITE" />
+      <Button fx:id="connectButton" layoutX="533.0" layoutY="538.0" mnemonicParsing="false" onAction="#ActionHandler" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #6070FF; -fx-border-radius: 50; -fx-padding: 10 10 10 10;" text="CONNECT" textFill="WHITE">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
