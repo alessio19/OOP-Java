@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -82,8 +83,12 @@ public class PaymentProcedureController {
                 @Override
                 public void run() {
                     OOP_Cinema.changeScene("mainMenuCusto");
+                    
                 }                
             }, 1500);
+            FXMLLoader loader = (FXMLLoader) OOP_Cinema.getScene().getUserData();
+            MainMenuCustomerController controller = loader.getController();
+            controller.setCart(new ArrayList<>());
         } else {
             this.resultImg.setImage(new Image("/Resources/images/failure.png"));
         }

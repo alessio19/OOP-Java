@@ -54,6 +54,7 @@ public class LoginController  {
                 MainMenuCustomerController controller = loader.getController();
                 controller.setCustomer(new CustomerDAO().getCustomerByCredentials(this.emailField.getText(), this.pwdField.getText()));                
                 OOP_Cinema.changeScene("mainMenuCusto");               
+                OOP_Cinema.getPane("mainMenuCusto").getScene().setUserData(loader);
             } else if (new EmployeeDAO().hasEmployee(this.emailField.getText(), this.pwdField.getText())) { //if user is an employee redirect to the main menu for employee
                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainMenuEmployee.fxml"));       
                 OOP_Cinema.addScene("mainMenuEmployee", loader.load());

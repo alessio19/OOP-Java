@@ -99,7 +99,15 @@ public class PaymentScreenController {
         
         this.tableOrders.setItems(FXCollections.observableArrayList(cart));
         this.tableOrders.getColumns().addAll(movieTitleCol, quantityCol, paymentCol, discountCol);       
-       
+       calculate();
+    }
+    
+    /**
+     * Calculate total cart price
+     */
+    private void calculate() {
+        this.subTotal = 0;
+        this.total = 0;
         this.cart.forEach(order -> {
             this.subTotal += order.getIquantity() * order.getProduct().getMovie().getTicketPrice();
             if (order.getProduct().getMovie().getDiscount() != null)
@@ -131,6 +139,9 @@ public class PaymentScreenController {
     @FXML
     void conitnueShopping(MouseEvent event) {
         OOP_Cinema.changeScene("mainMenuCusto");
+        FXMLLoader loader =  (FXMLLoader) OOP_Cinema.getScene().getUserData();
+        MainMenuCustomerController controller = loader.getController();
+        controller.setCart(cart);
     }
 
     /**
@@ -150,12 +161,21 @@ public class PaymentScreenController {
      @FXML
     void clearBtn(MouseEvent event) {
         tableOrders.getItems().clear();
+        this.cart.clear();
+        calculate();
     }
     
      @FXML
     void removeBtn(MouseEvent event) {
          try {
-             tableOrders.getItems().remove(tableOrders.getSelectionModel().getSelectedItem());
+             if(this.cart.size() == 1) {
+                 this.cart.clear();
+                 tableOrders.getItems().clear();
+             } else {
+                 tableOrders.getItems().remove(tableOrders.getSelectionModel().getSelectedItem());
+                this.cart.remove(tableOrders.getSelectionModel().getSelectedItem());
+             }
+             calculate();
          } catch (Exception e) {
          }
     }

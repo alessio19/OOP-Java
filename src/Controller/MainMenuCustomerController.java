@@ -139,6 +139,14 @@ public class MainMenuCustomerController {
     
     public void resetCart() {
         this.cart = new ArrayList<>();
+        this.itemInCart.setText("0");
+        refreshOrderTable();
+    }
+    
+    public void setCart(ArrayList<Order> cart) {
+          this.cart = cart;
+          this.itemInCart.setText(Integer.toString(this.cart.size()));
+          refreshOrderTable();
     }
     
     /**
@@ -166,6 +174,12 @@ public class MainMenuCustomerController {
         this.cart = new ArrayList<>();
         this.setCustomerOrders();
     }
+    
+   public void refreshOrderTable() {
+       ArrayList<Order> orders = new OrderDAO().getOrdersForUsrId(this.customer.getId());
+       this.tableOrders.getItems().clear();
+       this.tableOrders.setItems(FXCollections.observableArrayList(orders));
+   }
     
     /**
      * setter
